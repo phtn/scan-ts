@@ -56,7 +56,7 @@ export default function UserForm({ qrCodeData, onSubmit }: UserFormProps) {
   return (
     <div className="bg-white p-1.5 pb-0 rounded-[42px]">
       <form onSubmit={handleSubmit}>
-        <div className="py-6 px-4 border-gray-300 border space-y-6 bg-gray-200 rounded-b-[38px] rounded-t-[38px]">
+        <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-200 rounded-b-[24px] rounded-t-[38px]">
           <h2 className="text-lg font-medium tracking-tighter mb-4 text-slate-700">
             Please enter your contact details.
           </h2>
@@ -131,6 +131,6 @@ export default function UserForm({ qrCodeData, onSubmit }: UserFormProps) {
 }
 
 const inputClassName =
-  "ps-3 font-sans tracking-tight text-lg block pt-5 h-16 w-full rounded-2xl bg-white border-gray-300 border focus:border-blue-500 focus:ring-blue-500 text-[#14141b]";
+  "ps-3 font-sans tracking-tight text-lg block pt-5 h-16 w-full rounded-2xl bg-white border-gray-400 border focus:border-blue-500 focus:ring-blue-500 text-[#14141b]";
 const labelClassName =
-  "block font-sans absolute tracking-tighter text-xs -top-0 border-0 border-gray-300 rounded-md p-2 left-1 text-blue-950/60";
+  "block font-sans absolute tracking-tighter text-xs -top-0 border-0 border-gray-300 rounded-md p-2 left-1 text-blue-950/80";

@@ -66,7 +66,7 @@ export function Content() {
           <div className="px-3 text-2xl font-bold py-5">Generate QR Code</div>
         </div>
 
-        <div className="md:flex w-full md:border-y md:border-r md:rounded-[42px] border-gray-200/20 gap-4">
+        <div className="md:flex w-full md:border-y md:border-r-[0.33px] md:rounded-[42px] border-gray-200/20 gap-4">
           <div className="bg-white h-full p-1.5 w-full pb-0 rounded-[42px]">
             <form action={formAction}>
               <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-300 rounded-b-[20px] rounded-t-[38px]">
