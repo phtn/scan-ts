@@ -10,7 +10,10 @@ export async function GET(request: Request) {
 
     // Create the URL to encode in the QR code
     // This URL will point to your app and include the parameters
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://localhost:3000";
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://scan-ts.vercel.app"
+        : "https://localhost:3000";
     const qrData = `${baseUrl}?id=${id}&param1=${param1}&param2=${param2}`;
 
     // Generate QR code as data URL
