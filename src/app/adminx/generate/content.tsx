@@ -141,14 +141,14 @@ export function Content() {
                   {state.qrData && (
                     <Link
                       href={state.qrData}
-                      className="mt-2 text-sm text-gray-600 break-all"
+                      className="mt-2 text-sm px-4 text-blue-400 break-all"
                     >
                       {state.qrData}
                     </Link>
                   )}
                 </div>
-                <p className="mt-4 text-sm">
-                  Scan this QR code with the app to submit user information
+                <p className="mt-4 text-sm px-4 opacity-80">
+                  User your device camera to scan this QR code.
                 </p>
               </div>
             )}
