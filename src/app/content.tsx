@@ -1,17 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import UserForm from "./_components/user-form";
-import { DeviceProfile, getDeviceProfile } from "./_lib/utils";
+import { type DeviceProfile, getDeviceProfile } from "./_lib/utils";
 import { TopOutlines } from "./_components/outlines";
+import { useSearchParams } from "next/navigation";
+import { Station } from "./types";
 
 export function Content() {
-  const [scanResult] = useState<string | null>(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  return (
+    <Suspense>
+      <Landing />
+    </Suspense>
+  );
+}
+
+function Landing() {
+  const [station, setStation] = useState<Record<string, keyof Station> | null>(
+    null,
+  );
   const [deviceProfile, setDeviceProfile] = useState<DeviceProfile | null>(
     null,
   );
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams) as Record<
+      string,
+      keyof Station
+    >;
+    setStation(params);
+  }, [searchParams]);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -33,11 +52,6 @@ export function Content() {
     getProfile();
   }, []);
 
-  const handleFormSubmit = () => {
-    setLoading(true);
-    setFormSubmitted(true);
-  };
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="w-full max-w-md mx-auto space-y-6">
@@ -50,23 +64,12 @@ export function Content() {
             </span>
           </h1>
           <p className="mt-0.5 text-sky-100/60">
-            {loading ? "Loading..." : "Protecting what matters most."}
+            Protecting what matters most.
           </p>
         </div>
 
         <div className="px-4">
-          {!formSubmitted ? (
-            <UserForm qrCodeData={scanResult} onSubmit={handleFormSubmit} />
-          ) : (
-            <div className="text-center p-4 bg-green-100 rounded-lg">
-              <h2 className="text-xl font-semibold text-green-800">
-                Thank You!
-              </h2>
-              <p className="mt-2">
-                Your information has been submitted successfully.
-              </p>
-            </div>
-          )}
+          <UserForm station={station} device={deviceProfile} />
         </div>
       </div>
       <div className="bg-white">
@@ -78,9 +81,3 @@ export function Content() {
     </main>
   );
 }
-
-/*
-!scanResult ? (
-          <QRScanner onScan={handleScan} />
-        ) :
-*/
