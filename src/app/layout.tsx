@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Nunito } from "next/font/google";
 import "./globals.css";
+import { Toasts } from "./_ctx/toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
         className={`${nito.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toasts />
       </body>
     </html>
   );

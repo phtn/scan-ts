@@ -1,10 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { addStation } from "@/lib/firebase/add-station";
+import { gsec } from "@/app/_lib/utils";
+import toast from "react-hot-toast";
+import { QRViewer } from "./qrcode";
 
-// Create a submit button component that uses useFormStatus
 function SubmitButton({ pending }: { pending: boolean }) {
   return (
     <button
@@ -32,16 +33,31 @@ async function generateQRCode(prevState: QrParams, formData: FormData) {
       throw new Error("Failed to generate QR code");
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as {
+      qrUrl: string | null;
+      qrData: string | null;
+    };
+
+    const promise = addStation(gsec(), {
+      params: { id, param1, param2 },
+      url: data.qrUrl,
+      data: data.qrData,
+    });
+
+    await toast.promise(promise, {
+      loading: "Creating QR...",
+      success: "Successful!",
+      error: "Failed to save.",
+    });
     return {
       error: null,
-      qrCode: data.qrCodeDataUrl,
+      qrUrl: data.qrUrl,
       qrData: data.qrData,
     };
   } catch (err) {
     return {
       error: err instanceof Error ? err.message : "An error occurred",
-      qrCode: null,
+      qrUrl: null,
       qrData: null,
     };
   }
@@ -50,7 +66,7 @@ async function generateQRCode(prevState: QrParams, formData: FormData) {
 export function Content() {
   const initialState = {
     error: null,
-    qrCode: null,
+    qrUrl: null,
     qrData: null,
   };
 
@@ -63,10 +79,12 @@ export function Content() {
     <main className="flex flex-col items-center justify-between">
       <div className="w-full px-2 max-w-md md:max-w-3xl mx-auto space-y-4">
         <div className="w-full space-y-4">
-          <div className="px-3 text-2xl font-bold py-5">Generate QR Code</div>
+          <div className="px-3 text-xl font-bold pt-5 tracking-tighter">
+            Generate QR Code
+          </div>
         </div>
 
-        <div className="md:flex w-full md:border-y md:border-r-[0.33px] md:rounded-[42px] border-gray-200/20 gap-4">
+        <div className="md:flex w-full md:border-y md:border-r-[0.33px] md:rounded-[42px] border-gray-200/20 px-3 gap-4">
           <div className="bg-white h-full p-1.5 w-full pb-0 rounded-[42px]">
             <form action={formAction}>
               <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-300 rounded-b-[20px] rounded-t-[38px]">
@@ -122,37 +140,10 @@ export function Content() {
             </div>
           )}
 
-          <div className="mt-6 text-center w-3xl">
-            {state.qrCode && (
-              <div>
-                <h2 className="text-lg font-medium mb-2">Your QR Code</h2>
-                <div className="inline-block p-4 bg-white rounded-lg shadow-md">
-                  <Image
-                    src={state.qrCode}
-                    alt="QR Code"
-                    className="mx-auto"
-                    width={200}
-                    height={200}
-                    unoptimized
-                    priority
-                  />
-                </div>
-                <div>
-                  {state.qrData && (
-                    <Link
-                      href={state.qrData}
-                      className="mt-2 text-sm px-4 text-blue-400 break-all"
-                    >
-                      {state.qrData}
-                    </Link>
-                  )}
-                </div>
-                <p className="mt-4 text-sm px-4 opacity-80">
-                  User your device camera to scan this QR code.
-                </p>
-              </div>
-            )}
-          </div>
+          <div className="h-20"></div>
+          <QRViewer qrUrl={state.qrUrl} qrData={state.qrData} />
+          <div className="bg-pink-50 h-20 w-full"></div>
+          <div></div>
         </div>
       </div>
     </main>
@@ -166,6 +157,6 @@ const labelClassName =
 
 interface QrParams {
   error: string | null;
-  qrCode: string | null;
+  qrUrl: string | null;
   qrData: string | null;
 }

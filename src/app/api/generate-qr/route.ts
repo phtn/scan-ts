@@ -14,12 +14,12 @@ export async function GET(request: Request) {
       process.env.NODE_ENV === "production"
         ? "https://scan-ts.vercel.app"
         : "https://localhost:3000";
-    const qrData = `${baseUrl}?id=${id}&param1=${param1}&param2=${param2}`;
+    const qrUrl = `${baseUrl}?id=${id}&param1=${param1}&param2=${param2}`;
 
     // Generate QR code as data URL
-    const qrCodeDataUrl = await QRCode.toDataURL(qrData);
+    const qrData = await QRCode.toDataURL(qrUrl);
 
-    return NextResponse.json({ qrCodeDataUrl, qrData });
+    return NextResponse.json({ qrUrl, qrData });
   } catch (error) {
     console.error("Error generating QR code:", error);
     return NextResponse.json(

@@ -1,8 +1,8 @@
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
+import crypto from "crypto";
 
 export type DeviceProfile = {
   userAgent: string;
-  creds: Credential | null;
   cores: number | null;
   screen: {
     width: number;
@@ -11,7 +11,6 @@ export type DeviceProfile = {
   };
   hasTouch: boolean;
   timezone: string;
-  canvasFingerprint: string;
   webglVendor?:
     | {
         vendor: string;
@@ -25,7 +24,6 @@ export type DeviceProfile = {
 
 export async function getDeviceProfile(ref: HTMLCanvasElement | null) {
   const userAgent = navigator.userAgent;
-  const creds = await navigator.credentials.get();
   const cores = navigator.hardwareConcurrency;
   const screenWidth = window.screen.width;
   const screenHeight = window.screen.height;
@@ -35,13 +33,13 @@ export async function getDeviceProfile(ref: HTMLCanvasElement | null) {
   const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   const canvasFingerprint = getCanvasFingerprint(ref);
+  console.log(canvasFingerprint);
 
   const fp = await FingerprintJS.load();
   const result = await fp.get();
 
   const results = {
     userAgent,
-    creds,
     cores,
     screen: {
       width: screenWidth,
@@ -50,14 +48,12 @@ export async function getDeviceProfile(ref: HTMLCanvasElement | null) {
     },
     hasTouch,
     timezone,
-    canvasFingerprint,
     fingerprintId: result.visitorId,
   } satisfies DeviceProfile;
 
   return results;
 }
 
-// Canvas fingerprinting
 function getCanvasFingerprint(canvasRef: HTMLCanvasElement | null) {
   if (!canvasRef) return "not-supported";
   try {
@@ -82,3 +78,14 @@ const s = () =>
 
 export const guid = () =>
   `${s()}${s()}-${s()}-${s()}-${s()}-${s()}${s()}${s()}`;
+
+export function gsec(length = 20) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const bytes = crypto.randomBytes(length);
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars[bytes[i] % chars.length];
+  }
+  return result;
+}

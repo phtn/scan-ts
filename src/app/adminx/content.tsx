@@ -46,12 +46,14 @@ const ActionList = () => {
   );
   return (
     <div className="space-y-4">
-      <div className="ps-4 text-2xl font-bold py-5">Functions</div>
+      <div className="ps-4 text-xl tracking-tighter font-bold py-5">
+        Functions
+      </div>
       <HyperList
         keyId="id"
         data={data}
         component={CardItem}
-        container="flex px-4 items-center overflow-x-auto scroll-smooth will-change-auto"
+        container="flex items-center overflow-x-auto pe-10 scroll-smooth will-change-auto"
         itemStyle="ml-10 flex items-center justify-center"
       />
     </div>

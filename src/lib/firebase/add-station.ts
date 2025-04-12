@@ -1,11 +1,19 @@
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { type SubmitPayload } from "@/app/hooks/use-form";
 import { db } from ".";
 
-export async function addNewData(doc_id: string, payload: SubmitPayload) {
+interface StationPayload {
+  params: {
+    id: string;
+    param1: string;
+    param2: string;
+  };
+  url: string | null;
+  data: string | null;
+}
+export async function addStation(doc_id: string, payload: StationPayload) {
   try {
-    const submitsRef = collection(db, "submits");
-    const docRef = doc(submitsRef, doc_id);
+    const stationsRef = collection(db, "stations");
+    const docRef = doc(stationsRef, doc_id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -15,11 +23,7 @@ export async function addNewData(doc_id: string, payload: SubmitPayload) {
       // Document doesn't exist, add it
       await setDoc(docRef, {
         doc_id,
-        user: payload.user,
-        station: payload.station,
-        device: payload.device,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        ...payload,
       });
 
       console.log("Document added successfully!");

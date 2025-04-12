@@ -1,9 +1,10 @@
+import { addNewData } from "@/lib/firebase/add-user-doc";
 import { HyperList } from "@/ui/hyper-list";
 import { useActionState, useCallback, useMemo, useState } from "react";
 import { z } from "zod";
-import { useForm } from "../hooks/use-form";
-import type { DeviceProfile } from "../_lib/utils";
+import { gsec, type DeviceProfile } from "../_lib/utils";
 import type { Station } from "../types";
+import toast from "react-hot-toast";
 
 interface UserFormProps {
   station: Record<string, keyof Station> | null;
@@ -35,8 +36,6 @@ export default function UserForm({ station, device }: UserFormProps) {
     [],
   );
 
-  const { submitFn } = useForm("/submit-user-data");
-
   const initialState = {
     name: "",
     tel: "",
@@ -44,7 +43,7 @@ export default function UserForm({ station, device }: UserFormProps) {
   };
 
   const handleSubmit = useCallback(
-    (_: UserType | null, fd: FormData) => {
+    async (_: UserType | null, fd: FormData) => {
       const validated = UserSchema.safeParse({
         name: fd.get("name") as string,
         tel: fd.get("tel") as string,
@@ -58,11 +57,22 @@ export default function UserForm({ station, device }: UserFormProps) {
       }
 
       console.log(validated.data, station, device);
-      submitFn({ user: validated.data, station, device });
+
+      const promise = addNewData(gsec(), {
+        user: validated.data,
+        station,
+        device,
+      });
+
+      await toast.promise(promise, {
+        loading: "Submitting",
+        success: "Sumitted Successfully!",
+        error: "Failed to submit.",
+      });
 
       return validated.data;
     },
-    [station, device, submitFn],
+    [station, device],
   );
 
   const [, action, pending] = useActionState(handleSubmit, initialState);

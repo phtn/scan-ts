@@ -1,7 +1,4 @@
-// File: src/app/api/submit-user-data/route.ts
-import { guid } from "@/app/_lib/utils";
 import { SubmitPayload } from "@/app/hooks/use-form";
-import { addDataIfNotExist } from "@/lib/firebase/add-user-doc";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -22,7 +19,7 @@ export async function POST(request: Request) {
       );
     }
 
-    await addDataIfNotExist(device?.fingerprintId ?? guid(), data);
+    console.log(data);
 
     // Here you would typically:
     // 1. Validate the data more thoroughly

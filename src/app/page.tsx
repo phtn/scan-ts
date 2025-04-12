@@ -1,4 +1,4 @@
 import { Content } from "./content";
-export default function App() {
+export default async function App() {
   return <Content />;
 }
