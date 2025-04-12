@@ -33,7 +33,7 @@ export async function getDeviceProfile(ref: HTMLCanvasElement | null) {
   const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   const canvasFingerprint = getCanvasFingerprint(ref);
-  console.log(canvasFingerprint);
+  console.log(canvasFingerprint.length);
 
   const fp = await FingerprintJS.load();
   const result = await fp.get();
@@ -89,3 +89,21 @@ export function gsec(length = 20) {
   }
   return result;
 }
+
+export const getInitials = (name: string | undefined) => {
+  if (!name) return;
+
+  const words = name.split(" ");
+
+  if (words.length === 1) {
+    return name.slice(0, 2);
+  }
+
+  if (words.length === 2) {
+    return words[0]!.charAt(0) + words[1]!.charAt(0);
+  }
+
+  if (words.length >= 3) {
+    return words[0]!.charAt(0) + words[words.length - 1]!.charAt(0);
+  }
+};

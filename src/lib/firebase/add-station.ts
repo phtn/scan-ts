@@ -9,6 +9,7 @@ interface StationPayload {
   };
   url: string | null;
   data: string | null;
+  createdBy: string | undefined;
 }
 export async function addStation(doc_id: string, payload: StationPayload) {
   try {

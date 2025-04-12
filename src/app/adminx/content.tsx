@@ -3,7 +3,7 @@
 import { HyperList } from "@/ui/hyper-list";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { ClassName } from "../types";
 import { cn } from "@/lib/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -11,8 +11,46 @@ import { auth } from "@/lib/firebase";
 import { Loader } from "../_components/loader";
 import { useAuth } from "../_ctx/auth";
 import { UserCredential } from "firebase/auth";
+import { getDeviceProfile } from "../_lib/utils";
+import { setDevice } from "../actions";
 
 export const Content = () => {
+  // const { fcmToken } = useFcmToken();
+  //   // Use the token as needed
+  //   if (fcmToken){
+  //    console.log('FCM token:', fcmToken);
+  //   }
+
+  //   useEffect(() => {
+  //     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  //       const messaging = getMessaging(app);
+  //       const unsubscribe = onMessage(messaging, (payload) => {
+  //         console.log('Foreground push notification received:', payload);
+  //         // Handle the received push notification while the app is in the foreground
+  //         // You can display a notification or update the UI based on the payload
+  //       });
+  //       return () => {
+  //         unsubscribe(); // Unsubscribe from the onMessage event
+  //       };
+  //     }
+  //   }, []);
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        if (canvasRef.current) {
+          const profile = await getDeviceProfile(canvasRef.current);
+          await setDevice(profile.fingerprintId);
+        }
+      } catch (error) {
+        console.error("Error getting device profile:", error);
+      }
+    };
+    getProfile();
+  }, []);
+
   const [user, loading] = useAuthState(auth);
   const { signInWithGoogle } = useAuth();
 
@@ -21,12 +59,17 @@ export const Content = () => {
     [signInWithGoogle],
   );
 
-  return loading ? (
-    <Loader />
-  ) : user ? (
-    <ActionList />
-  ) : (
-    <SignIn signFn={signFn} />
+  const render = useCallback(
+    () =>
+      loading ? <Loader /> : user ? <ActionList /> : <SignIn signFn={signFn} />,
+    [loading, user, signFn],
+  );
+
+  return (
+    <div>
+      {render()}
+      <canvas ref={canvasRef} className="hidden size-10" />
+    </div>
   );
 };
 

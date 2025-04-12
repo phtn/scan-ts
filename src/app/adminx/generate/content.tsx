@@ -5,6 +5,8 @@ import { addStation } from "@/lib/firebase/add-station";
 import { gsec } from "@/app/_lib/utils";
 import toast from "react-hot-toast";
 import { QRViewer } from "./qrcode";
+import { getUID } from "@/app/actions";
+import { useAuth } from "@/app/_ctx/auth";
 
 function SubmitButton({ pending }: { pending: boolean }) {
   return (
@@ -42,6 +44,7 @@ async function generateQRCode(prevState: QrParams, formData: FormData) {
       params: { id, param1, param2 },
       url: data.qrUrl,
       data: data.qrData,
+      createdBy: await getUID(),
     });
 
     await toast.promise(promise, {
@@ -74,6 +77,8 @@ export function Content() {
     generateQRCode,
     initialState,
   );
+
+  const { logout } = useAuth();
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -142,7 +147,14 @@ export function Content() {
 
           <div className="h-20"></div>
           <QRViewer qrUrl={state.qrUrl} qrData={state.qrData} />
-          <div className="bg-pink-50 h-20 w-full"></div>
+          <div className="h-20 flex items-center justify-end w-full">
+            <button
+              className="h-10 border border-gray-300/30 rounded-2xl"
+              onClick={logout}
+            >
+              <span className="mt-4 text-sm px-4 opacity-80">sign out</span>
+            </button>
+          </div>
           <div></div>
         </div>
       </div>

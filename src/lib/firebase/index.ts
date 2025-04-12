@@ -16,13 +16,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
-
-// import { getMessaging, getToken } from "firebase/messaging";
-// export const messaging = getMessaging(app);
-// export const token = getToken(messaging, {
-//   vapidKey: process.env.NEXT_PUBLIC_F_VAPIDKEY,
-// });
