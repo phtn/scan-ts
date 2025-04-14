@@ -1,5 +1,6 @@
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
 import crypto from "crypto";
+import { onError, onSuccess, onWarn } from "../_ctx/toast";
 
 export type DeviceProfile = {
   userAgent: string;
@@ -106,4 +107,29 @@ export const getInitials = (name: string | undefined) => {
   if (words.length >= 3) {
     return words[0]!.charAt(0) + words[words.length - 1]!.charAt(0);
   }
+};
+
+export type CopyFnParams = {
+  name: string;
+  text: string;
+  limit?: number;
+};
+type CopyFn = (params: CopyFnParams) => Promise<boolean>; // Return success
+export const copyFn: CopyFn = async ({ name, text }) => {
+  if (!navigator?.clipboard) {
+    onWarn("Clipboard not supported");
+    return false;
+  }
+  if (!text) return false;
+
+  return await navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      onSuccess(`${name ? "Copied: " + name : "Copied."}`);
+      return true;
+    })
+    .catch((e) => {
+      onError(`Copy failed. ${e}`);
+      return false;
+    });
 };

@@ -1,6 +1,6 @@
+import { copyFn } from "@/app/_lib/utils";
 import html2canvas from "html2canvas";
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 
 interface QRViewerProps {
@@ -61,11 +61,11 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
       if (navigator.share) {
         try {
           await navigator.share({
-            title: `Big Ticket Payment Receipt`,
-            text: "Your payment receipt",
+            title: `AutoProtect QR Code`,
+            text: "Scan QR this code.",
             files: [file],
           });
-          console.log("Receipt shared successfully");
+          console.log("QR code shared successfully");
         } catch (error) {
           if (error instanceof Error && error.name === "AbortError") {
             console.log("User cancelled sharing");
@@ -85,57 +85,53 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
       }
     }
   }, [generateImage, handleDownload]);
+
+  const copyUrl = useCallback(() => {
+    if (!qrUrl) return;
+    copyFn({ text: qrUrl, name: "URL link" });
+  }, [qrUrl]);
+
   return (
-    <div>
-      <div className="mt-6 text-center md:w-3xl">
-        {qrData && (
-          <div>
-            <div className="px-5 h-12 flex items-center justify-between">
-              <h2 className="font-medium tracking-tighter mb-2">
-                Your QR Code
-              </h2>
-              <button
-                onClick={handleDownload}
-                className="border size-7 rounded-lg flex items-center justify-center"
-              >
-                <span className="rotate-90">&rarr;</span>
-              </button>
-            </div>
-            <div
-              ref={qrRef}
-              className="inline-block p-2 bg-white rounded-lg shadow-md"
-            >
+    <div className="w-full border rounded-[42px]">
+      <div className="flex items-center justify-center">
+        {qrData ? (
+          <div className="py-14 lg:py-8 space-y-6">
+            <div ref={qrRef} className="p-2 bg-white rounded-xl w-full">
               <Image
                 src={qrData}
                 alt="QR Code"
-                className="mx-auto"
-                width={285}
-                height={280}
+                className="mx-auto aspect-square"
+                width={300}
+                height={300}
                 unoptimized
                 priority
               />
             </div>
-            <div className="px-14">
-              {qrUrl && (
-                <Link
-                  href={qrUrl}
-                  className="mt-2 text-xs text-blue-400 break-all"
-                >
-                  {qrUrl}
-                </Link>
-              )}
-            </div>
-            <div className="h-12"></div>
-            <button
-              className="h-12 border border-gray-300/30 rounded-2xl"
-              onClick={share}
-            >
-              <span className="mt-4 text-sm px-4 opacity-80">
-                Share QR Code
-              </span>
-            </button>
 
-            <div className="h-12"></div>
+            <div className="flex items-center font-sans font-semibold text-sm h-8 justify-center gap-10">
+              <button
+                className="border cursor-pointer hover:bg-gray-300/15 border-gray-200/40 h-7 rounded-lg px-2 flex items-center justify-center"
+                onClick={copyUrl}
+              >
+                <span>copy link</span>
+              </button>
+              <button
+                className="border cursor-pointer hover:bg-gray-300/15 border-gray-200/40 h-7 rounded-lg px-2 flex items-center justify-center"
+                onClick={share}
+              >
+                <span>share</span>
+              </button>
+              <button
+                onClick={handleDownload}
+                className="border cursor-pointer hover:bg-gray-300/15 h-7 border-gray-200/40 rounded-lg px-2 flex items-center justify-center"
+              >
+                <span>download</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center font-sans tracking-tight h-64">
+            QR result area
           </div>
         )}
       </div>

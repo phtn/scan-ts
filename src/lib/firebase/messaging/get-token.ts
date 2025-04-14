@@ -7,7 +7,7 @@ import { setToken } from "@/app/actions";
 export function requestPermission() {
   Notification.requestPermission().then((permission) => {
     if (permission === "granted") {
-      console.log(process.env.NEXT_PUBLIC_F_VAPIDKEY);
+      console.log(process.env.NEXT_PUBLIC_F_VAPID_KEY);
       console.log("Notification permission granted.");
       // Get registration token. Initially this makes a network call, once retrieved
       // subsequent calls to getToken will return from cache.
@@ -15,11 +15,12 @@ export function requestPermission() {
 
       console.log("Getting fcm-token.");
       getToken(messaging, {
-        vapidKey: process.env.NEXT_PUBLIC_F_VAPIDKEY,
+        vapidKey: process.env.NEXT_PUBLIC_F_VAPID_KEY,
       }).then((currentToken) => {
         if (currentToken) {
           console.log("Storing fcm-token.");
           setToken(currentToken).catch(console.log);
+          console.log(currentToken);
 
           // Send the token to your server and update the UI if necessary
           onSuccess("Push Notification Enabled");

@@ -15,26 +15,6 @@ import { getDeviceProfile } from "../_lib/utils";
 import { setDevice } from "../actions";
 
 export const Content = () => {
-  // const { fcmToken } = useFcmToken();
-  //   // Use the token as needed
-  //   if (fcmToken){
-  //    console.log('FCM token:', fcmToken);
-  //   }
-
-  //   useEffect(() => {
-  //     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  //       const messaging = getMessaging(app);
-  //       const unsubscribe = onMessage(messaging, (payload) => {
-  //         console.log('Foreground push notification received:', payload);
-  //         // Handle the received push notification while the app is in the foreground
-  //         // You can display a notification or update the UI based on the payload
-  //       });
-  //       return () => {
-  //         unsubscribe(); // Unsubscribe from the onMessage event
-  //       };
-  //     }
-  //   }, []);
-
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -79,7 +59,7 @@ const ActionList = () => {
       [
         {
           id: "1",
-          label: "Generate QR Code",
+          label: "QR Code",
           href: "/adminx/generate",
           cover: "/svg/qr.svg",
         },
