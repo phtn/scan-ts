@@ -1,3 +1,4 @@
+import { Button } from "@/app/_components/button";
 import { copyFn } from "@/app/_lib/utils";
 import html2canvas from "html2canvas";
 import Image from "next/image";
@@ -36,7 +37,7 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
     return dataUrl;
   }, [imageUrl]);
 
-  const handleDownload = useCallback(async () => {
+  const download = useCallback(async () => {
     if (!qrRef.current) return;
     const image = await generateImage();
     if (image) {
@@ -81,10 +82,10 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
         alert(
           "Web Share API not supported in your browser. isProcessing instead.",
         );
-        await handleDownload();
+        await download();
       }
     }
-  }, [generateImage, handleDownload]);
+  }, [generateImage, download]);
 
   const copyUrl = useCallback(() => {
     if (!qrUrl) return;
@@ -93,9 +94,9 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
 
   return (
     <div className="w-full border rounded-[42px]">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-full">
         {qrData ? (
-          <div className="py-14 lg:py-8 space-y-6">
+          <div className="flex flex-col justify-center space-y-8">
             <div ref={qrRef} className="p-2 bg-white rounded-xl w-full">
               <Image
                 src={qrData}
@@ -108,25 +109,17 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
               />
             </div>
 
-            <div className="flex items-center font-sans font-semibold text-sm h-8 justify-center gap-10">
-              <button
-                className="border cursor-pointer hover:bg-gray-300/15 border-gray-200/40 h-7 rounded-lg px-2 flex items-center justify-center"
-                onClick={copyUrl}
-              >
+            <div className="flex items-center font-sans font-semibold text-sm border h-6 justify-around">
+              <Button onClick={copyUrl}>
                 <span>copy link</span>
-              </button>
-              <button
-                className="border cursor-pointer hover:bg-gray-300/15 border-gray-200/40 h-7 rounded-lg px-2 flex items-center justify-center"
-                onClick={share}
-              >
+              </Button>
+              <Button onClick={share}>
                 <span>share</span>
-              </button>
-              <button
-                onClick={handleDownload}
-                className="border cursor-pointer hover:bg-gray-300/15 h-7 border-gray-200/40 rounded-lg px-2 flex items-center justify-center"
-              >
+              </Button>
+
+              <Button onClick={download}>
                 <span>download</span>
-              </button>
+              </Button>
             </div>
           </div>
         ) : (

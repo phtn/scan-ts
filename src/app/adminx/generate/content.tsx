@@ -8,6 +8,8 @@ import { QRViewer } from "./qr-viewer";
 import { getUID } from "@/app/actions";
 import { useAuth } from "@/app/_ctx/auth";
 import { QrForm } from "./qr-form";
+import { PageTitle } from "../components";
+import { Button } from "@/app/_components/button";
 
 // Define the action
 async function generateQRCode(prevState: QrParams, formData: FormData) {
@@ -69,11 +71,7 @@ export function Content() {
   return (
     <main className="flex flex-col items-center justify-between">
       <div className="w-full px-2 md:max-w-lg lg:max-w-4xl mx-auto space-y-4">
-        <div className="w-full space-y-4">
-          <div className="px-3 text-xl font-bold pt-5 tracking-tighter">
-            Generate QR Code
-          </div>
-        </div>
+        <PageTitle title="Generate QR Code" />
 
         <div className="grid lg:grid-cols-2 gap-y-12 grid-cols-1 w-full md:border-y md:border-r-[0.33px] md:rounded-[58px] border-gray-200/20 p-4 gap-4">
           <QrForm action={action} pending={pending} />
@@ -87,12 +85,9 @@ export function Content() {
               </div>
             )}
             <div className="h-20"></div>
-            <button
-              className="border border-gray-200/40 h-7 text-orange-400 tracking-tight font-sans rounded-lg px-2 flex items-center justify-center"
-              onClick={logout}
-            >
-              <span>sign out</span>
-            </button>
+            <Button onClick={logout}>
+              <span className="text-orange-400">sign out</span>
+            </Button>
           </div>
         </div>
 

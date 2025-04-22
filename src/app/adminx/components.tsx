@@ -12,3 +12,9 @@ export const Title = ({ un }: TitleProps) => {
     </div>
   );
 };
+
+export const PageTitle = ({ title }: { title: string }) => (
+  <div className="w-full py-5">
+    <div className="ps-4 text-xl font-bold tracking-tighter">{title}</div>
+  </div>
+);

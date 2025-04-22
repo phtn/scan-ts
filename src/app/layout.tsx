@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Nunito } from "next/font/google";
+import { Geist, Geist_Mono, Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
 import { Toasts } from "./_ctx/toast";
 
@@ -18,6 +18,11 @@ const nito = Nunito({
   subsets: ["latin"],
 });
 
+const quick = Quicksand({
+  variable: "--font-quick",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "AutoProtect Insurance",
   description: "Proudly deployed on Vercel. That's wassup!",
@@ -31,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nito.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${quick.variable} ${nito.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
         <Toasts />

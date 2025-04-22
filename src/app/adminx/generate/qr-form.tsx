@@ -51,7 +51,7 @@ export const QrForm = ({ action, pending }: QrFormProps) => {
     <div className="bg-white p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
         <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-300 rounded-b-[20px] rounded-t-[38px]">
-          <h2 className="text-lg font-medium tracking-tighter mb-4 text-slate-700">
+          <h2 className="text-lg font-medium tracking-tighter mb-4 text-slate-700 font-quick">
             Enter QR details.
           </h2>
           <HyperList

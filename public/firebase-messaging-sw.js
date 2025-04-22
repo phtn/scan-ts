@@ -1,16 +1,16 @@
 importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAwGz0UMJkuJt1lHwRBfmjuOmzmQrHjWds",
-  authDomain: "autoprotect-scan.firebaseapp.com",
-  projectId: "autoprotect-scan",
-  storageBucket: "autoprotect-scan.firebasestorage.app",
-  messagingSenderId: "1095526681742",
-  appId: "1:1095526681742:web:1c65f98efb001aaf48cddf",
-  measurementId: "G-ET80CFYPTK",
+const options = {
+  apiKey: process.env.NEXT_PUBLIC_F_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_F_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_F_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_F_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_F_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_F_APPID,
+  measurementId: process.env.NEXT_PUBLIC_F_MEASUREMENTID,
 };
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(options);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {

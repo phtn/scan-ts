@@ -13,29 +13,7 @@ interface UserFormProps {
 }
 
 export default function UserForm({ station, device }: UserFormProps) {
-  const [error, setError] = useState<string | null>(null);
-
-  const user_fields = useMemo(
-    () =>
-      [
-        {
-          id: "1",
-          name: "name",
-          label: "name",
-        },
-        {
-          id: "2",
-          name: "tel",
-          label: "tel",
-        },
-        {
-          id: "3",
-          name: "email",
-          label: "email",
-        },
-      ] as IFieldItem[],
-    [],
-  );
+  const [, setError] = useState<string | null>(null);
 
   const initialState = {
     name: "",
@@ -76,21 +54,42 @@ export default function UserForm({ station, device }: UserFormProps) {
     [station, device],
   );
 
-  const [, action, pending] = useActionState(handleSubmit, initialState);
+  const [state, action, pending] = useActionState(handleSubmit, initialState);
+
+  const user_fields = useMemo(
+    () =>
+      [
+        {
+          id: "name",
+          name: "name",
+          label: "name",
+          value: state?.name,
+          required: true,
+        },
+        {
+          id: "tel",
+          name: "tel",
+          label: "tel",
+          value: state?.tel,
+        },
+        {
+          id: "email",
+          name: "email",
+          label: "email",
+          value: state?.email,
+        },
+      ] as IFieldItem[],
+    [state],
+  );
 
   return (
     <div className="bg-white p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
-        <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-200 rounded-b-[20px] rounded-t-[38px]">
-          <h2 className="text-lg font-medium tracking-tighter mb-4 text-slate-700">
+        <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-200 rounded-b-3xl rounded-t-[38px]">
+          <h2 className="text-lg font-semibold font-quick tracking-tighter mb-4 text-raised">
             Please enter your contact details.
           </h2>
-
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
-              {error}
-            </div>
-          )}
+          {/* TODO: Implement error handling */}
           {true ? (
             <HyperList
               keyId="id"
@@ -110,11 +109,11 @@ export default function UserForm({ station, device }: UserFormProps) {
           )}
         </div>
 
-        <div className="h-20 flex items-center justify-end px-4">
+        <div className="h-20 flex items-center justify-end px-3">
           <button
             type="submit"
             disabled={pending}
-            className="w-fit px-6 h-11 text-[16px] font-semibold font-sans tracking-tighter border rounded-3xl border-transparent text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-fit px-6 h-12 text-[16px] font-bold font-quick border rounded-full border-transparent text-white bg-background hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
           >
             {pending ? "Submitting..." : "Submit"}
           </button>
@@ -131,3 +130,12 @@ const UserSchema = z.object({
 });
 
 export type UserType = z.infer<typeof UserSchema>;
+
+/*
+
+{error && (
+  <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
+    {error}
+  </div>
+)}
+*/
