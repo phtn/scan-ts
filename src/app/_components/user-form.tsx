@@ -6,6 +6,8 @@ import { gsec, type DeviceProfile } from "../_lib/utils";
 import type { Station } from "../types";
 import toast from "react-hot-toast";
 import { FieldItem, IFieldItem } from "./input-field";
+import Inquiry from "@/app/inquiry";
+import { Icon } from "@/lib/icons";
 
 interface UserFormProps {
   station: Record<string, keyof Station> | null;
@@ -83,10 +85,10 @@ export default function UserForm({ station, device }: UserFormProps) {
   );
 
   return (
-    <div className="bg-white p-1.5 pb-0 rounded-[42px]">
+    <div className="bg-gray-300 p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
-        <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-200 rounded-b-3xl rounded-t-[38px]">
-          <h2 className="text-lg font-semibold font-quick tracking-tighter mb-4 text-raised">
+        <div className="py-5 px-3 border-gray-300 border space-y-4 bg-gray-100 rounded-b-3xl rounded-t-[38px]">
+          <h2 className="text-lg ps-2 font-semibold font-quick tracking-tighter mb-4 text-hot-dark">
             Please enter your contact details.
           </h2>
           {/* TODO: Implement error handling */}
@@ -94,7 +96,7 @@ export default function UserForm({ station, device }: UserFormProps) {
             <HyperList
               keyId="id"
               data={user_fields}
-              container="space-y-6"
+              container="space-y-4"
               component={FieldItem}
             />
           ) : (
@@ -107,13 +109,32 @@ export default function UserForm({ station, device }: UserFormProps) {
               </p>
             </div>
           )}
+
+          <Inquiry />
         </div>
 
-        <div className="h-20 flex items-center justify-end px-3">
+        <div className="h-20 flex items-center justify-between gap-3 px-3">
+          <div className="h-14 gap-4 flex flex-row items-center justify-center">
+            <div className="h-10 rounded-3xl text-green-500 font-quick font-bold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
+              <Icon name="phone" className="mt-0.5 select-none" />
+              <a href="tel:+639275770777" className="text-[15px]">
+                Call
+              </a>
+            </div>
+            <div className="h-10 rounded-3xl text-blue-500 font-quick font-semibold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
+              <Icon name="messenger" className="mt-0" />
+              <a
+                href="https://m.me/Bestdealinsuranceph"
+                className="text-[15px]"
+              >
+                Chat
+              </a>
+            </div>
+          </div>
           <button
             type="submit"
             disabled={pending}
-            className="w-fit px-6 h-12 text-[16px] font-bold font-quick border rounded-full border-transparent text-white bg-background hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="w-fit px-6 h-12 text-[15px] font-semibold font-quick rounded-full border-transparent text-white bg-hot-dark hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
           >
             {pending ? "Submitting..." : "Submit"}
           </button>

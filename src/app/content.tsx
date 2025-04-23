@@ -6,7 +6,6 @@ import { type DeviceProfile, getDeviceProfile } from "./_lib/utils";
 import { TopOutlines } from "./_components/outlines";
 import { useSearchParams } from "next/navigation";
 import { Station } from "./types";
-import { Icon } from "@/lib/icons";
 
 export function Content() {
   return (
@@ -57,14 +56,14 @@ function Landing() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="w-full max-w-md mx-auto space-y-6">
         <TopOutlines />
-        <div className="text-center pb-6">
+        <div className="text-center pb-3 md:pb-6">
           <h1 className="text-3xl tracking-tight text-white font-black">
             Best Deal{" "}
             <span className="font-mono font-light tracking-tighter text-orange-200">
               Insurance
             </span>
           </h1>
-          <p className="mt-0.5 text-sky-100/60">
+          <p className="mt-0.5 font-quick text-neutral-50/80">
             Protecting what matters most.
           </p>
         </div>
@@ -72,26 +71,15 @@ function Landing() {
         <div className="px-4">
           <UserForm station={station} device={deviceProfile} />
         </div>
-        <div className="h-16 gap-8 flex flex-row items-center justify-center">
-          <div className="h-10 rounded-3xl text-green-500 font-quick font-bold gap-x-2 ps-3 pe-3.5 bg-white flex items-center justify-center">
-            <Icon name="phone" className="mt-0.5" />
-            <a href="tel:+639275770777" className="tracking-tight">
-              Call
-            </a>
-          </div>
-          <div className="h-10 rounded-3xl text-blue-500 font-quick font-bold gap-x-2 ps-3 pe-3.5 bg-white flex items-center justify-center">
-            <Icon name="messenger" className="mt-0" />
-            <a
-              href="https://m.me/Bestdealinsuranceph"
-              className="tracking-tight"
-            >
-              Chat
-            </a>
-          </div>
-        </div>
-        <div className="h-6 flex justify-center">
+
+        <div className="h-6 opacity-0 flex justify-center">
           <a href="/adminx" className="text-orange-200 text-xs">
             admin
+          </a>
+        </div>
+        <div className="h-6 opacity-80 font-quick flex justify-center">
+          <a href="/adminx" className="text-orange-100 text-[10px]">
+            &copy;2023 BestDeal Insurance
           </a>
         </div>
       </div>

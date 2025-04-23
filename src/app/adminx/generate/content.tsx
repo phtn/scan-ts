@@ -70,10 +70,10 @@ export function Content() {
 
   return (
     <main className="flex flex-col items-center justify-between">
-      <div className="w-full px-2 md:max-w-lg lg:max-w-4xl mx-auto space-y-4">
+      <div className="w-full px-2 md:max-w-lg lg:max-w-6xl mx-auto space-y-4">
         <PageTitle title="Generate QR Code" />
 
-        <div className="grid lg:grid-cols-2 gap-y-12 grid-cols-1 w-full md:border-y md:border-r-[0.33px] md:rounded-[58px] border-gray-200/20 p-4 gap-4">
+        <div className="grid lg:grid-cols-2 gap-y-12 grid-cols-1 w-full md:rounded-[58px] p-4 gap-24 bg-gradient-to-b from-mariana via-deep to-black">
           <QrForm action={action} pending={pending} />
 
           <QRViewer qrUrl={state.qrUrl} qrData={state.qrData} />

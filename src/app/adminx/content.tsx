@@ -14,6 +14,7 @@ import { UserCredential } from "firebase/auth";
 import { getDeviceProfile } from "../_lib/utils";
 import { setDevice } from "../actions";
 import { PageTitle } from "./components";
+import { Header } from "../_components/header";
 
 export const Content = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -75,7 +76,9 @@ const ActionList = () => {
   );
   return (
     <div className="space-y-4">
-      <PageTitle title="Main" />
+      <Header>
+        <PageTitle title="Main" />
+      </Header>
       <HyperList
         keyId="id"
         data={data}
@@ -97,10 +100,10 @@ interface ICardItem {
 const CardItem = ({ label, href = "#", cover, style }: ICardItem) => (
   // ration h:w = 1.1122:1
   <div className="h-[238px] w-64 rounded-[36px] p-1 bg-white">
-    <div className="rounded-t-[32px] relative overflow-hidden rounded-b-3xl border-t border-l bg-gray-700 border-gray-900 h-[180px]">
+    <div className="rounded-t-[32px] relative overflow-hidden rounded-b-3xl border-t border-l bg-raised border-gray-900 h-[180px]">
       <Image
         className={cn(
-          "absolute h-32 w-auto aspect-square -bottom-6 right-1/5 rotate-[8deg]",
+          "absolute h-32 w-auto aspect-square -bottom-6 pointer-events-none select-none right-1/5 rotate-[8deg]",
           style,
         )}
         alt={label}
@@ -115,7 +118,7 @@ const CardItem = ({ label, href = "#", cover, style }: ICardItem) => (
     <div className="flex h-[54px] pe-3 items-center justify-end">
       <Link
         href={href}
-        className="h-8 flex items-center justify-center w-fit px-4 bg-[#14141b] rounded-full"
+        className="h-8 flex items-center justify-center w-fit px-4 bg-raised rounded-full"
       >
         <span className="text-xs font-extrabold font-quick tracking-tight">
           {label}

@@ -7,7 +7,7 @@ function SubmitButton({ pending }: { pending: boolean }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-fit px-4 cursor-pointer h-12 text-[16px] font-semibold font-sans tracking-tighter border rounded-full border-transparent text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+      className="w-fit px-4 cursor-pointer h-12 text-[16px] font-semibold font-quick tracking-tighter rounded-full text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
     >
       {pending ? "Generating..." : "Generate QR Code"}
     </button>
@@ -50,8 +50,8 @@ export const QrForm = ({ action, pending }: QrFormProps) => {
   return (
     <div className="bg-white p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
-        <div className="py-6 px-4 border-gray-500 border space-y-6 bg-gray-300 rounded-b-[20px] rounded-t-[38px]">
-          <h2 className="text-lg font-medium tracking-tighter mb-4 text-slate-700 font-quick">
+        <div className="py-6 px-4 border-gray-400 border space-y-6 bg-gray-300 rounded-b-[24px] rounded-t-[38px]">
+          <h2 className="text-lg font-medium tracking-tighter mb-4 text-raised font-quick">
             Enter QR details.
           </h2>
           <HyperList
@@ -62,7 +62,7 @@ export const QrForm = ({ action, pending }: QrFormProps) => {
           />
         </div>
 
-        <div className="h-24 flex items-center justify-end px-4">
+        <div className="h-24 flex items-center justify-between px-4">
           <SubmitButton pending={pending} />
         </div>
       </form>

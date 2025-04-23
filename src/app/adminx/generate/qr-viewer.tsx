@@ -93,7 +93,7 @@ export const QRViewer = ({ qrUrl, qrData }: QRViewerProps) => {
   }, [qrUrl]);
 
   return (
-    <div className="w-full border rounded-[42px]">
+    <div className="w-full border-6 border-chalk/20 rounded-[42px]">
       <div className="flex items-center justify-center h-full">
         {qrData ? (
           <div className="flex flex-col justify-center space-y-8">

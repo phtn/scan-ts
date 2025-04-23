@@ -8,7 +8,7 @@ const AdminxLayout = async ({ children }: { children: ReactNode }) => {
   const un = await getUsername();
   return (
     <AuthCtxProvider>
-      <div className="container mx-auto max-w-4xl bg-gradient-to-b from-mariana via-deep to-black">
+      <div className="container mx-auto max-w-6xl">
         <div className="h-14 relative w-full overflow-hidden">
           <TopOutlines />
           <Title un={un} />
