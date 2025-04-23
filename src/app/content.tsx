@@ -79,7 +79,7 @@ function Landing() {
         </div>
         <div className="h-6 opacity-80 font-quick flex justify-center">
           <a href="/adminx" className="text-orange-100 text-[10px]">
-            &copy;2023 BestDeal Insurance
+            &copy;2025 BestDeal Insurance
           </a>
         </div>
       </div>
