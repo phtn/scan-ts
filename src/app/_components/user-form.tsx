@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { FieldItem, IFieldItem } from "./input-field";
 import Inquiry from "@/app/inquiry";
 import { Icon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 interface UserFormProps {
   station: Record<string, keyof Station> | null;
@@ -16,6 +17,7 @@ interface UserFormProps {
 
 export default function UserForm({ station, device }: UserFormProps) {
   const [, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const initialState = {
     name: "",
@@ -37,19 +39,21 @@ export default function UserForm({ station, device }: UserFormProps) {
         return null;
       }
 
-      console.log(validated.data, station, device);
-
       const promise = addNewData(gsec(), {
         user: validated.data,
         station,
         device,
       });
 
-      await toast.promise(promise, {
+      const result = await toast.promise(promise, {
         loading: "Submitting",
         success: "Sumitted Successfully!",
         error: "Failed to submit.",
       });
+
+      if (result === "success") {
+        setSubmitted(true);
+      }
 
       return validated.data;
     },
@@ -71,7 +75,7 @@ export default function UserForm({ station, device }: UserFormProps) {
         {
           id: "tel",
           name: "tel",
-          label: "tel",
+          label: "phone",
           value: state?.tel,
         },
         {
@@ -85,56 +89,73 @@ export default function UserForm({ station, device }: UserFormProps) {
   );
 
   return (
-    <div className="bg-gray-300 p-1.5 pb-0 rounded-[42px]">
+    <div className="bg-gradient-to-b from-gray-100 via-gray-400 to-gray-400 p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
-        <div className="py-5 px-3 border-gray-300 border space-y-4 bg-gray-100 rounded-b-3xl rounded-t-[38px]">
-          <h2 className="text-lg ps-2 font-semibold font-quick tracking-tighter mb-4 text-hot-dark">
-            Please enter your contact details.
+        <div className="pt-5 pb-3 px-3 border-gray-300 border space-y-4 bg-gray-100 rounded-b-3xl rounded-t-[38px]">
+          <h2 className="text-lg ps-2 font-semibold font-sans tracking-tight mb-4 text-hot-dark">
+            {submitted
+              ? "You're all set!"
+              : "Please enter your contact details."}
           </h2>
           {/* TODO: Implement error handling */}
-          {true ? (
+          {submitted ? (
+            <div className="text-center flex flex-col text-hot-dark justify-center p-4 bg-white rounded-xl font-sans">
+              <p className="">Your information has been</p>
+              <p>submitted successfully.</p>
+            </div>
+          ) : (
             <HyperList
               keyId="id"
               data={user_fields}
               container="space-y-4"
               component={FieldItem}
             />
-          ) : (
-            <div className="text-center p-4 bg-green-100 rounded-lg">
-              <h2 className="text-xl font-semibold text-green-800">
-                Thank You!
-              </h2>
-              <p className="mt-2">
-                Your information has been submitted successfully.
-              </p>
-            </div>
           )}
 
           <Inquiry />
         </div>
 
-        <div className="h-20 flex items-center justify-between gap-3 px-3">
-          <div className="h-14 gap-4 flex flex-row items-center justify-center">
-            <div className="h-10 rounded-3xl text-green-500 font-quick font-bold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
-              <Icon name="phone" className="mt-0.5 select-none" />
-              <a href="tel:+639275770777" className="text-[15px]">
-                Call
-              </a>
+        <div className="h-20 flex items-end justify-between ps-3 pe-1 pb-2">
+          <div className="space-y-1">
+            <div className="text-xs px-0.5 font-sans text-orange-50 tracking-tight">
+              <span className="-ml-0.5 px-[5px] bg-gray-500/10 py-0.5 rounded-sm shadow-inner shadow-hot-dark/10">
+                {submitted
+                  ? "Call and Chat is now available."
+                  : "Submit your info to activate."}
+              </span>
             </div>
-            <div className="h-10 rounded-3xl text-blue-500 font-quick font-semibold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
-              <Icon name="messenger" className="mt-0" />
-              <a
-                href="https://m.me/Bestdealinsuranceph"
-                className="text-[15px]"
-              >
-                Chat
-              </a>
+            <div
+              className={cn(
+                "flex flex-row items-center justify-center",
+                "h-10 gap-0 opacity-40 pointer-events-none",
+                { "opacity-100 pointer-events-auto": submitted },
+              )}
+            >
+              <div className="h-9 rounded-bl-3xl border-y border-s border-hot-dark rounded-tl-md text-green-500 font-quick font-bold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
+                <Icon name="phone" className="mt-0.5 select-none" />
+                <a
+                  href="tel:+639275770777"
+                  className="text-[15px] drop-shadow-xs tracking-tight"
+                >
+                  Call
+                </a>
+              </div>
+              <div className="h-9 w-0.5 bg-gray-100 border-y border-hot-dark" />
+              <div className="h-9 rounded-lg rounded-e-full border-y border-e border-hot-dark text-blue-500 font-quick font-semibold gap-x-1.5 ps-2 pe-2.5 bg-white flex items-center justify-center">
+                <Icon name="messenger" className="mt-0" />
+                <a
+                  href="https://m.me/Bestdealinsuranceph"
+                  className="text-[15px] tracking-tight"
+                >
+                  Chat
+                </a>
+              </div>
             </div>
           </div>
           <button
             type="submit"
-            disabled={pending}
-            className="w-fit px-6 h-12 text-[15px] font-semibold font-quick rounded-full border-transparent text-white bg-hot-dark hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            disabled={pending || submitted}
+            className="w-fit ps-8 border pe-10 h-12 text-[15px] font-semibold font-quick rounded-br-[38px] rounded-tr-lg rounded-tl-xl rounded-bl-xl text-white bg-hot-dark hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 border-gray-200 shadow-inner shadow-gray-400/80"
           >
             {pending ? "Submitting..." : "Submit"}
           </button>

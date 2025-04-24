@@ -56,9 +56,9 @@ function Landing() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="w-full max-w-md mx-auto space-y-6">
         <TopOutlines />
-        <div className="text-center pb-3 md:pb-6">
+        <div className="text-center pb-1 md:pb-6">
           <h1 className="text-3xl tracking-tight text-white font-black">
-            Best Deal{" "}
+            BestDeal{" "}
             <span className="font-mono font-light tracking-tighter text-orange-200">
               Insurance
             </span>
