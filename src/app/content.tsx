@@ -1,11 +1,12 @@
 "use client";
 
 import { Suspense, useEffect, useRef, useState } from "react";
-import UserForm from "./_components/user-form";
-import { type DeviceProfile, getDeviceProfile } from "./_lib/utils";
+import { getDeviceProfile } from "./_lib/utils";
 import { TopOutlines } from "./_components/outlines";
 import { useSearchParams } from "next/navigation";
-import { Station } from "./types";
+import type { Device, Station } from "./types";
+import { UserInfoForm } from "@/components/form/forms";
+import Inquiry from "./inquiry";
 
 export function Content() {
   return (
@@ -16,12 +17,8 @@ export function Content() {
 }
 
 function Landing() {
-  const [station, setStation] = useState<Record<string, keyof Station> | null>(
-    null,
-  );
-  const [deviceProfile, setDeviceProfile] = useState<DeviceProfile | null>(
-    null,
-  );
+  const [station, setStation] = useState<Station | null>(null);
+  const [deviceProfile, setDeviceProfile] = useState<Device>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -57,9 +54,9 @@ function Landing() {
       <div className="w-full max-w-md mx-auto space-y-6">
         <TopOutlines />
         <div className="text-center pb-1 md:pb-6">
-          <h1 className="text-3xl tracking-tight text-white font-black">
-            BestDeal{" "}
-            <span className="font-mono font-light tracking-tighter text-orange-200">
+          <h1 className="text-3xl tracking-tight text-white font-sans font-black">
+            BestDeal
+            <span className="font-sans ml-1 font-light tracking-tight text-orange-200">
               Insurance
             </span>
           </h1>
@@ -69,7 +66,9 @@ function Landing() {
         </div>
 
         <div className="px-4">
-          <UserForm station={station} device={deviceProfile} />
+          <UserInfoForm station={station} device={deviceProfile}>
+            <Inquiry />
+          </UserInfoForm>
         </div>
 
         <div className="h-6 opacity-0 flex justify-center">

@@ -7,8 +7,9 @@ import type { Station } from "../types";
 import toast from "react-hot-toast";
 import { FieldItem, IFieldItem } from "./input-field";
 import Inquiry from "@/app/inquiry";
-import { Icon } from "@/lib/icons";
+import { Icon, IconName } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { FlexRow } from "@/ui/hyper-flex";
 
 interface UserFormProps {
   station: Record<string, keyof Station> | null;
@@ -97,31 +98,29 @@ export default function UserForm({ station, device }: UserFormProps) {
               ? "You're all set!"
               : "Please enter your contact details."}
           </h2>
-          {/* TODO: Implement error handling */}
           {submitted ? (
-            <div className="text-center flex flex-col text-hot-dark justify-center p-4 bg-white rounded-xl font-sans">
-              <p className="">Your information has been</p>
-              <p>submitted successfully.</p>
-            </div>
+            <Checklist />
           ) : (
-            <HyperList
-              keyId="id"
-              data={user_fields}
-              container="space-y-4"
-              component={FieldItem}
-            />
+            <div>
+              <HyperList
+                keyId="id"
+                data={user_fields}
+                container="space-y-4"
+                component={FieldItem}
+              />
+              <Inquiry />
+            </div>
           )}
-
-          <Inquiry />
         </div>
 
         <div className="h-20 flex items-end justify-between ps-3 pe-1 pb-2">
           <div className="space-y-1">
-            <div className="text-xs px-0.5 font-sans text-orange-50 tracking-tight">
-              <span className="-ml-0.5 px-[5px] bg-gray-500/10 py-0.5 rounded-sm shadow-inner shadow-hot-dark/10">
+            <div className="text-xs px-0.5 font-sans text-white tracking-tight">
+              <span className="-ml-0.5 px-1.5 bg-hot-dark/20 py-0.5 s rounded-sm shadow-inner shadow-hot-dark/10">
+                <span className="text-orange-300 mr-1">⏺</span>
                 {submitted
                   ? "Call and Chat is now available."
-                  : "Submit your info to activate."}
+                  : "Submit form to activate."}
               </span>
             </div>
             <div
@@ -167,17 +166,64 @@ export default function UserForm({ station, device }: UserFormProps) {
 
 const UserSchema = z.object({
   name: z.string().min(1).max(100),
-  tel: z.string().max(13),
-  email: z.string().email().max(255),
+  tel: z.string().max(13).nullable(),
+  email: z.string().email().max(255).nullable(),
 });
 
 export type UserType = z.infer<typeof UserSchema>;
 
-/*
+const Checklist = () => {
+  const checklist = useMemo(
+    () =>
+      [
+        {
+          id: 0,
+          icon: "check-circle",
+          text: "We received your information.",
+          styles: "bg-green-100/60--text-green-600",
+        },
+        {
+          id: 1,
+          icon: "call-incoming",
+          text: "Expect a call from us shortly.",
+          styles: "bg-gray-100--text-gray-500",
+        },
 
-{error && (
-  <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
-    {error}
-  </div>
-)}
-*/
+        {
+          id: 2,
+          icon: "book-open",
+          text: "Learn more about our services.",
+          styles: "bg-gray-100--text-gray-500",
+        },
+      ] as IChecklistItem[],
+    [],
+  );
+  return (
+    <HyperList
+      keyId="id"
+      data={checklist}
+      component={ChecklistItem}
+      container="space-y-2"
+    />
+  );
+};
+
+interface IChecklistItem {
+  id: number;
+  icon: IconName;
+  text: string;
+  styles: string;
+}
+
+const ChecklistItem = ({ icon, text, styles }: IChecklistItem) => {
+  return (
+    <div className="flex items-center justify-start text-hot-dark gap-x-3 border border-gray-400 p-3 bg-white rounded-xl">
+      <FlexRow
+        className={cn("size-9 rounded-full", styles.split("--").shift())}
+      >
+        <Icon name={icon} className={cn("size-5", styles.split("--").pop())} />
+      </FlexRow>
+      <span className="text-sm tracking-tight font-sans">{text}</span>
+    </div>
+  );
+};

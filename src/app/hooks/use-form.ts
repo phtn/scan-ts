@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 import { UserType } from "../_components/user-form";
-import { DeviceProfile } from "../_lib/utils";
-import { Station } from "../types";
+import type { Device, Station } from "../types";
 import { getAPI } from "../actions";
 
 export interface SubmitPayload {
   user: UserType;
-  station: Record<string, keyof Station> | null;
-  device: DeviceProfile | null;
+  station: Station;
+  device: Device;
 }
 
 export const useForm = (endpoint: string) => {

@@ -29,21 +29,21 @@ export default function Inquiry() {
           icon: "sports-car",
           value: "1",
           title: "Auto Insurance",
-          description: "Type of Inquiry",
+          description: "CTPL & Comprehensive",
         },
         {
           id: 2,
           icon: "injured",
           value: "2",
           title: "Personal Accident",
-          description: "Individual or Family",
+          description: "Individual & Family",
         },
         {
           id: 3,
           icon: "fire-extinguisher",
           value: "3",
           title: "Fire Insurance",
-          description: "Residential or Commercial",
+          description: "Residential & Commercial",
         },
       ] as ISelectListItem[],
     [],
@@ -78,7 +78,7 @@ const SelectListItem = ({ id, icon, title, description }: ISelectListItem) => (
     value={`${id}`}
     className="h-16 font-semibold font-quick rounded-sm first:rounded-t-[12px] last:rounded-b-[12px]"
   >
-    <span className="flex items-center gap-x-3">
+    <div className="flex items-center px-2 gap-x-4">
       <Icon name={icon} />
       <div className="flex flex-col justify-start">
         <span className="block text-[14px] font-bold">{title}</span>
@@ -86,6 +86,6 @@ const SelectListItem = ({ id, icon, title, description }: ISelectListItem) => (
           {description}
         </span>
       </div>
-    </span>
+    </div>
   </SelectItem>
 );
