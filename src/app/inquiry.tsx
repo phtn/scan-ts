@@ -53,7 +53,7 @@ export default function Inquiry() {
       <Select defaultValue="1">
         <SelectTrigger
           id={id}
-          className="h-16 rounded-2xl bg-panel dark:bg-hot-dark border-[0.33px] dark:border-gray-500/50 text-white outline-none text-left w-full py-5"
+          className="h-16 cursor-pointer rounded-2xl bg-panel dark:bg-hot-dark border-[0.33px] dark:border-gray-500/50 text-white outline-none text-left w-full py-5"
         >
           <SelectValue
             placeholder="Choose a plan"
@@ -77,7 +77,7 @@ export default function Inquiry() {
 const SelectListItem = ({ id, icon, title, description }: ISelectListItem) => (
   <SelectItem
     value={`${id}`}
-    className="h-20 font-semibold font-quick focus:text-panel"
+    className="h-20 font-semibold font-quick cursor-pointer focus:text-panel"
   >
     <div className="flex items-center px-2 gap-x-4">
       <Icon name={icon} className="" />

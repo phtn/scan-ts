@@ -137,8 +137,8 @@ const SignIn = ({ signFn }: ISignIn) => {
       <div className="absolute size-full">
         <Radiance />
       </div>
-      <div className="h-[238px] relative z-50 w-64 rounded-[36px] p-1 bg-white">
-        <div className="rounded-t-[32px] relative overflow-hidden rounded-b-[16px] border-t border-l bg-gray-700 border-gray-900 h-[180px]">
+      <div className="h-[238px] relative z-50 w-64 rounded-[36px] p-1 bg-gray-300">
+        <div className="rounded-t-[32px] relative overflow-hidden rounded-b-[16px] border-t border-l bg-gray-400 border-gray-500 h-[180px]">
           <Image
             className={cn(
               "absolute h-28 w-auto aspect-square -bottom-6 right-1/4 rotate-[8deg]",
@@ -155,7 +155,7 @@ const SignIn = ({ signFn }: ISignIn) => {
         <div className="flex h-[54px] pe-3 items-center justify-end">
           <button
             onClick={signFn}
-            className="h-[34px] flex items-center justify-center w-fit px-4 bg-[#14141b] rounded-[28px]"
+            className="h-[34px] flex items-center cursor-pointer text-white justify-center w-fit px-6 bg-[#14141b] rounded-[28px]"
           >
             <span className="text-xs font-bold font-nito">Sign in</span>
           </button>

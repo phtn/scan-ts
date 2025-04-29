@@ -111,6 +111,36 @@ export const icons = {
     viewBox: `0 0 24 24`,
     set: `solar`,
   },
+  laptop: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9c0-2.828 0-4.243.879-5.121C4.757 3 6.172 3 9 3h6c2.828 0 4.243 0 5.121.879C21 4.757 21 6.172 21 9v5c0 1.886 0 2.828-.586 3.414S18.886 18 17 18H7c-1.886 0-2.828 0-3.414-.586S3 15.886 3 14z"></path><path stroke-linecap="round" d="M22 21H2m13-6H9"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "add-circle": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10m.75-13a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25z" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  settings: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"></circle><path d="M13.765 2.152C13.398 2 12.932 2 12 2s-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083c-.092.223-.129.484-.143.863a1.62 1.62 0 0 1-.79 1.353a1.62 1.62 0 0 1-1.567.008c-.336-.178-.579-.276-.82-.308a2 2 0 0 0-1.478.396C4.04 5.79 3.806 6.193 3.34 7s-.7 1.21-.751 1.605a2 2 0 0 0 .396 1.479c.148.192.355.353.676.555c.473.297.777.803.777 1.361s-.304 1.064-.777 1.36c-.321.203-.529.364-.676.556a2 2 0 0 0-.396 1.479c.052.394.285.798.75 1.605c.467.807.7 1.21 1.015 1.453a2 2 0 0 0 1.479.396c.24-.032.483-.13.819-.308a1.62 1.62 0 0 1 1.567.008c.483.28.77.795.79 1.353c.014.38.05.64.143.863a2 2 0 0 0 1.083 1.083C10.602 22 11.068 22 12 22s1.398 0 1.765-.152a2 2 0 0 0 1.083-1.083c.092-.223.129-.483.143-.863c.02-.558.307-1.074.79-1.353a1.62 1.62 0 0 1 1.567-.008c.336.178.579.276.819.308a2 2 0 0 0 1.479-.396c.315-.242.548-.646 1.014-1.453s.7-1.21.751-1.605a2 2 0 0 0-.396-1.479c-.148-.192-.355-.353-.676-.555A1.62 1.62 0 0 1 19.562 12c0-.558.304-1.064.777-1.36c.321-.203.529-.364.676-.556a2 2 0 0 0 .396-1.479c-.052-.394-.285-.798-.75-1.605c-.467-.807-.7-1.21-1.015-1.453a2 2 0 0 0-1.479-.396c-.24.032-.483.13-.82.308a1.62 1.62 0 0 1-1.566-.008a1.62 1.62 0 0 1-.79-1.353c-.014-.38-.05-.64-.143-.863a2 2 0 0 0-1.083-1.083Z"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "chev-down-linear": {
+    symbol: `<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m19 9l-7 6l-7-6"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "menu-dots-bold": {
+    symbol: `<path fill="currentColor" d="M7 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0m14 0a2 2 0 1 1-4 0a2 2 0 0 1 4 0"></path><path fill="currentColor" d="M14 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0" opacity=".5"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "add-circle-line-duotone": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10" opacity=".5"></circle><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
 };
 
 export type IconNameType = keyof typeof icons;

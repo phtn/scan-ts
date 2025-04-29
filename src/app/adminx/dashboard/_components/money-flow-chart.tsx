@@ -31,9 +31,9 @@ export default function MoneyFlowChart() {
   const maxValue = 50000;
 
   return (
-    <Card className="bg-gradient-to-br from-[#1e293b] to-[#111827] border-none shadow-lg overflow-hidden relative">
+    <Card className="bg-gradient-to-br from-hot-dark/60 to-hot-dark rounded-md border-none shadow-lg overflow-hidden relative">
       {/* Add subtle orange glow effect */}
-      <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute -bottom-10 -left-10 size-64 bg-orange-200/20 rounded-full blur-[80px] opacity-20"></div>
 
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-medium">Money Flow</CardTitle>
@@ -53,11 +53,7 @@ export default function MoneyFlowChart() {
           </div>
         </div>
 
-        <div className="relative h-64">
-          <div className="absolute left-0 top-0 text-xs text-gray-400">50k</div>
-          <div className="absolute left-0 top-1/4 text-xs text-gray-400">
-            40k
-          </div>
+        <div className="relative h-full flex flex-1">
           <div className="absolute left-0 top-2/4 text-xs text-gray-400">
             30k
           </div>

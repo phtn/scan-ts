@@ -155,15 +155,19 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
       </>,
 
       <>
-        <span className="text-[1rem] text-orange-300 leading-none">●</span>
-        <span className="ml-1.5 text-white">Submit form to activate</span>
+        <span className="text-[1.25rem] pb-1 text-orange-300 drop-shadow-xs leading-none">
+          ●
+        </span>
+        <span className="ml-1.5 dark:text-white leading-none">
+          Submit form to activate
+        </span>
       </>,
     );
     return (
-      <div className="text-xs font-sans text-white tracking-tight">
+      <div className="text-xs font-sans tracking-tight">
         <div
           className={cn(
-            "bg-hot-dark/0 py-0.5 s rounded-full shadow-inner shadow-hot-dark/10",
+            "bg-hot-dark/0 py-0.5 s flex items-center rounded-full shadow-inner shadow-hot-dark/10",
             { "bg-hot-dark": isSubmitted },
           )}
         >

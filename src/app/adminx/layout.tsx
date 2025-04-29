@@ -1,21 +1,19 @@
 import type { ReactNode } from "react";
-import { TopOutlines } from "../_components/outlines";
-import { Title } from "./components";
+// import { TopOutlines } from "../_components/outlines";
+// import { Title } from "./components";
 import { AuthCtxProvider } from "../_ctx/auth";
-import { getUsername } from "../actions";
+// import { getUsername } from "../actions";
 
 const AdminxLayout = async ({ children }: { children: ReactNode }) => {
-  const un = await getUsername();
+  // const un = await getUsername();
   return (
     <AuthCtxProvider>
-      <div className="container mx-auto max-w-6xl">
-        <div className="h-14 relative w-full overflow-hidden">
+      <div className="">
+        {/* <div className="h-14 relative w-full overflow-hidden">
           <TopOutlines />
           <Title un={un} />
-        </div>
-        <main className="h-[calc(100vh-56px)] overflow-y-scroll scroll-smooth w-full">
-          {children}
-        </main>
+        </div> */}
+        <main className="scroll-smooth w-full">{children}</main>
       </div>
     </AuthCtxProvider>
   );

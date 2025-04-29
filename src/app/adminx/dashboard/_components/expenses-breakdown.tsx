@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 export default function ExpensesBreakdown() {
   return (
-    <Card className="bg-gradient-to-br from-[#1e293b] to-[#111827] border-none shadow-lg overflow-hidden h-full relative">
+    <Card className="bg-gradient-to-br from-hot-dark/40 overflow-auto to-hot-dark/30 rounded-md border-none shadow-lg h-[50vh] relative">
       {/* Add subtle orange glow effect */}
-      <div className="absolute top-20 right-10 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute top-10 right-4 size-44 bg-orange-100/20 rounded-full blur-[96px] opacity-40"></div>
 
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-medium">
@@ -27,7 +27,7 @@ export default function ExpensesBreakdown() {
             </div>
           </div>
 
-          <div className="h-40 relative">
+          <div className="h-44 overflow-hidden relative">
             {/* This would be a real chart in a production app */}
             <svg viewBox="0 0 300 100" className="w-full h-full">
               {/* Orange line - Bills */}

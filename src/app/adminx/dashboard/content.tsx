@@ -1,43 +1,61 @@
+"use client";
+
 import Sidebar from "./_components/sidebar";
-import SearchBar from "./_components/search-bar";
-import ThemeToggle from "./_components/theme-toggle";
 import NotificationBell from "./_components/notification-bell";
-import MoneyFlowChart from "./_components/money-flow-chart";
-import MyCards from "./_components/my-cards";
-import TransactionHistory from "./_components/transaction-history";
-import ExpensesBreakdown from "./_components/expenses-breakdown";
-import UserProfile from "./_components/user-profile";
+import { TopOutlines } from "@/app/_components/outlines";
+import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/app/_components/mode-switch";
+import { Affiliates } from "./_components/affiliates";
 
 export const Content = () => {
   return (
-    <div className="flex h-screen bg-hot-dark text-white">
+    <div className="flex h-screen dark:bg-panel-dark/30">
       <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="flex items-center justify-between p-4">
-          <SearchBar />
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <NotificationBell />
+      <div className={cn("flex-1 justify-between flex relative flex-col")}>
+        <div className="h-[7vh] flex-col flex justify-center w-full">
+          <header className="flex bg-transparent w-full relative z-10 items-center justify-between px-1.5">
+            <div className="px-5">Overview</div>
+            <div className="flex items-center gap-4">
+              <ModeToggle />
+              <NotificationBell />
+            </div>
+          </header>
+          <div className="absolute w-full z-[100] -top-4 md:right-40 pointer-events-none">
+            <TopOutlines />
           </div>
-        </header>
-        <main className="flex-1 overflow-auto p-4">
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 lg:col-span-7">
-              <MoneyFlowChart />
+        </div>
+        <main className="space-y-1.5">
+          <div className="h-[42vh] flex-1">
+            <div className={cn("h-full m-1.5 grid grid-cols-12 gap-1.5", ``)}>
+              <div className="col-span-12 lg:col-span-8">
+                <Affiliates />
+              </div>
+              <div className="col-span-12 lg:col-span-4">
+                <MockCard />
+              </div>
             </div>
-            <div className="col-span-12 lg:col-span-5">
-              <MyCards />
-            </div>
-            <div className="col-span-12 lg:col-span-7">
-              <TransactionHistory />
-            </div>
-            <div className="col-span-12 lg:col-span-5">
-              <ExpensesBreakdown />
+          </div>
+
+          <div className="h-[50vh] flex-1">
+            <div
+              className={cn("h-full m-1.5 mt-0 grid grid-cols-12 gap-1.5", ``)}
+            >
+              <div className="col-span-12 lg:col-span-8">
+                <MockCard />
+              </div>
+              <div className="col-span-12 lg:col-span-4">
+                <MockCard />
+              </div>
             </div>
           </div>
         </main>
-        <UserProfile />
       </div>
     </div>
+  );
+};
+
+const MockCard = () => {
+  return (
+    <div className="h-full rounded-lg border dark:border-hot-dark bg-gradient-to-r from-ultra-fade to-ultra-fade dark:from-hot-dark/20 dark:to-hot-dark/20" />
   );
 };

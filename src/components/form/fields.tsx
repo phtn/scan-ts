@@ -17,8 +17,11 @@ export const InputField = <T extends FieldName>(item: IField<T>) => (
 
       {item.required && (
         <div className={requiredClassName}>
-          <div className="text-red-600 dark:text-red-300 flex items-center leading-none space-x-1 justify-center py-[1.5px]">
-            <Icon name="asterisk" className="size-3" />
+          <div className="flex items-center leading-none space-x-1 justify-center py-[1.5px]">
+            <Icon
+              name="asterisk"
+              className="text-red-600 dark:text-red-300 size-3"
+            />
             <span className="text-[10.5px] font-medium leading-none">
               Required
             </span>

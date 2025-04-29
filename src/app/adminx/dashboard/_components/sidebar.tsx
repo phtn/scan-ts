@@ -1,22 +1,43 @@
-import Link from "next/link"
-import { LayoutDashboard, ArrowLeftRight, Clock, BarChart3, CreditCard, Bell, Settings } from "lucide-react"
+import Link from "next/link";
+import {
+  LayoutDashboard,
+  ArrowLeftRight,
+  Clock,
+  BarChart3,
+  CreditCard,
+  Bell,
+  Settings,
+} from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <div className="w-60 bg-gradient-to-b from-[#1a2234] to-[#111827] flex flex-col h-full relative">
+    <div className="md:w-60 w-12 bg-gradient-to-b dark:from-hot-dark dark:to-panel overflow-hidden flex flex-col h-full relative">
       {/* Add subtle orange glow effect */}
-      <div className="absolute top-40 left-10 w-20 h-20 bg-orange-500/10 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute top-40 left-10 size-20 bg-orange-100/10 rounded-full blur-3xl opacity-30"></div>
 
-      <div className="p-4 mb-6">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-indigo-600 rounded"></div>
-          <span className="text-xl font-bold">Fundly</span>
+      <div className="p-1.5 font-dm h-[7vh] overflow-hidden ">
+        <div className="flex items-start leading-none flex-col justify-center rounded-lg ps-3 h-full">
+          <div>
+            <span className="font-medium dark:text-ultra-fade text-xs tracking-tighter opacity-70">
+              <span className="">BestDeal</span>
+              <span className="dark:opacity-60 ml-1">Insurance</span>
+            </span>
+          </div>
+          <div>
+            <span className="tracking-tight text-sm font-bold font-sans dark:text-indigo-400 text-indigo-400">
+              ADMIN
+            </span>
+          </div>
         </div>
       </div>
-      <nav className="flex-1">
+
+      <nav className="flex-1 py-2 font-quick tracking-tight font-medium">
         <ul className="space-y-1 px-2">
           <li>
-            <Link href="#" className="flex items-center gap-3 px-3 py-2 rounded-md bg-[#2d3748] text-white">
+            <Link
+              href="#"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-600 text-white"
+            >
               <LayoutDashboard size={20} />
               <span>Dashboard</span>
             </Link>
@@ -24,7 +45,7 @@ export default function Sidebar() {
           <li>
             <Link
               href="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-400 hover:bg-[#2d3748] hover:text-white transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-md opacity-70 hover:bg-[#2d3748] hover:text-white transition-colors"
             >
               <ArrowLeftRight size={20} />
               <span>Transactions</span>
@@ -78,5 +99,5 @@ export default function Sidebar() {
         </ul>
       </nav>
     </div>
-  )
+  );
 }

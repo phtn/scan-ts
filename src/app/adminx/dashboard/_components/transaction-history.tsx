@@ -57,9 +57,9 @@ export default function TransactionHistory() {
   ];
 
   return (
-    <Card className="bg-gradient-to-br from-[#1e293b] to-[#111827] border-none shadow-lg overflow-hidden h-full relative">
+    <Card className="bg-gradient-to-br rounded-md from-hot-dark/60 to-hot-dark/40 border-none shadow-lg overflow-hidden h-[50vh] relative">
       {/* Add subtle orange glow effect */}
-      <div className="absolute -bottom-20 left-20 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute -bottom-20 left-0 size-96 bg-panel rounded-full blur-2xl opacity-20"></div>
 
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-medium">
