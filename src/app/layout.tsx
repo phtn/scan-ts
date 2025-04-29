@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Nunito, Quicksand } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Nunito,
+  Quicksand,
+  DM_Sans,
+} from "next/font/google";
 import "./globals.css";
 import { Toasts } from "./_ctx/toast";
+import { Providers } from "./_ctx/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,9 +30,14 @@ const quick = Quicksand({
   subsets: ["latin"],
 });
 
+const dmSans = DM_Sans({
+  variable: "--font-dm",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "AutoProtect Insurance",
-  description: "Proudly deployed on Vercel. That's wassup!",
+  title: "BestDeal Insurance",
+  description: "Protecting what matters most.",
 };
 
 export default function RootLayout({
@@ -34,12 +46,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${quick.variable} ${nito.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${quick.variable} ${dmSans.variable} ${nito.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        <Toasts />
+        <Providers>
+          {children}
+          <Toasts />
+        </Providers>
       </body>
     </html>
   );

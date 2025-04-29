@@ -53,18 +53,19 @@ export default function Inquiry() {
       <Select defaultValue="1">
         <SelectTrigger
           id={id}
-          className="h-16 rounded-2xl bg-hot-dark outline-none text-left w-full py-5"
+          className="h-16 rounded-2xl bg-panel dark:bg-hot-dark border-[0.33px] dark:border-gray-500/50 text-white outline-none text-left w-full py-5"
         >
           <SelectValue
             placeholder="Choose a plan"
             className="text-neutral-200"
           />
         </SelectTrigger>
-        <SelectContent className="rounded-2xl border-raised/50 [&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-4">
+        <SelectContent className="rounded-2xl border-gray-400 [&_*[role=option]]:ps-3 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-4">
           <HyperList
             data={select_items}
             component={SelectListItem}
             direction="up"
+            itemStyle="border-b last:border-none"
             keyId="id"
           />
         </SelectContent>
@@ -76,12 +77,14 @@ export default function Inquiry() {
 const SelectListItem = ({ id, icon, title, description }: ISelectListItem) => (
   <SelectItem
     value={`${id}`}
-    className="h-16 font-semibold font-quick rounded-sm first:rounded-t-[12px] last:rounded-b-[12px]"
+    className="h-20 font-semibold font-quick focus:text-panel"
   >
     <div className="flex items-center px-2 gap-x-4">
-      <Icon name={icon} />
+      <Icon name={icon} className="" />
       <div className="flex flex-col justify-start">
-        <span className="block text-[14px] font-bold">{title}</span>
+        <span className="block text-[14px] tracking-tight font-bold">
+          {title}
+        </span>
         <span className="block text-[12px] font-sans font-normal opacity-60">
           {description}
         </span>

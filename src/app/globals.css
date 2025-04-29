@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 :root {
-    --background: oklch(0.34 0.029 271.23);
-    --foreground: #171717;
-    --radius: 0.625rem;
     --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --foreground: oklch(0.22 0.01 300);
+    --radius: 0.625rem;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
@@ -45,12 +43,15 @@
 }
 
 @theme inline {
+    --color-panel: oklch(0.3 0.01 304);
+    --color-panel-dark: oklch(0.22 0.01 300);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
     --font-nito: var(--font-nito);
     --font-quick: var(--font-quick);
+    --font-dm: var(--font-dm);
     --color-mariana: oklch(0.2 0.027 254.56);
     --color-deep: oklch(0.15 0.033 267.78);
     --color-raised: oklch(0.34 0.029 271.23);
@@ -84,6 +85,9 @@
     --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
     --color-card: var(--card);
+    --color-vanilla: oklch(0.98 0.0125 122.29);
+    --color-ice: oklch(0.95 0.0229 280.59);
+    --color-ultra-fade: oklch(0.97 0.0029 264.54);
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
@@ -106,7 +110,7 @@
     --accent: oklch(0.269 0 0);
     --accent-foreground: oklch(0.985 0 0);
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
+    --border: oklch(1 0 0 / 8%);
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.556 0 0);
     --chart-1: oklch(0.488 0.243 264.376);

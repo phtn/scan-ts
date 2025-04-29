@@ -80,6 +80,37 @@ export const icons = {
     viewBox: `0 0 24 24`,
     set: `hugeicons`,
   },
+  "toggle-off": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" color="currentColor"><path d="M11 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0"></path><path d="M16 6H8a6 6 0 1 0 0 12h8a6 6 0 0 0 0-12"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `hugeicons`,
+  },
+  "toggle-on": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" color="currentColor"><path d="M19 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0"></path><path d="M16 6H8a6 6 0 1 0 0 12h8a6 6 0 0 0 0-12"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `hugeicons`,
+  },
+  "check-circle-duotone": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10" opacity=".5"></circle><path stroke-linecap="round" stroke-linejoin="round" d="m8.5 12.5l2 2l5-5"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "check-circle-bold-duotone": {
+    symbol: `<path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" opacity=".5"></path><path fill="currentColor" d="M16.03 8.97a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "check-circle-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-5.97-3.03a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 1 1 1.06-1.06l1.47 1.47l2.235-2.235L14.97 8.97a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "arrow-down-duotone": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10" opacity=".5"></circle><path stroke-linecap="round" stroke-linejoin="round" d="m15 10.5l-3 3l-3-3"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
 };
 
 export type IconNameType = keyof typeof icons;

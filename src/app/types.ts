@@ -1,5 +1,5 @@
-import type { HTMLProps } from "react";
 import { DeviceProfile } from "./_lib/utils";
+import type { HTMLProps } from "react";
 
 export type ClassName = HTMLProps<HTMLElement>["className"];
 

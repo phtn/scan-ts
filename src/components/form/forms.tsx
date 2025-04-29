@@ -86,7 +86,7 @@ export const UserInfoForm = ({
   const FormOptions = useCallback(() => {
     const options = opts(
       <Checklist />,
-      <div className="space-y-2">
+      <div className="space-y-4">
         <HyperList
           keyId="id"
           data={user_fields}
@@ -100,17 +100,19 @@ export const UserInfoForm = ({
   }, [isSubmitted, FormField, children, user_fields]);
 
   return (
-    <div className="bg-gradient-to-b from-gray-100 via-gray-400 to-gray-400 p-1.5 pb-0 rounded-[42px]">
+    <div className="bg-gradient-to-b dark:from-neutral-400 from-gray-300 dark:via-neutral-500 dark:to-neutral-400 via-gray-200 to-gray-400 p-1.5 pb-0 rounded-[42px]">
       <form action={action}>
-        <div className="pt-5 pb-3 px-3 border-gray-400 border-t border-x space-y-4 bg-gray-100 rounded-b-[20px] rounded-t-[38px]">
-          <h2 className="text-lg ps-2 font-medium font-sans tracking-tight mb-4 text-hot-dark">
-            {isSubmitted
-              ? "You're all set!"
-              : "Please enter your contact details."}
-          </h2>
-          <FormOptions />
+        <div className="bg-gradient-to-b from-white dark:from-gray-300 dark:via-gray-300 dark:to-gray-300 via-white/80 to-white dark:border-neutral-500 border-gray-300 overflow-hidden border-t border-x space-y-4 rounded-b-[20px] rounded-t-[38px]">
+          <div className="pt-5 pb-3.5 px-3 bg-gradient-to-br from-white to-white dark:from-panel dark:via-hot-dark dark:to-gray-600">
+            <h2 className="ps-2 h-12 font-medium font-sans tracking-tight opacity-80">
+              {isSubmitted
+                ? "You're all set!"
+                : "Please enter your contact details."}
+            </h2>
+            <FormOptions />
+          </div>
         </div>
-        <div className="h-24 flex items-end justify-between ps-3 pe-1 pb-2.5">
+        <div className="h-24 flex items-end justify-between ps-4 pe-3 pb-4">
           <CommsPanel isSubmitted={isSubmitted} />
           <Submit />
         </div>
@@ -132,14 +134,14 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
           icon: "phone",
           href: "tel:+639275770777",
           title: "Call",
-          styles: `border-y border-s rounded-bl-3xl rounded-tl-md ${isSubmitted ? "text-green-500" : "text-slate-300"}**mt-0.5`,
+          styles: `border border-e-[0.33px] rounded-s-full ${isSubmitted ? "text-green-500" : "text-gray-400"}**mt-0.5`,
         },
         {
           id: 2,
           icon: "messenger",
           href: "https://m.me/Bestdealinsuranceph",
           title: "Chat",
-          styles: `rounded-lg rounded-e-full border-y border-e ${isSubmitted ? "text-blue-500" : "text-slate-300"}**mt-0`,
+          styles: `rounded-lg rounded-e-full border-y border-e ${isSubmitted ? "text-blue-500" : "text-gray-400"}**mt-0`,
         },
       ] as ICommItem[],
     [isSubmitted],
@@ -158,10 +160,10 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
       </>,
     );
     return (
-      <div className="text-xs px-0.5 font-sans text-white tracking-tight">
+      <div className="text-xs font-sans text-white tracking-tight">
         <div
           className={cn(
-            "-ml-0.5 px-2 bg-hot-dark/10 py-1 s rounded-full shadow-inner shadow-hot-dark/10",
+            "bg-hot-dark/0 py-0.5 s rounded-full shadow-inner shadow-hot-dark/10",
             { "bg-hot-dark": isSubmitted },
           )}
         >
@@ -171,14 +173,14 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
     );
   }, [isSubmitted]);
   return (
-    <div className="space-y-1">
+    <div className="space-y-0.5">
       <PanelHeader />
       <HyperList
+        keyId="id"
         direction="left"
         data={data}
         component={CommItem}
         container="flex flex-row items-end justify-start h-10 p-0"
-        keyId="id"
         itemStyle={cn("pointer-events-none opacity-20 p-0", {
           "pointer-events-auto opacity-100": isSubmitted,
         })}
@@ -198,13 +200,13 @@ interface ICommItem {
 const CommItem = ({ icon, title, href, styles }: ICommItem) => (
   <div
     className={cn(
-      " bg-white flex items-center justify-center",
-      "h-9 gap-x-2 ps-2 border-hot-dark/60 pe-3 font-quick font-semibold select-none",
+      "bg-ultra-fade dark:bg-neutral-300 flex items-center justify-center",
+      "h-9 gap-x-2 ps-2 border-gray-500/90 pe-3 font-quick font-semibold select-none",
       styles.split("**").shift(),
     )}
   >
-    <Icon name={icon} className={styles.split("**").pop()} />
-    <a href={href} className="text-[15px] drop-shadow-xs tracking-tight">
+    <Icon name={icon} className={cn("size-5", styles.split("**").pop())} />
+    <a href={href} className="text-sm drop-shadow-xs tracking-tight">
       {title}
     </a>
   </div>
