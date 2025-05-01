@@ -141,6 +141,36 @@ export const icons = {
     viewBox: `0 0 24 24`,
     set: `solar`,
   },
+  "add-circle-linear": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><path stroke-linecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  maximize: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M13 22c4.055-.008 6.178-.107 7.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.071 2 16.714 2 12 2S4.929 2 3.464 3.464C2.107 4.822 2.008 6.944 2 11"></path><path stroke-linecap="round" stroke-linejoin="round" d="m12 12l5-5m0 0h-3.75M17 7v3.75"></path><path d="M2 18c0-1.886 0-2.828.586-3.414S4.114 14 6 14s2.828 0 3.414.586S10 16.114 10 18s0 2.828-.586 3.414S7.886 22 6 22s-2.828 0-3.414-.586S2 19.886 2 18Z"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  chart: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"></path><path stroke-linecap="round" d="M7 18V9m5 9V6m5 12v-5"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  file: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M3.5 10c0-3.771 0-5.657 1.245-6.828S7.993 2 12 2h.773c3.26 0 4.892 0 6.024.798c.324.228.612.5.855.805c.848 1.066.848 2.6.848 5.67v2.545c0 2.963 0 4.445-.469 5.628c-.754 1.903-2.348 3.403-4.37 4.113c-1.257.441-2.83.441-5.98.441c-1.798 0-2.698 0-3.416-.252c-1.155-.406-2.066-1.263-2.497-2.35c-.268-.676-.268-1.523-.268-3.216z"></path><path d="M20.5 12a3.333 3.333 0 0 1-3.333 3.333c-.666 0-1.451-.116-2.098.057a1.67 1.67 0 0 0-1.179 1.179c-.173.647-.057 1.432-.057 2.098A3.333 3.333 0 0 1 10.5 22M8 7h7m-7 4h3"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `hugeicons`,
+  },
+  "add-square-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M12 22c-4.714 0-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12s0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22m0-13.75a.75.75 0 0 1 .75.75v2.25H15a.75.75 0 0 1 0 1.5h-2.25V15a.75.75 0 0 1-1.5 0v-2.25H9a.75.75 0 0 1 0-1.5h2.25V9a.75.75 0 0 1 .75-.75" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  confirm: {
+    symbol: `<path fill="none" stroke="currentColor" stroke-dasharray="24" stroke-dashoffset="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l6 6l10 -10"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"></animate></path>`,
+    viewBox: `0 0 24 24`,
+    set: `line`,
+  },
 };
 
 export type IconNameType = keyof typeof icons;

@@ -5,7 +5,7 @@ import { getDeviceProfile } from "./_lib/utils";
 import { TopOutlines } from "./_components/outlines";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Device, Station } from "./types";
-import { UserInfoForm } from "@/components/form/forms";
+import { UserInquiryForm } from "@/components/forms";
 import Inquiry from "./inquiry";
 import { ModeSwitch } from "./_components/mode-switch";
 import { Brand } from "./_components/brand";
@@ -63,9 +63,9 @@ function Landing() {
         <Brand />
 
         <div className="px-1.5">
-          <UserInfoForm station={station} device={deviceProfile}>
+          <UserInquiryForm station={station} device={deviceProfile}>
             <Inquiry />
-          </UserInfoForm>
+          </UserInquiryForm>
         </div>
 
         <div>

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { UserInfoSchema, UserType } from "../schema";
+import { UserInquirySchema, UserType } from "../schema";
 import { addNewData } from "@/lib/firebase/add-user-doc";
 import { gsec } from "@/app/_lib/utils";
 import toast from "react-hot-toast";
@@ -10,7 +10,7 @@ export const useUserForm = (station: Station, device: Device) => {
 
   const handleSubmit = useCallback(
     async (_: UserType | null, fd: FormData) => {
-      const validated = UserInfoSchema.safeParse({
+      const validated = UserInquirySchema.safeParse({
         name: fd.get("name") as string,
         tel: fd.get("tel") as string,
         email: fd.get("email") as string,

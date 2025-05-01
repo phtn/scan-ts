@@ -1,27 +1,27 @@
 import { HyperList } from "@/ui/hyper-list";
 import { type ReactNode, useActionState, useCallback, useMemo } from "react";
-import { useAppForm } from ".";
+import { useAppForm } from "./utils";
 import { IField } from "./fields";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/lib/icons";
-import { UserFieldName, UserInfoSchema } from "./schema";
-import { useUserForm } from "./hooks/use-userform";
+import { UserFieldName, UserInquirySchema } from "./schema";
+import { useUserForm } from "./hooks/use-user-inquiry";
 import { opts } from "@/utils/helpers";
 import { FlexRow } from "@/ui/hyper-flex";
 import type { Device, Station } from "@/app/types";
 import { IconName } from "@/lib/icons/types";
 
-interface UserInfoFormProps {
+interface UserInquiryFormProps {
   children: ReactNode;
   station: Station;
   device: Device;
 }
 
-export const UserInfoForm = ({
+export const UserInquiryForm = ({
   children,
   station,
   device,
-}: UserInfoFormProps) => {
+}: UserInquiryFormProps) => {
   const initialState = {
     name: "",
     tel: "",
@@ -30,7 +30,7 @@ export const UserInfoForm = ({
   const form = useAppForm({
     defaultValues: initialState,
     validators: {
-      onChange: UserInfoSchema,
+      onChange: UserInquirySchema,
     },
   });
 

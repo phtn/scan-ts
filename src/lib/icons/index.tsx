@@ -1,3 +1,5 @@
+"use client";
+
 import type { FC } from "react";
 import { icons, IconNameType } from "./icons";
 import type { IconData, IconProps } from "./types";

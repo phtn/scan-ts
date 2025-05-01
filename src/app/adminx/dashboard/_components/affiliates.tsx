@@ -1,40 +1,62 @@
 "use client";
 
+import { AffiliateForm } from "@/components/forms/affiliate-form";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Icon } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 export function Affiliates() {
   return (
-    <Card className="bg-gradient-to-br h-full from-ultra-fade to-ultra-fade dark:from-hot-dark/60 dark:to-hot-dark rounded-md border-[0.33px] dark:border-transparent border-gray-400/50 overflow-hidden relative">
+    <Card
+      className={cn(
+        "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
+        "dark:border-panel rounded-lg rounded-br-[3px] border-[0.33px] border-gray-500",
+        "dark:from-neutral-400/60 dark:via-neutral-300/80 dark:to-neutral-200/40",
+        "overflow-hidden relative",
+      )}
+    >
       {/* Add subtle orange glow effect */}
-      <div className="absolute -bottom-10 -left-10 size-64 bg-orange-200/20 rounded-full blur-[80px] opacity-20"></div>
+      <div className="absolute -top-20 -left-80 size-56 bg-pink-400/80 rounded-full blur-[8px] opacity-80"></div>
+      <div className="absolute -top-20 -left-0 size-56 bg-amber-100/40 rounded-full blur-[80px] opacity-20"></div>
+      <div className="absolute -top-8 -right-16 size-72 dark:bg-amber-100 rounded-full blur-[48px] opacity-40"></div>
+      <div className="absolute -bottom-[36rem] -right-0 w-[50rem] h-[47rem] bg-white/50 rounded-full blur-[60px] opacity-80"></div>
 
-      <CardHeader className="flex relative flex-row border items-center justify-between pb-2">
-        <CardTitle className="text-xl font-semibold font-sans tracking-tight">
-          Affiliates
-        </CardTitle>
-        <div className="flex items-center justify-center gap-6">
+      <CardHeader className="flex relative flex-row dark:border-hot-dark items-start h-1/5 justify-between pb-2">
+        <div className="flex h-full items-center font-sans gap-6">
+          <CardTitle className="text-2xl ps-6 font-medium leading-none h-12 flex items-center font-sans tracking-tight px-3">
+            Affiliates
+          </CardTitle>
+          <div className="flex items-center gap-1 tracking-tighter">
+            <button className="hover:opacity-100 flex items-center gap-1.5 opacity-90">
+              <Icon
+                name="add-square-bold"
+                solid
+                size={20}
+                className="text-panel dark:text-ultra-fade"
+              />
+              <span className="text-sm">New</span>
+            </button>
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+            <span className="text-sm">Most Active</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="size-2 rounded-full dark:bg-orange-300 bg-orange-400"></div>
+            <span className="text-sm">New</span>
+          </div>
+        </div>
+
+        <div className="flex items-start justify-center h-full gap-6 p-2">
           <button className="hover:opacity-100 opacity-60">
-            <Icon name="add-circle-line-duotone" solid size={24} />
-          </button>
-          <button className="hover:opacity-100 opacity-60">
-            <Icon name="menu-dots-bold" solid size={20} className="rotate-90" />
+            <Icon name="maximize" solid size={20} />
           </button>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="flex h-full items-center font-dm gap-6 mb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-            <span className="text-sm opacity-60">Most Active</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-orange-400"></div>
-            <span className="text-sm opacity-60">New</span>
-          </div>
+      <CardContent className="flex px-0 justify-center items-start h-5/6">
+        <div className="relative size-full">
+          <AffiliateForm />
         </div>
-
-        <div className="relative h-full flex flex-1"></div>
       </CardContent>
     </Card>
   );
