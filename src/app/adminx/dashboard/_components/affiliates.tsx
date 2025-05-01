@@ -4,8 +4,12 @@ import { AffiliateForm } from "@/components/forms/affiliate-form";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Icon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
+import { useToggle } from "@/app/hooks/use-toggle";
+import { AffiliatesTable } from "./affiliates-table";
 
 export function Affiliates() {
+  const { open, toggle } = useToggle(true);
+
   return (
     <Card
       className={cn(
@@ -17,28 +21,33 @@ export function Affiliates() {
     >
       {/* Add subtle orange glow effect */}
       <div className="absolute -top-20 -left-80 size-56 bg-pink-400/80 rounded-full blur-[8px] opacity-80"></div>
-      <div className="absolute -top-20 -left-0 size-56 bg-amber-100/40 rounded-full blur-[80px] opacity-20"></div>
-      <div className="absolute -top-8 -right-16 size-72 dark:bg-amber-100 rounded-full blur-[48px] opacity-40"></div>
+      <div className="absolute -top-20 -left-0 size-72 bg-amber-50/40 rounded-full blur-[80px] opacity-20"></div>
+      <div className="absolute -top-24 -right-24 size-64 dark:bg-neutral-100 rounded-full blur-[80px] opacity-40"></div>
       <div className="absolute -bottom-[36rem] -right-0 w-[50rem] h-[47rem] bg-white/50 rounded-full blur-[60px] opacity-80"></div>
 
-      <CardHeader className="flex relative flex-row dark:border-hot-dark items-start h-1/5 justify-between pb-2">
+      <CardHeader className="flex relative flex-row dark:border-hot-dark items-start h-1/8 justify-between pb-2">
         <div className="flex h-full items-center font-sans gap-6">
-          <CardTitle className="text-2xl ps-6 font-medium leading-none h-12 flex items-center font-sans tracking-tight px-3">
+          <CardTitle className="text-lg ps-6 font-medium leading-none h-12 flex items-center font-sans tracking-tight px-3">
             Affiliates
           </CardTitle>
-          <div className="flex items-center gap-1 tracking-tighter">
-            <button className="hover:opacity-100 flex items-center gap-1.5 opacity-90">
+          <div className="flex items-center gap-1 w-28 tracking-tighter">
+            <button
+              onClick={toggle}
+              className="hover:opacity-100 cursor-pointer flex items-center gap-1.5 opacity-90"
+            >
               <Icon
-                name="add-square-bold"
+                name={open ? "close-square" : "add-square"}
                 solid
                 size={20}
                 className="text-panel dark:text-ultra-fade"
               />
-              <span className="text-sm">New</span>
+              <span className="text-sm">
+                {open ? "Close Form" : "Create New"}
+              </span>
             </button>
           </div>
           <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+            <div className="size-2 rounded-full bg-blue-400"></div>
             <span className="text-sm">Most Active</span>
           </div>
           <div className="flex items-center gap-1">
@@ -49,13 +58,13 @@ export function Affiliates() {
 
         <div className="flex items-start justify-center h-full gap-6 p-2">
           <button className="hover:opacity-100 opacity-60">
-            <Icon name="maximize" solid size={20} />
+            <Icon name="maximize" solid size={24} />
           </button>
         </div>
       </CardHeader>
-      <CardContent className="flex px-0 justify-center items-start h-5/6">
+      <CardContent className="flex p-0 justify-center h-7/8 items-start">
         <div className="relative size-full">
-          <AffiliateForm />
+          {open ? <AffiliateForm /> : <AffiliatesTable />}
         </div>
       </CardContent>
     </Card>

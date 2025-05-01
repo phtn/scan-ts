@@ -10,7 +10,7 @@ export default function Sidebar() {
       <div className="ps-1.5 py-1.5 font-dm h-[7vh] overflow-hidden ">
         <div className="flex items-center leading-none justify-start rounded-md border-[0.0px] dark:border-hot-dark border-gray-400 ps-3 h-full">
           <span className="font-medium opacity-70 dark:text-ultra-fade text-sm tracking-tighter">
-            <span className="">BestDeal</span>
+            <span className="font-bold">BestDeal</span>
             <span className="dark:opacity-60 ml-1">Insurance</span>
           </span>
           <span className="tracking-tight text-xs font-bold px-4 font-sans text-blue-400">

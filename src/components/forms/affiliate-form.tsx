@@ -1,18 +1,12 @@
-import {
-  ReactNode,
-  useActionState,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import { ReactNode, use, useActionState, useCallback, useMemo } from "react";
 import { useAppForm } from "./utils";
 import { AffiliateSchema, IAffiliate } from "@/lib/firebase/add-affiliate";
-import { useAffiliate } from "./hooks/use-affiliate";
 import { IField } from "./fields";
 import { AffiliateFieldName } from "./schema";
 import { HyperList } from "@/ui/hyper-list";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { AffiliateConfig, AffiliateCtx } from "@/app/_ctx/affiliate";
 
 interface AffiliateFormProps {
   children?: ReactNode;
@@ -32,25 +26,9 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
     },
   });
 
+  const { createAffiliate, affiliateConfigs } = use(AffiliateCtx)!;
+
   // Add state for checkbox configurations
-  const [checkboxStates, setCheckboxStates] = useState({
-    activated: true,
-    generateQR: true,
-  });
-
-  // Modify the onCheckedChange handler
-  const onCheckedChange = useCallback(
-    (id: string) => (checked: boolean) => {
-      setCheckboxStates((prev) => ({
-        ...prev,
-        [id]: checked,
-      }));
-    },
-    [],
-  );
-
-  const { createAffiliate } = useAffiliate(checkboxStates);
-
   const [state, action, pending] = useActionState(
     createAffiliate,
     initialState,
@@ -116,39 +94,18 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
     [form, pending],
   );
 
-  const affiliateConfigs = useMemo(
-    () =>
-      [
-        {
-          id: "activated",
-          label: "Activate Account",
-          description: "Check to activate affiliate account on create",
-          value: checkboxStates.activated,
-          onCheckedChange,
-        },
-        {
-          id: "generateQR",
-          label: "Generate QR",
-          description: "This will generate a QR code on create",
-          value: checkboxStates.generateQR,
-          onCheckedChange,
-        },
-      ] as AffiliateConfig[],
-    [onCheckedChange, checkboxStates],
-  );
-
   return (
     <div className="bg-gradient-to-b size-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
       <form action={action} className="h-full flex flex-col justify-between">
         <div className="overflow-hidden h-full pt-5 relative bg-white border-t-[0.33px] dark:bg-zark border-gray-400/60 dark:border-hot-dark/40 px-4">
-          <h2 className="ps-2 h-16 font-semibold font-sans tracking-tight opacity-60">
+          <h2 className="ps-2 font-semibold h-12 font-sans tracking-tight opacity-60">
             Create New Affiliate
           </h2>
-          <div className="h-full">
+          <div className="">
             <HyperList
               keyId="id"
               data={user_fields}
-              container="space-y-6 grid grid-rows-2 gap-x-4 grid-cols-3"
+              container="space-y-5 grid grid-rows-2 gap-x-4 grid-cols-3"
               component={FormField}
             />
             {children}
@@ -163,19 +120,19 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
   );
 };
 
-interface AffiliateConfig {
-  id: string;
-  label: string;
-  description: string;
-  value: boolean;
-  onCheckedChange: (id: string) => (checked: boolean) => void;
-}
 interface CheckboxPanelProps {
   data: AffiliateConfig[];
 }
 
 const CheckboxPanel = ({ data }: CheckboxPanelProps) => {
-  return <HyperList data={data} container="flex" component={ConfigItem} />;
+  return (
+    <HyperList
+      delay={0.3}
+      data={data}
+      container="flex"
+      component={ConfigItem}
+    />
+  );
 };
 
 const ConfigItem = ({

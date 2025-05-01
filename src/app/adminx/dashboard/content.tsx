@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { ToggleSwitch } from "@/app/_components/mode-switch";
 import { Affiliates } from "./_components/affiliates";
 import { Icon } from "@/lib/icons";
+import { AffiliateCtxProvider } from "@/app/_ctx/affiliate";
+import { QRCodeViewer } from "./_components/qrcode-viewer";
 
 export const Content = () => {
   return (
@@ -28,31 +30,36 @@ export const Content = () => {
             <TopOutlines />
           </div>
         </div>
-        <main className="space-y-2.5">
-          <div className="h-[56vh]">
-            <div className={cn("h-full m-1.5 grid grid-cols-12 gap-2.5", ``)}>
-              <div className="col-span-12 lg:col-span-8">
-                <Affiliates />
-              </div>
-              <div className="col-span-12 lg:col-span-4">
-                <MockCard />
+        <AffiliateCtxProvider>
+          <main className="space-y-2.5">
+            <div className="h-[56vh]">
+              <div className={cn("h-full m-1.5 grid grid-cols-12 gap-2.5", ``)}>
+                <div className="col-span-12 lg:col-span-8">
+                  <Affiliates />
+                </div>
+                <div className="col-span-12 lg:col-span-4">
+                  <QRCodeViewer />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="h-[36vh] pb-1.5">
-            <div
-              className={cn("h-full m-1.5 mt-0 grid grid-cols-12 gap-2.5", ``)}
-            >
-              <div className="col-span-12 lg:col-span-8">
-                <MockCard />
-              </div>
-              <div className="col-span-12 lg:col-span-4">
-                <MockCard />
+            <div className="h-[36vh] pb-1.5">
+              <div
+                className={cn(
+                  "h-full m-1.5 mt-0 grid grid-cols-12 gap-2.5",
+                  ``,
+                )}
+              >
+                <div className="col-span-12 lg:col-span-8">
+                  <MockCard />
+                </div>
+                <div className="col-span-12 lg:col-span-4">
+                  <MockCard />
+                </div>
               </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </AffiliateCtxProvider>
       </div>
     </div>
   );
