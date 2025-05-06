@@ -1,16 +1,13 @@
-import "../env-config";
-import { config } from "dotenv";
+import { loadEnvConfig } from "@next/env";
 import { writeFileSync } from "fs";
-import { join, resolve } from "path";
+import { join } from "path";
 
-// Load environment variables from project root
-const env = process.env.NODE_ENV === "production" ? ".env" : ".env.local";
-const envPath = resolve(process.cwd(), env);
-const result = config({ path: envPath });
+// Load environment variables using Next.js env loader
+const projectDir = process.cwd();
+const { combinedEnv, loadedEnvFiles } = loadEnvConfig(projectDir);
 
-if (result.error) {
-  console.error("⚠️ Error loading .env file", result.error);
-  process.exit(1);
+if (loadedEnvFiles.length === 0) {
+  console.warn("⚠️ No env files loaded, using process.env");
 }
 
 const getFirebaseConfig = () => {
@@ -23,10 +20,9 @@ const getFirebaseConfig = () => {
     "NEXT_PUBLIC_F_APPID",
   ];
 
-  const envJson = result.parsed;
-  const keys = Object.keys(envJson ?? {});
-
-  const missingVars = requiredVars.filter((v) => !keys.includes(v));
+  // Check both combinedEnv and process.env
+  const env = { ...process.env, ...combinedEnv };
+  const missingVars = requiredVars.filter((v) => !env[v]);
 
   if (missingVars.length > 0) {
     console.error(
@@ -37,13 +33,13 @@ const getFirebaseConfig = () => {
   }
 
   return {
-    apiKey: process.env.NEXT_PUBLIC_F_APIKEY,
-    authDomain: process.env.NEXT_PUBLIC_F_AUTHDOMAIN,
-    projectId: process.env.NEXT_PUBLIC_F_PROJECTID,
-    storageBucket: process.env.NEXT_PUBLIC_F_STORAGEBUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_F_MESSAGINGSENDERID,
-    appId: process.env.NEXT_PUBLIC_F_APPID,
-    measurementId: process.env.NEXT_PUBLIC_F_MEASUREMENTID,
+    apiKey: env.NEXT_PUBLIC_F_APIKEY,
+    authDomain: env.NEXT_PUBLIC_F_AUTHDOMAIN,
+    projectId: env.NEXT_PUBLIC_F_PROJECTID,
+    storageBucket: env.NEXT_PUBLIC_F_STORAGEBUCKET,
+    messagingSenderId: env.NEXT_PUBLIC_F_MESSAGINGSENDERID,
+    appId: env.NEXT_PUBLIC_F_APPID,
+    measurementId: env.NEXT_PUBLIC_F_MEASUREMENTID,
   };
 };
 
