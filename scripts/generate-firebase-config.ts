@@ -5,7 +5,7 @@ import { join, resolve } from "path";
 // Load environment variables from project root
 const envPath = resolve(
   process.cwd(),
-  process.env.NODE_ENV === "production" ? ".env" : ".env.local",
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local",
 );
 const result = config({ path: envPath });
 
