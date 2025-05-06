@@ -29,7 +29,7 @@ import { Icon, IconName } from "@/lib/icons";
 import { HyperList } from "@/ui/hyper-list";
 import { CheckedState } from "@radix-ui/react-checkbox";
 
-export const AffiliatesTable = () => {
+export const SubmissionsTable = () => {
   const { affiliates } = use(AffiliateCtx)!;
   useEffect(() => {
     if (affiliates.length === 0) {
@@ -39,19 +39,19 @@ export const AffiliatesTable = () => {
     console.log(affiliates);
   }, [affiliates]);
   return (
-    <div className="bg-gradient-to-b lg:size-full w-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
-      <AffiliatesDataTable data={affiliates} />
+    <div className="bg-gradient-to-b size-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
+      <SubmissionsDataTable data={affiliates} />
     </div>
   );
 };
 
-interface AffiliatesDataTableProps {
+interface SubmissionsDataTableProps {
   data: IAffiliate[];
 }
 
-export default function AffiliatesDataTable({
+export default function SubmissionsDataTable({
   data,
-}: AffiliatesDataTableProps) {
+}: SubmissionsDataTableProps) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
@@ -99,7 +99,7 @@ export default function AffiliatesDataTable({
       cell: ({ row }) => (
         <button
           onClick={() => row.toggleSelected()}
-          className="font-medium hover:underline underline-offset-4 decoration-dotted decoration-neutral-400 tracking-tight cursor-pointer"
+          className="font-medium cursor-pointer"
         >
           {row.getValue("name")}
         </button>
@@ -124,9 +124,9 @@ export default function AffiliatesDataTable({
         return (
           <Badge
             className={cn(
-              "tracking-tight hover:text-white text-xs font-sans select-none text-panel/60 dark:text-neutral-300 dark:bg-transparent bg-transparent border border-blue-400 flex items-center w-fit justify-center gap-1",
+              "tracking-tight flex items-center w-fit justify-center gap-1 text-xs",
               {
-                "dark:bg-transparent dark:text-neutral-300 text-panel/60 border-orange-300":
+                "bg-neutral-500 dark:bg-neutral-500 dark:text-neutral-300":
                   !isActive,
               },
             )}
@@ -284,16 +284,16 @@ export default function AffiliatesDataTable({
                             asc: (
                               <Icon
                                 name="arrow-down-bold-duotone"
-                                className="shrink-0 text-teal-500 dark:text-teal-400 opacity-80 rotate-180"
-                                size={18}
+                                className="shrink-0 opacity-60 rotate-180"
+                                size={16}
                                 aria-hidden="true"
                               />
                             ),
                             desc: (
                               <Icon
                                 name="arrow-down-bold-duotone"
-                                className="shrink-0 text-indigo-400 opacity-100"
-                                size={18}
+                                className="shrink-0 opacity-60"
+                                size={16}
                                 aria-hidden="true"
                               />
                             ),

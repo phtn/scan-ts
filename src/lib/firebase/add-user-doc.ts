@@ -1,10 +1,17 @@
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { type SubmitPayload } from "@/app/hooks/use-form";
 import { db } from ".";
+import type { AffiliateId, Device } from "@/app/types";
+import type { UserType } from "@/components/forms/schema";
+
+export interface SubmitPayload {
+  user: UserType;
+  affiliateId: AffiliateId;
+  device: Device;
+}
 
 export async function addNewData(doc_id: string, payload: SubmitPayload) {
   try {
-    const submitsRef = collection(db, "submits");
+    const submitsRef = collection(db, "submissions");
     const docRef = doc(submitsRef, doc_id);
     const docSnap = await getDoc(docRef);
 
@@ -14,9 +21,9 @@ export async function addNewData(doc_id: string, payload: SubmitPayload) {
     } else {
       // Document doesn't exist, add it
       await setDoc(docRef, {
-        doc_id,
+        id: doc_id,
         user: payload.user,
-        station: payload.station,
+        affiliateId: payload.affiliateId,
         device: payload.device,
         createdAt: new Date(),
         updatedAt: new Date(),

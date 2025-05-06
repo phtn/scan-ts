@@ -38,6 +38,10 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "BestDeal Insurance",
   description: "Protecting what matters most.",
+  icons: {
+    icon: "/svg/qr.svg",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

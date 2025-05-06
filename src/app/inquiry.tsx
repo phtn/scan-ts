@@ -28,7 +28,7 @@ export default function Inquiry() {
           id: 1,
           icon: "sports-car",
           value: "1",
-          title: "Auto Insurance",
+          title: "Car Insurance",
           description: "CTPL & Comprehensive",
         },
         {

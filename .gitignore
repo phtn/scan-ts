@@ -42,3 +42,5 @@ next-env.d.ts
 inject.txt
 certificates
 icon.txt
+
+/public/firebase-config.js

@@ -8,18 +8,18 @@ import { UserFieldName, UserInquirySchema } from "./schema";
 import { useUserForm } from "./hooks/use-user-inquiry";
 import { opts } from "@/utils/helpers";
 import { FlexRow } from "@/ui/hyper-flex";
-import type { Device, Station } from "@/app/types";
+import type { Device, AffiliateId } from "@/app/types";
 import { IconName } from "@/lib/icons/types";
 
 interface UserInquiryFormProps {
   children: ReactNode;
-  station: Station;
+  affiliateId: AffiliateId;
   device: Device;
 }
 
 export const UserInquiryForm = ({
   children,
-  station,
+  affiliateId,
   device,
 }: UserInquiryFormProps) => {
   const initialState = {
@@ -34,7 +34,7 @@ export const UserInquiryForm = ({
     },
   });
 
-  const { isSubmitted, handleSubmit } = useUserForm(station, device);
+  const { isSubmitted, handleSubmit } = useUserForm(affiliateId, device);
 
   const [state, action, pending] = useActionState(handleSubmit, initialState);
   const user_fields = useMemo(
@@ -150,12 +150,15 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
   const PanelHeader = useCallback(() => {
     const options = opts(
       <>
-        <span className="text-[1rem] text-green-500 leading-none">●</span>
-        <span className="ml-1.5 text-white">Call and Chat is available</span>
+        <div className="size-2 rounded-full bg-green-400 border-gray-600 border-[0.33px]"></div>
+        {/* <span className="text-[1rem] text-green-500 leading-none">●</span> */}
+        <span className="ml-1 text-white drop-shadow-sm shadow-panel">
+          Call and Chat is available
+        </span>
       </>,
 
       <>
-        <span className="text-[1.25rem] pb-1 text-orange-300 drop-shadow-xs leading-none">
+        <span className="text-[1.25rem] pb-1 text-orange-300 leading-none">
           ●
         </span>
         <span className="ml-1.5 dark:text-white leading-none">
@@ -167,8 +170,8 @@ const CommsPanel = ({ isSubmitted }: CommsPanelProps) => {
       <div className="text-xs font-sans tracking-tight">
         <div
           className={cn(
-            "bg-hot-dark/0 py-0.5 s flex items-center rounded-full shadow-inner shadow-hot-dark/10",
-            { "bg-hot-dark": isSubmitted },
+            "bg-hot-dark/0 px-1 py-0.5 s flex items-center rounded-full shadow-inner shadow-hot-dark/10",
+            { "bg-ultra-fade/0": isSubmitted },
           )}
         >
           {options.get(isSubmitted)}
@@ -204,13 +207,13 @@ interface ICommItem {
 const CommItem = ({ icon, title, href, styles }: ICommItem) => (
   <div
     className={cn(
-      "bg-ultra-fade dark:bg-neutral-300 flex items-center justify-center",
-      "h-9 gap-x-2 ps-2 border-gray-500/90 pe-3 font-quick font-semibold select-none",
+      "bg-ultra-fade dark:bg-neutral-200 flex items-center justify-center",
+      "h-9 gap-x-2 ps-2.5 border-neutral-500/70 pe-3.5 font-quick font-semibold select-none",
       styles.split("**").shift(),
     )}
   >
     <Icon name={icon} className={cn("size-5", styles.split("**").pop())} />
-    <a href={href} className="text-sm drop-shadow-xs tracking-tight">
+    <a href={href} className="text-sm text-panel drop-shadow-xs tracking-tight">
       {title}
     </a>
   </div>
@@ -224,20 +227,20 @@ const Checklist = () => {
           id: 0,
           icon: "check-circle",
           text: "We received your information.",
-          styles: "bg-green-100/50 ** text-green-800",
+          styles: "bg-green-100/50 dark:bg-green-100 ** text-panel",
         },
         {
           id: 1,
           icon: "call-incoming",
           text: "Expect a call from us shortly.",
-          styles: "bg-rose-100/50 ** text-rose-800",
+          styles: "bg-rose-100/50 dark:bg-rose-100 ** text-panel",
         },
 
         {
           id: 2,
           icon: "book-open",
           text: "Learn more about our services.",
-          styles: "bg-indigo-100/50 ** text-indigo-800",
+          styles: "bg-indigo-100/50 dark:bg-indigo-100 ** text-panel",
         },
       ] as IChecklistItem[],
     [],
@@ -261,7 +264,7 @@ interface IChecklistItem {
 
 const ChecklistItem = ({ icon, text, styles }: IChecklistItem) => {
   return (
-    <div className="flex items-center justify-start text-hot-dark gap-x-3 border-[0.33px] border-gray-400 p-3 bg-white rounded-xl">
+    <div className="flex items-center justify-start text-panel gap-x-3 bg-ultra-fade/80 dark:bg-neutral-200/30 dark:text-ultra-fade p-3 rounded-xl">
       <FlexRow
         className={cn("size-9 rounded-full", styles.split("**").shift())}
       >
@@ -271,4 +274,4 @@ const ChecklistItem = ({ icon, text, styles }: IChecklistItem) => {
     </div>
   );
 };
-export type StationFieldName = "sid" | "location" | "area";
+export type affiliateIdFieldName = "sid" | "location" | "area";

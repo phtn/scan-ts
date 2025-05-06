@@ -20,7 +20,13 @@ const Checkbox = forwardRef<
     <CheckboxPrimitive.Indicator
       className={cn("flex items-center justify-center text-current")}
     >
-      <Icon name="confirm" className="size-4 -ml-[2px]" />
+      <Icon
+        name={props.checked === "indeterminate" ? "asterisk" : "confirm"}
+        className={cn(`size-4 -ml-[2px]`, {
+          "-ml-0 opacity-90 size-3 dark:text-teal-400 text-teal-700":
+            props.checked === "indeterminate",
+        })}
+      />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

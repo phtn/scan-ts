@@ -39,12 +39,12 @@ export const QrCode = ({ url, width = 330, height = 330 }: QrCodeProps) => {
         crossOrigin: "Anonymous",
       },
       dotsOptions: {
-        color: "#09090b",
+        color: "#27272a",
         gradient: {
           type: "radial", // 'linear'
           rotation: 0,
           colorStops: [
-            { offset: 0.25, color: "#52525b" },
+            // { offset: 0.25, color: "#52525b" },
             { offset: 1, color: "#27272a" },
           ],
         },

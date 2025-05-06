@@ -3,9 +3,9 @@ import { UserInquirySchema, UserType } from "../schema";
 import { addNewData } from "@/lib/firebase/add-user-doc";
 import { gsec } from "@/app/_lib/utils";
 import toast from "react-hot-toast";
-import type { Device, Station } from "@/app/types";
+import type { Device, AffiliateId } from "@/app/types";
 
-export const useUserForm = (station: Station, device: Device) => {
+export const useUserForm = (affiliateId: AffiliateId, device: Device) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = useCallback(
@@ -23,7 +23,7 @@ export const useUserForm = (station: Station, device: Device) => {
 
       const promise = addNewData(gsec(), {
         user: validated.data,
-        station,
+        affiliateId,
         device,
       });
 
@@ -39,7 +39,7 @@ export const useUserForm = (station: Station, device: Device) => {
 
       return validated.data;
     },
-    [station, device],
+    [affiliateId, device],
   );
 
   return {

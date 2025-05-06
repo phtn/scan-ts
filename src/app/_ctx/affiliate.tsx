@@ -4,6 +4,7 @@ import {
   addNewAffiliate,
   AffiliateSchema,
   IAffiliate,
+  IQrCode,
 } from "@/lib/firebase/add-affiliate";
 import {
   createContext,
@@ -43,9 +44,10 @@ interface AffiliateCtxValues {
     formData: FormData,
   ) => Promise<IAffiliate>;
   qrCodeUrl: string | null;
-  qrCodeData: string | null;
   affiliates: IAffiliate[];
   loading: boolean;
+  getQRCodes: (affiliate: IAffiliate) => void;
+  qrCodeList: IQrCode[] | undefined;
 }
 
 const affiliatesConverter = {
@@ -67,6 +69,8 @@ const affiliatesConverter = {
       phone: data.phone,
       tags: data.tags,
       active: data.active,
+      level: data.level,
+      qrCodes: data.qrCodes,
     };
   },
 };
@@ -126,14 +130,19 @@ export const AffiliateCtxProvider = ({ children }: { children: ReactNode }) => {
     [onAffiliateConfigChange, affiliateConfigState],
   );
 
-  const [qrCodeData, setQRCodeData] = useState<string | null>(null);
   const [qrCodeUrl, setQRCodeUrl] = useState<string | null>(null);
+  const [qrCodeList, setQRCodes] = useState<IQrCode[]>();
+
+  const getQRCodes = useCallback(({ qrCodes }: IAffiliate) => {
+    setQRCodes(qrCodes);
+    setQRCodeUrl(qrCodes?.[0]?.url ?? null);
+  }, []);
 
   const createAffiliate = useCallback(
     async (prev: IAffiliate, formData: FormData) => {
       const validation = runValidation(formData);
 
-      const createdBy = (await getUID()) ?? "me";
+      const createdBy = (await getUID()) ?? "DEV";
 
       if (validation.error) {
         console.log(validation.error);
@@ -141,12 +150,11 @@ export const AffiliateCtxProvider = ({ children }: { children: ReactNode }) => {
 
       let qrCode;
       if (affiliateConfigState.generateQR) {
-        const qr = await generateQR(gsec(), "grp", createdBy);
+        const qr = await generateQR(gsec(), createdBy, gsec());
         qrCode = {
           id: qr?.id ?? "",
           ident: qr?.ident ?? "",
           url: qr?.qrUrl ?? "",
-          data: qr?.qrData ?? "",
           active: true,
           createdBy,
           createdAt: Date.now(),
@@ -157,18 +165,15 @@ export const AffiliateCtxProvider = ({ children }: { children: ReactNode }) => {
 
       if (qrCode) {
         setQRCodeUrl(qrCode.url);
-        setQRCodeData(qrCode.data);
       }
 
       try {
-        const id = gsec();
-        const promise = addNewAffiliate(id, {
+        const promise = addNewAffiliate(gsec(), {
           ...validation.data,
-          id,
-          createdBy,
           active: affiliateConfigState.activated,
-          rewardPoints: 10,
+          rewardPoints: 0,
           level: 1,
+          createdBy,
           qrCodes: qrCode && [qrCode],
         });
 
@@ -190,19 +195,21 @@ export const AffiliateCtxProvider = ({ children }: { children: ReactNode }) => {
       affiliateConfigState,
       affiliateConfigs,
       createAffiliate,
-      qrCodeData,
       qrCodeUrl,
       affiliates,
       loading,
+      getQRCodes,
+      qrCodeList,
     }),
     [
       affiliateConfigState,
       affiliateConfigs,
       createAffiliate,
-      qrCodeData,
       qrCodeUrl,
       affiliates,
       loading,
+      getQRCodes,
+      qrCodeList,
     ],
   );
   return <AffiliateCtx value={value}>{children}</AffiliateCtx>;
@@ -220,32 +227,16 @@ const runValidation = (formData: FormData) => {
 export const generateQR = async (id: string, grp?: string, seed?: string) => {
   const ident = moses(("b" + secureRef(8) + "d").toUpperCase());
 
-  try {
-    const response = await fetch(
-      `/api/generate-qr?id=${encodeURIComponent(id)}&grp=${encodeURIComponent(grp ?? "")}&seed=${encodeURIComponent(seed ?? "")}&iztp1nk=${encodeURIComponent(ident)}`,
-    );
+  const host =
+    process.env.NODE_ENV === "development"
+      ? "https://192.168.1.30:3000"
+      : "https://scan-ts.vercel.app";
+  const qrUrl = `${host}/?id=${encodeURIComponent(id)}&grp=${encodeURIComponent(grp ?? "no-group")}&seed=${encodeURIComponent(seed ?? "")}&iztp1nk=${encodeURIComponent(ident)}`;
 
-    if (!response.ok) {
-      throw new Error("Failed to generate QR code");
-    }
-
-    const data = (await response.json()) as {
-      qrUrl: string | null;
-      qrData: string | null;
-    };
-
-    return {
-      error: null,
-      qrUrl: data.qrUrl,
-      qrData: data.qrData,
-      ident,
-      id,
-    };
-  } catch (err) {
-    return {
-      error: err instanceof Error ? err.message : "An error occurred",
-      qrUrl: null,
-      qrData: null,
-    };
-  }
+  return {
+    error: null,
+    qrUrl,
+    ident,
+    id,
+  };
 };

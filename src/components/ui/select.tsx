@@ -42,7 +42,8 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon asChild>
         <Icon
-          name="arrow-down-duotone"
+          name="arrow-down-bold-duotone"
+          size={16}
           className={cn("right-6 data-[invalid=true]:text-red-500", caretStyle)}
         />
       </SelectPrimitive.Icon>

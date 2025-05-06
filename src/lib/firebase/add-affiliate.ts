@@ -5,7 +5,6 @@ import { z } from "zod";
 export const QrCodeSchema = z.object({
   active: z.boolean(),
   url: z.string().url(),
-  data: z.string().url(),
   id: z.string().optional(),
   grp: z.string().optional(),
   seed: z.string().optional(),
@@ -50,8 +49,10 @@ export async function addNewAffiliate(docId: string, payload: IAffiliate) {
     } else {
       // Document doesn't exist, add it
       await setDoc(docRef, {
-        docId,
         ...payload,
+        id: docId,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
       });
 
       console.log("Document added successfully!");

@@ -3,11 +3,12 @@ import type { HTMLProps } from "react";
 
 export type ClassName = HTMLProps<HTMLElement>["className"];
 
-export interface IStation {
+export interface IAffiliateParams {
   id: string | null;
-  param1: string | null;
-  param2: string | null;
+  grp: string | null;
+  seed: string | null;
+  ident: string | null;
 }
 
-export type Station = Record<string, keyof IStation> | null;
+export type AffiliateId = Record<string, keyof IAffiliateParams> | null;
 export type Device = DeviceProfile | null;

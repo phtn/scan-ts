@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack --experimental-https",
+    "prebuild": "bunx ts-node --project scripts/tsconfig.json scripts/generate-firebase-config.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -31,6 +32,7 @@
     "firebase": "^11.6.0",
     "genkit": "^1.6.0",
     "html2canvas": "^1.4.1",
+    "html2canvas-pro": "^1.5.10",
     "jsqr": "^1.4.0",
     "lucide-react": "^0.503.0",
     "motion": "^12.6.3",
@@ -52,14 +54,16 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^22.15.12",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.5.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "genkit-cli": "^1.6.1",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

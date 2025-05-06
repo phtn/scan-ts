@@ -1,16 +1,8 @@
 importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js");
+importScripts("/firebase-config.js");
 
-const options = {
-  apiKey: process.env.NEXT_PUBLIC_F_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_F_AUTHDOMAIN,
-  projectId: process.env.NEXT_PUBLIC_F_PROJECTID,
-  storageBucket: process.env.NEXT_PUBLIC_F_STORAGEBUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_F_MESSAGINGSENDERID,
-  appId: process.env.NEXT_PUBLIC_F_APPID,
-  measurementId: process.env.NEXT_PUBLIC_F_MEASUREMENTID,
-};
-firebase.initializeApp(options);
+firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {

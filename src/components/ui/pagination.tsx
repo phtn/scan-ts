@@ -1,3 +1,5 @@
+"use client";
+
 import { ChevronLeft, MoreHorizontal } from "lucide-react";
 
 import { cn } from "@/lib/utils";

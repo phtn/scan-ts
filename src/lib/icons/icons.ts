@@ -187,7 +187,7 @@ export const icons = {
     set: `solar`,
   },
   share: {
-    symbol: `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1"><path d="M22 13.998c-.029 3.414-.218 5.296-1.46 6.537C19.076 22 16.718 22 12.003 22s-7.073 0-8.538-1.465S2 16.713 2 11.997C2 7.282 2 4.924 3.465 3.46C4.706 2.218 6.588 2.029 10.002 2"></path><path stroke-linejoin="round" d="M22 7h-8c-1.818 0-2.913.892-3.32 1.3q-.187.19-.19.19q0 .003-.19.19C9.892 9.087 9 10.182 9 12v3m13-8l-5-5m5 5l-5 5"></path></g>`,
+    symbol: `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path d="M22 13.998c-.029 3.414-.218 5.296-1.46 6.537C19.076 22 16.718 22 12.003 22s-7.073 0-8.538-1.465S2 16.713 2 11.997C2 7.282 2 4.924 3.465 3.46C4.706 2.218 6.588 2.029 10.002 2"></path><path stroke-linejoin="round" d="M22 7h-8c-1.818 0-2.913.892-3.32 1.3q-.187.19-.19.19q0 .003-.19.19C9.892 9.087 9 10.182 9 12v3m13-8l-5-5m5 5l-5 5"></path></g>`,
     viewBox: `0 0 24 24`,
     set: `solar`,
   },
@@ -221,6 +221,89 @@ export const icons = {
     viewBox: `0 0 24 24`,
     set: `solar`,
   },
-};
+
+  "square-arrow-right-duotone": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="m10.5 9l3 3l-3 3"></path><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z" opacity=".5"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "square-double-arrow-right-duotone": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z" opacity=".5"></path><path stroke-linecap="round" stroke-linejoin="round" d="m8.5 9l3 3l-3 3m4-6l3 3l-3 3"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "arrow-down-bold-duotone": {
+    symbol: `<path fill="currentColor" d="m8.303 12.404l3.327 3.431c.213.22.527.22.74 0l6.43-6.63C19.201 8.79 18.958 8 18.43 8h-5.723z"></path><path fill="currentColor" d="M11.293 8H5.57c-.528 0-.771.79-.37 1.205l2.406 2.481z" opacity=".5"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "square-arrow-right-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M3.464 20.536C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535M9.97 15.53a.75.75 0 0 1 0-1.06L12.44 12L9.97 9.53a.75.75 0 0 1 1.06-1.06l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 0 1-1.06 0" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "maximize-square": {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M17 7h-3m3 0v3m0-3l-3.5 3.5M7 17h3m-3 0v-3m0 3l3.5-3.5"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "square-double-arrow-right-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M22 12c0-4.714 0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12M7.97 9.53a.75.75 0 0 1 1.06-1.06l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 0 1-1.06-1.06L10.44 12zm4-1.06a.75.75 0 0 0 0 1.06L14.44 12l-2.47 2.47a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "square-double-arrow-left-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12m14.03-2.47a.75.75 0 0 0-1.06-1.06l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 1 0 1.06-1.06L13.56 12zm-4-1.06a.75.75 0 0 1 0 1.06L9.56 12l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "square-arrow-left-bold": {
+    symbol: `<path fill="currentColor" fill-rule="evenodd" d="M20.536 3.464C19.07 2 16.714 2 12 2S4.929 2 3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536M14.03 8.47a.75.75 0 0 1 0 1.06L11.56 12l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  "minimize-square-bold": {
+    symbol: `<path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.134 0 6.455 0 7.952.988L14.75 8.189V6.25a.75.75 0 0 0-1.5 0V10c0 .414.336.75.75.75h3.75a.75.75 0 0 0 0-1.5h-1.94l5.202-5.202C22 5.545 22 7.866 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22c-4.134 0-6.455 0-7.952-.988l5.202-5.201v1.939a.75.75 0 0 0 1.5 0V14a.75.75 0 0 0-.75-.75H6.25a.75.75 0 0 0 0 1.5h1.94l-5.202 5.202C2 18.455 2 16.134 2 12"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  square: {
+    symbol: `<path fill="currentColor" fill-rule="even" d="M3.464 3.464C2 4.93 2 7.286 2 12s0 7.071 1.464 8.535C4.93 22 7.286 22 12 22s7.071 0 8.535-1.465C22 19.072 22 16.714 22 12s0-7.071-1.465-8.536C19.072 2 16.714 2 12 2S4.929 2 3.464 3.464M7.25 12a4.75 4.75 0 1 1 9.5 0a4.75 4.75 0 0 1-9.5 0m1.5 0a3.25 3.25 0 1 1 6.5 0a3.25 3.25 0 0 1-6.5 0" clip-rule="odd"></path>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+  lock: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1"><path d="M2 16c0-2.828 0-4.243.879-5.121C3.757 10 5.172 10 8 10h8c2.828 0 4.243 0 5.121.879C22 11.757 22 13.172 22 16s0 4.243-.879 5.121C20.243 22 18.828 22 16 22H8c-2.828 0-4.243 0-5.121-.879C2 20.243 2 18.828 2 16Z"></path><path stroke-linecap="round" d="M12 14v4m-6-8V8a6 6 0 1 1 12 0v2"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "question-circle-duotone": {
+    symbol: `<g fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" opacity=".5"></circle><path stroke="currentColor" stroke-linecap="round" stroke-width="1" d="M10.125 8.875a1.875 1.875 0 1 1 2.828 1.615c-.475.281-.953.708-.953 1.26V13"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+  "spinners-ring": {
+    symbol: `<path fill="currentColor" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"></path><path fill="currentColor" d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"></animateTransform></path>`,
+    viewBox: `0 0 24 24`,
+    set: `svg`,
+  },
+  sidebar: {
+    symbol: `<g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828S6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172S22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828S17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172S2 16.771 2 13z"></path><path stroke-linecap="round" d="M15 21V3" opacity=".5"></path></g>`,
+    viewBox: `0 0 24 24`,
+    set: `solar`,
+  },
+
+	"siderbar-bold-duotone": {
+		symbol: `<path fill="currentColor" fill-rule="evenodd" d="M3.172 4.172C2 5.343 2 7.229 2 11v2c0 3.771 0 5.657 1.172 6.828S6.229 21 10 21h5V3h-5C6.229 3 4.343 3 3.172 4.172" clip-rule="evenodd" opacity=".5"></path><path fill="currentColor" d="M5.5 9.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zm1 4a.75.75 0 0 0 0 1.5h4a.75.75 0 0 0 0-1.5zM22 13v-2c0-3.771 0-5.657-1.172-6.828c-.974-.975-3.192-1.139-5.828-1.166v17.988c2.636-.027 4.854-.191 5.828-1.166C22 18.657 22 16.771 22 13"></path>`,
+		viewBox: `0 0 24 24`,
+		set: `solar`,
+	},};
 
 export type IconNameType = keyof typeof icons;
