@@ -1,3 +1,4 @@
+import "../env-config";
 import { config } from "dotenv";
 import { writeFileSync } from "fs";
 import { join, resolve } from "path";
