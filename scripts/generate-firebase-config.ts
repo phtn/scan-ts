@@ -3,14 +3,13 @@ import { writeFileSync } from "fs";
 import { join, resolve } from "path";
 
 // Load environment variables from project root
-const envPath = resolve(
-  process.cwd(),
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local",
-);
+const env =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+const envPath = resolve(process.cwd(), env);
 const result = config({ path: envPath });
 
 if (result.error) {
-  console.error("⚠️ Error loading .env.local file");
+  console.error("⚠️ Error loading .env file", result.error);
   process.exit(1);
 }
 
