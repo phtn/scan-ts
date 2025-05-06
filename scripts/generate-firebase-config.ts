@@ -3,8 +3,7 @@ import { writeFileSync } from "fs";
 import { join, resolve } from "path";
 
 // Load environment variables from project root
-const env =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+const env = process.env.NODE_ENV === "production" ? ".env" : ".env.local";
 const envPath = resolve(process.cwd(), env);
 const result = config({ path: envPath });
 
