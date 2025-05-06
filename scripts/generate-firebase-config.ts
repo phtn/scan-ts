@@ -2,7 +2,6 @@ import { loadEnvConfig } from "@next/env";
 import { writeFileSync } from "fs";
 import { join } from "path";
 
-// Load environment variables using Next.js env loader
 const projectDir = process.cwd();
 const { combinedEnv, loadedEnvFiles } = loadEnvConfig(projectDir);
 

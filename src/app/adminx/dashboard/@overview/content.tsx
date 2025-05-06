@@ -5,13 +5,17 @@ import { Affiliates } from "../_components/affiliates";
 import { AffiliateCtxProvider } from "@/app/_ctx/affiliate";
 import { QRCodeViewer } from "../_components/qrcode-viewer";
 import { useMemo } from "react";
+import { LogsTable } from "../_components/logs-table";
+import { LogCtxProvider } from "@/app/_ctx/log";
+import { SubsCtxProvider } from "@/app/_ctx/subs";
+import { Subs } from "../_components/subs";
 
 export const Content = () => {
   const Main = useMemo(
     () => (
       <main className="space-y-2.5 lg:h-screen overflow-scroll">
-        <div className="lg:h-[56vh]">
-          <div className={cn("h-full m-1.5 grid grid-cols-12 gap-2.5", ``)}>
+        <div className="lg:h-[54vh]">
+          <div className={cn("mx-1.5 grid h-full grid-cols-12 gap-x-2.5", ``)}>
             <div className="col-span-12 lg:col-span-8">
               <Affiliates />
             </div>
@@ -21,16 +25,25 @@ export const Content = () => {
           </div>
         </div>
 
-        <div className="lg:h-[36vh] pb-1.5">
-          <div
-            className={cn("h-full m-1.5 mt-0 grid grid-cols-12 gap-2.5", ``)}
-          >
-            <div className="col-span-12 lg:col-span-8">
-              <MockCard />
-            </div>
-            <div className="col-span-12 lg:col-span-4">
-              <MockCard />
-            </div>
+        <div className="lg:h-[38vh]">
+          <div className={cn("mx-1.5 mt-0 grid grid-cols-12 gap-x-2.5", ``)}>
+            <SubsCtxProvider>
+              <div className="col-span-12 lg:col-span-8">
+                <Subs />
+              </div>
+            </SubsCtxProvider>
+            <LogCtxProvider>
+              <div
+                className={cn(
+                  "col-span-12 lg:col-span-4 bg-gradient-to-b from-ultra-fade/50 to-super-fade",
+                  "dark:border-panel rounded-[3px] rounded-tr-xl border-[0.33px] border-gray-500",
+                  "dark:from-neutral-800/40 dark:via-neutral-800/80 dark:to-neutral-800/80",
+                  "overflow-hidden relative",
+                )}
+              >
+                <LogsTable />
+              </div>
+            </LogCtxProvider>
           </div>
         </div>
       </main>
@@ -41,11 +54,11 @@ export const Content = () => {
   return <AffiliateCtxProvider>{Main}</AffiliateCtxProvider>;
 };
 
-const MockCard = () => {
+export const MockCard = () => {
   return (
     <div
       className={cn(
-        "bg-gradient-to-br h-full min-h-96 from-ultra-fade/50 to-super-fade",
+        "bg-gradient-to-br h-full from-ultra-fade/50 to-super-fade",
         "dark:border-panel rounded-lg rounded-br-[3px] border-[0.33px] border-gray-500",
         "dark:from-neutral-800/30 dark:via-neutral-800/80 dark:to-neutral-800/80",
         "overflow-hidden relative",

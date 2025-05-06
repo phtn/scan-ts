@@ -1,8 +1,7 @@
 import { ReactNode, use, useActionState, useCallback, useMemo } from "react";
 import { useAppForm } from "./utils";
 import { AffiliateSchema, IAffiliate } from "@/lib/firebase/add-affiliate";
-import { IField } from "./fields";
-import { AffiliateFieldName } from "./schema";
+import { type TextFieldConfig } from "./schema";
 import { HyperList } from "@/ui/hyper-list";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -29,49 +28,59 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
   const { createAffiliate, affiliateConfigs } = use(AffiliateCtx)!;
 
   // Add state for checkbox configurations
-  const [state, action, pending] = useActionState(
-    createAffiliate,
-    initialState,
-  );
-  const user_fields = useMemo(
-    () =>
-      [
-        {
-          id: "name",
-          name: "name",
-          label: "name",
-          value: state?.name,
-          required: true,
-        },
-        {
-          id: "phone",
-          name: "phone",
-          label: "phone",
-          value: state?.phone,
-        },
-        {
-          id: "email",
-          name: "email",
-          label: "email",
-          value: state?.email,
-        },
-        {
-          id: "tags",
-          name: "tags",
-          label: "tags",
-          value: state?.tags,
-        },
-      ] as IField<AffiliateFieldName>[],
-    [state],
+  const [, action, pending] = useActionState(createAffiliate, initialState);
+  const affiliate_info = useMemo(
+    () => [
+      {
+        title: "Affiliates",
+        fields: [
+          {
+            name: "name",
+            label: "Name",
+            type: "text",
+            required: true,
+          },
+          {
+            name: "phone",
+            label: "Phone",
+            type: "tel",
+            required: false,
+          },
+          {
+            name: "email",
+            label: "Email",
+            type: "email",
+            required: true,
+          },
+          {
+            name: "grp",
+            label: "Group",
+            type: "text",
+            required: false,
+          },
+          {
+            name: "tags",
+            label: "Tags",
+            type: "text",
+            required: false,
+          },
+        ] as TextFieldConfig[],
+      },
+    ],
+    [],
   );
 
   const FormField = useCallback(
-    (props: IField<AffiliateFieldName>) => {
+    (props: TextFieldConfig) => {
       return (
-        <form.AppField name={props.name}>
+        <form.AppField {...props} name={props.name as keyof IAffiliate}>
           {(field) => (
             <field.InputField
               {...props}
+              type={props.type}
+              label={props.label}
+              required={props.required}
+              autoComplete={props.autoComplete}
               className="bg-super-fade dark:bg-neutral-600/60"
             />
           )}
@@ -95,16 +104,15 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
   );
 
   return (
-    <div className="bg-gradient-to-b size-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
-      <form action={action} className="flex flex-col justify-between">
-        <div className="overflow-hidden h-full pt-5 relative bg-white border-t-[0.33px] dark:bg-zark border-gray-400/60 dark:border-hot-dark/40 px-4">
+    <div className="bg-super-fade size-full">
+      <form action={action} className="flex lg:h-full flex-col justify-between">
+        <div className="overflow-hidden h-full pt-5 relative bg-white border-t-[0.33px] dark:bg-zinc-800 border-gray-400/60 dark:border-hot-dark/40 px-4">
           <h2 className="ps-2 font-semibold h-8 lg:h-12 font-sans tracking-tight opacity-60">
             Create New Affiliate
           </h2>
           <div className="py-2">
             <HyperList
-              keyId="id"
-              data={user_fields}
+              data={affiliate_info[0].fields}
               container="lg:space-y-5 space-y-2 grid grid-rows-2 gap-x-4 lg:grid-cols-3"
               component={FormField}
             />

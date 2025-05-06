@@ -13,7 +13,6 @@ import { TopOutlines } from "./_components/outlines";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Device, AffiliateId } from "./types";
 import { UserInquiryForm } from "@/components/forms";
-import Inquiry from "./inquiry";
 import { ModeSwitch } from "./_components/mode-switch";
 import { Brand } from "./_components/brand";
 import { Icon } from "@/lib/icons";
@@ -73,8 +72,6 @@ function Landing() {
     [],
   );
 
-  const MemoizedInquiry = useMemo(() => <Inquiry />, []);
-
   const Footer = useMemo(
     () => (
       <div>
@@ -108,9 +105,10 @@ function Landing() {
         {Header}
 
         <div className="px-1.5">
-          <UserInquiryForm affiliateId={affiliateId} device={deviceProfile}>
-            {MemoizedInquiry}
-          </UserInquiryForm>
+          <UserInquiryForm
+            affiliateId={affiliateId}
+            device={deviceProfile}
+          ></UserInquiryForm>
         </div>
 
         {Footer}

@@ -55,8 +55,8 @@ export default function Sidebar({ user }: SidebarProps) {
           </li>
         </ul>
       </nav>
-      <div className="flex lg:p-4 items-center justify-center pb-4 lg:h-44">
-        <div className="lg:space-y-6 space-y-3">
+      <div className="flex lg:p-4 items-center justify-start pb-4 lg:h-44">
+        <div className="lg:space-y-6 flex flex-col items-start space-y-3">
           <div className="flex items-center lg:space-x-5">
             <ToggleSwitch />
             <div className="text-xs lg:flex hidden font-quick">Light</div>

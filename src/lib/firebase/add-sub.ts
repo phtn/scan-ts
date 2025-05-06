@@ -1,19 +1,21 @@
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from ".";
 import type { AffiliateId, Device } from "@/app/types";
-import type { UserType } from "@/components/forms/schema";
+import type { InquiryFormType } from "@/components/forms/schema";
 
-export interface SubmitPayload {
-  user: UserType;
+export interface Sub {
+  user: InquiryFormType;
   affiliateId: AffiliateId;
   device: Device;
 }
 
-export async function addNewData(doc_id: string, payload: SubmitPayload) {
+export async function addSub(doc_id: string, payload: Sub) {
   try {
-    const submitsRef = collection(db, "submissions");
-    const docRef = doc(submitsRef, doc_id);
+    const ref = collection(db, "subs");
+    const docRef = doc(ref, doc_id);
     const docSnap = await getDoc(docRef);
+
+    console.log(doc_id, JSON.stringify(payload, null, 2));
 
     if (docSnap.exists()) {
       console.log("Document already exists!");

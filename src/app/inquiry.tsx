@@ -25,23 +25,23 @@ export default function Inquiry() {
     () =>
       [
         {
-          id: 1,
+          id: 0,
           icon: "sports-car",
-          value: "1",
+          value: "car",
           title: "Car Insurance",
           description: "CTPL & Comprehensive",
         },
         {
-          id: 2,
+          id: 1,
           icon: "injured",
-          value: "2",
+          value: "pa",
           title: "Personal Accident",
           description: "Individual & Family",
         },
         {
-          id: 3,
+          id: 2,
           icon: "fire-extinguisher",
-          value: "3",
+          value: "fire",
           title: "Fire Insurance",
           description: "Residential & Commercial",
         },
@@ -56,7 +56,7 @@ export default function Inquiry() {
           className="h-16 cursor-pointer rounded-2xl bg-panel dark:bg-hot-dark border-[0.33px] dark:border-gray-500/50 text-white outline-none text-left w-full py-5"
         >
           <SelectValue
-            placeholder="Choose a plan"
+            placeholder="Choose type of inquiry"
             className="text-neutral-200"
           />
         </SelectTrigger>

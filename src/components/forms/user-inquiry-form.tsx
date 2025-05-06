@@ -1,73 +1,194 @@
 import { HyperList } from "@/ui/hyper-list";
-import { type ReactNode, useActionState, useCallback, useMemo } from "react";
+import { useActionState, useCallback, useMemo } from "react";
 import { useAppForm } from "./utils";
-import { IField } from "./fields";
 import { cn } from "@/lib/utils";
-import { Icon } from "@/lib/icons";
-import { UserFieldName, UserInquirySchema } from "./schema";
-import { useUserForm } from "./hooks/use-user-inquiry";
+import { Icon, type IconName } from "@/lib/icons";
+import type { InquiryFormType, FieldGroup, FieldConfig } from "./schema";
+import { InquiryFormSchema } from "./schema";
+import { useInquiry } from "./hooks/use-inquiry";
 import { opts } from "@/utils/helpers";
 import { FlexRow } from "@/ui/hyper-flex";
 import type { Device, AffiliateId } from "@/app/types";
-import { IconName } from "@/lib/icons/types";
 
-interface UserInquiryFormProps {
-  children: ReactNode;
+interface InquiryFormProps {
   affiliateId: AffiliateId;
   device: Device;
 }
 
-export const UserInquiryForm = ({
-  children,
-  affiliateId,
-  device,
-}: UserInquiryFormProps) => {
+export const UserInquiryForm = ({ affiliateId, device }: InquiryFormProps) => {
   const initialState = {
     name: "",
     tel: "",
     email: "",
-  };
+    inquiry: "car",
+  } as InquiryFormType;
   const form = useAppForm({
     defaultValues: initialState,
     validators: {
-      onChange: UserInquirySchema,
+      onChange: InquiryFormSchema,
     },
   });
 
-  const { isSubmitted, handleSubmit } = useUserForm(affiliateId, device);
+  const { isSubmitted, handleSubmit } = useInquiry(affiliateId, device);
 
   const [state, action, pending] = useActionState(handleSubmit, initialState);
-  const user_fields = useMemo(
+
+  const fieldGroups = useMemo(
     () =>
       [
         {
-          id: "name",
-          name: "name",
-          label: "name",
-          value: state?.name,
-          required: true,
+          title: "PersonalInfo",
+          fields: [
+            {
+              id: "name",
+              name: "name",
+              label: "name",
+              value: state?.name,
+              required: true,
+              type: "text",
+            },
+            {
+              id: "tel",
+              name: "tel",
+              label: "phone",
+              value: state?.tel,
+              type: "tel",
+            },
+            {
+              id: "email",
+              name: "email",
+              label: "email",
+              value: state?.email,
+              type: "email",
+              validators: {
+                required: true,
+                email: true,
+              },
+            },
+          ],
         },
         {
-          id: "tel",
-          name: "tel",
-          label: "phone",
-          value: state?.tel,
+          title: "Inquiry",
+          fields: [
+            {
+              name: "inquiry",
+              label: "inquiry",
+              type: "select",
+              options: [
+                {
+                  icon: "sports-car",
+                  value: "car",
+                  label: "Car Insurance",
+                  description: "CTPL & Comprehensive",
+                },
+                {
+                  icon: "injured",
+                  value: "pa",
+                  label: "Personal Accident",
+                  description: "Individual & Family",
+                },
+                {
+                  icon: "fire-extinguisher",
+                  value: "fire",
+                  label: "Fire Insurance",
+                  description: "Residential & Commercial",
+                },
+              ],
+
+              required: true,
+            },
+          ],
         },
-        {
-          id: "email",
-          name: "email",
-          label: "email",
-          value: state?.email,
-        },
-      ] as IField<UserFieldName>[],
+      ] as FieldGroup[],
     [state],
   );
 
-  const FormField = useCallback(
-    (props: IField<UserFieldName>) => {
+  const renderField = useCallback(
+    (field: FieldConfig) => {
       return (
-        <form.AppField name={props.name}>
-          {(field) => <field.InputField {...props} />}
+        <form.AppField
+          key={field.name.toString()}
+          name={field.name as keyof InquiryFormType}
+          validators={field.validators}
+        >
+          {(fieldApi) => {
+            const error = fieldApi.state.meta.errors;
+
+            // Determine what type of field to render
+            switch (field.type) {
+              case "select":
+                return (
+                  <fieldApi.InquiryType
+                    {...fieldApi}
+                    name={field.name}
+                    // onValueChange={setInquiryType}
+                    options={field.options}
+                    type={field.type}
+                  />
+                );
+
+              case "checkbox-group":
+                return (
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {field.label}
+                    </label>
+                    <div className="space-y-2">
+                      {field.options.map((option) => (
+                        <div key={option.value} className="flex items-center">
+                          <input
+                            id={`${field.name.toString()}-${option.value}`}
+                            type="checkbox"
+                            value={option.value}
+                            checked={fieldApi.state.value?.includes(
+                              option.value,
+                            )}
+                            onChange={(e) => {
+                              const newValue = [
+                                ...(fieldApi.state.value ?? []),
+                              ];
+                              if (e.target.checked) {
+                                newValue.push(option.value);
+                              } else {
+                                const index = newValue.indexOf(option.value);
+                                if (index !== -1) {
+                                  newValue.splice(index, 1);
+                                }
+                              }
+                              fieldApi.handleChange((v) => v);
+                            }}
+                            className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                          />
+                          <label
+                            htmlFor={`${field.name.toString()}-${option.value}`}
+                            className="ml-2 text-sm text-gray-700"
+                          >
+                            {option.label}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                    {error && (
+                      <span className="text-red-500 text-sm">
+                        {error[0]?.message}
+                      </span>
+                    )}
+                  </div>
+                );
+
+              default:
+                // Text, email, number, etc.
+                return (
+                  <fieldApi.InputField
+                    {...fieldApi}
+                    label={field.label}
+                    required={field.required}
+                    autoComplete={field.autoComplete}
+                    type={field.type}
+                  />
+                );
+            }
+          }}
         </form.AppField>
       );
     },
@@ -87,17 +208,18 @@ export const UserInquiryForm = ({
     const options = opts(
       <Checklist />,
       <div className="space-y-4">
-        <HyperList
-          keyId="id"
-          data={user_fields}
-          container="space-y-4"
-          component={FormField}
-        />
-        {children}
+        {fieldGroups.map((group, index) => (
+          <HyperList
+            key={index}
+            data={group.fields}
+            container="space-y-4"
+            component={renderField}
+          />
+        ))}
       </div>,
     );
     return <>{options.get(isSubmitted)}</>;
-  }, [isSubmitted, FormField, children, user_fields]);
+  }, [isSubmitted, fieldGroups, renderField]);
 
   return (
     <div className="bg-gradient-to-b dark:from-neutral-400 from-gray-300 dark:via-neutral-500 dark:to-neutral-400 via-gray-200 to-gray-400 p-1.5 pb-0 rounded-[42px]">

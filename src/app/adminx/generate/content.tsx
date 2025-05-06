@@ -1,11 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { addStation } from "@/lib/firebase/add-station";
-import { gsec } from "@/app/_lib/utils";
-import toast from "react-hot-toast";
 import { QRViewer } from "./qr-viewer";
-import { getUID } from "@/app/actions";
 import { useAuth } from "@/app/_ctx/auth";
 import { QrForm } from "./qr-form";
 import { PageTitle } from "../components";
@@ -31,18 +27,6 @@ async function generateQRCode(prevState: QrParams, formData: FormData) {
       qrData: string | null;
     };
 
-    const promise = addStation(gsec(), {
-      params: { id, param1, param2 },
-      url: data.qrUrl,
-      data: data.qrData,
-      createdBy: await getUID(),
-    });
-
-    await toast.promise(promise, {
-      loading: "Generating...",
-      success: "Successful!",
-      error: "Failed to generate QR.",
-    });
     return {
       error: null,
       qrUrl: data.qrUrl,

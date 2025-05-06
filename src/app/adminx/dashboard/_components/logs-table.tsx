@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -6,14 +6,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   PaginationState,
-  Row,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Pagination, PaginationContent } from "@/components/ui/pagination";
 import {
   Table,
@@ -23,35 +20,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IAffiliate } from "@/lib/firebase/add-affiliate";
-import { AffiliateCtx } from "@/app/_ctx/affiliate";
 import { Icon, IconName } from "@/lib/icons";
 import { HyperList } from "@/ui/hyper-list";
-import { CheckedState } from "@radix-ui/react-checkbox";
+import { LogCtx } from "@/app/_ctx/log";
+import { Log } from "@/lib/firebase/add-log";
 
-export const AffiliatesTable = () => {
-  const { affiliates } = use(AffiliateCtx)!;
+export const LogsTable = () => {
+  const { logs } = use(LogCtx)!;
   useEffect(() => {
-    if (affiliates.length === 0) {
+    if (logs.length === 0) {
       console.log("Fetching affiliates data...");
       // Fetch affiliates data from API or other source
     }
-    console.log(affiliates);
-  }, [affiliates]);
+  }, [logs]);
   return (
-    <div className="bg-gradient-to-b lg:size-full w-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
-      <AffiliatesDataTable data={affiliates} />
-    </div>
+    // <div className="bg-gradient-to-b lg:size-full w-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
+    <LogsDataTable data={logs} />
+    // </div>
   );
 };
 
-interface AffiliatesDataTableProps {
-  data: IAffiliate[];
+interface DataTableProps<T> {
+  data: T[];
 }
 
-export default function AffiliatesDataTable({
-  data,
-}: AffiliatesDataTableProps) {
+export default function LogsDataTable({ data }: DataTableProps<Log>) {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 5,
@@ -64,37 +57,11 @@ export default function AffiliatesDataTable({
     },
   ]);
 
-  const { getQRCodes } = use(AffiliateCtx)!;
-
   const [rowSelection, setRowSelection] = useState({});
 
-  const columns: ColumnDef<IAffiliate>[] = [
+  const columns: ColumnDef<Log>[] = [
     {
-      id: "select",
-      header: () => (
-        <Checkbox
-          // checked={
-          //   table.getIsAllPageRowsSelected() ||
-          //   (table.getIsSomePageRowsSelected() && "indeterminate")
-          // }
-          // onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          checked={"indeterminate"}
-          disabled
-          aria-label="Disabled Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={onSelect(row)}
-          aria-label="Select row"
-        />
-      ),
-      size: 28,
-      enableSorting: false,
-    },
-    {
-      header: "Name",
+      header: "Activity",
       accessorKey: "name",
       cell: ({ row }) => (
         <button
@@ -104,43 +71,33 @@ export default function AffiliatesDataTable({
           {row.getValue("name")}
         </button>
       ),
-      size: 180,
+      size: 60,
     },
     {
-      header: "Email",
-      accessorKey: "email",
-      size: 180,
-    },
-    {
-      header: "Phone",
-      accessorKey: "phone",
-      size: 150,
-    },
-    {
-      header: "Status",
-      accessorKey: "active",
+      header: "Action",
+      accessorKey: "action",
       cell: ({ row }) => {
-        const isActive = row.getValue("active") === true;
+        const action = row.getValue("action") as string;
         return (
-          <Badge
-            className={cn(
-              "tracking-tight hover:text-white text-xs font-sans select-none text-panel/60 dark:text-neutral-300 dark:bg-transparent bg-transparent border border-blue-400 flex items-center w-fit justify-center gap-1",
-              {
-                "dark:bg-transparent dark:text-neutral-300 text-panel/60 border-orange-300":
-                  !isActive,
-              },
-            )}
-          >
-            <div
-              className={cn("size-2 rounded-full bg-blue-400", {
-                "bg-orange-300": !isActive,
-              })}
-            ></div>
-            <div>{isActive ? "Active" : "Inactive"}</div>
-          </Badge>
+          <div className="flex justify-start uppercase text-[10px] font-sans">
+            {action}
+          </div>
         );
       },
-      size: 120,
+      size: 60,
+    },
+    {
+      header: "Ref",
+      accessorKey: "ref",
+      cell: ({ row }) => {
+        const ref = row.getValue("ref") as string;
+        return (
+          <div className="flex justify-start text-[10px] font-quick">
+            {ref.toString().split("-").shift()}
+          </div>
+        );
+      },
+      size: 60,
     },
     {
       header: "",
@@ -152,7 +109,7 @@ export default function AffiliatesDataTable({
           </div>
         );
       },
-      size: 80,
+      size: 30,
       enableHiding: true,
     },
   ];
@@ -175,20 +132,6 @@ export default function AffiliatesDataTable({
       rowSelection,
     },
   });
-
-  const onSelect = useCallback(
-    (row: Row<IAffiliate>) => (checked: CheckedState) => {
-      // Clear any other selected rows first
-      table.getRowModel().rows.forEach((r) => {
-        if (r.id !== row.id) {
-          r.toggleSelected(false);
-        }
-      });
-      // Then select/deselect the clicked row
-      row.toggleSelected(!!checked);
-    },
-    [table],
-  );
 
   const canNext = useMemo(() => {
     const index = pagination.pageIndex;
@@ -239,13 +182,12 @@ export default function AffiliatesDataTable({
     if (selectedRows.length > 0) {
       const selectedRowData = selectedRows[0].original;
       console.log("Selected affiliate:", selectedRowData);
-      getQRCodes(selectedRowData);
     }
-  }, [rowSelection, table, getQRCodes]);
+  }, [rowSelection, table]);
 
   return (
     <div className="flex flex-col justify-between h-full font-sans">
-      <div className="dark:bg-zinc-800 bg-background overflow-hidden h-11/12 flex border-y-[0.33px] border-panel/40">
+      <div className="bg-background/40 overflow-hidden h-full flex border-y-[0.0px] border-panel/40">
         <Table className="table-fixed">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -317,7 +259,7 @@ export default function AffiliatesDataTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="h-16"
+                  className="h-10"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -341,7 +283,7 @@ export default function AffiliatesDataTable({
       </div>
 
       {/* Pagination */}
-      <div className="flex px-4 my-2 h-10 flex-1 grow-0 items-center justify-between gap-8">
+      <div className="flex px-4 my-2 flex-1 grow-0 items-center justify-between gap-8">
         {/* Results per page */}
         {/* <div className="flex items-center gap-3">
           <p className="text-foreground font-dm text-xs whitespace-nowrap">

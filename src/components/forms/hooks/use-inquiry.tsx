@@ -1,27 +1,30 @@
 import { useCallback, useState } from "react";
-import { UserInquirySchema, UserType } from "../schema";
-import { addNewData } from "@/lib/firebase/add-user-doc";
+import { addSub } from "@/lib/firebase/add-sub";
 import { gsec } from "@/app/_lib/utils";
 import toast from "react-hot-toast";
 import type { Device, AffiliateId } from "@/app/types";
+import { InquiryFormSchema, InquiryFormType } from "../schema";
 
-export const useUserForm = (affiliateId: AffiliateId, device: Device) => {
+export const useInquiry = (affiliateId: AffiliateId, device: Device) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = useCallback(
-    async (_: UserType | null, fd: FormData) => {
-      const validated = UserInquirySchema.safeParse({
+    async (_: InquiryFormType | null, fd: FormData) => {
+      const validated = InquiryFormSchema.safeParse({
         name: fd.get("name") as string,
         tel: fd.get("tel") as string,
         email: fd.get("email") as string,
+        inquiry: fd.get("inquiry") as string,
       });
+
+      console.log(validated.data);
 
       if (validated.error) {
         console.log(validated.error);
         return null;
       }
 
-      const promise = addNewData(gsec(), {
+      const promise = addSub(gsec(), {
         user: validated.data,
         affiliateId,
         device,

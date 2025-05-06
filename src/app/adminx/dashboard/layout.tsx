@@ -19,9 +19,9 @@ const DashboardLayout = ({ signin, overview }: Props) => {
 
   const Header = useMemo(
     () => (
-      <div className="max-h-[7vh] h-[7vh] py-1.5 lg:py-0 flex-col flex justify-center w-full">
+      <div className="max-h-[6vh] h-[6vh] lg:py-0 flex-col flex justify-center w-full">
         <header className="flex bg-transparent w-full relative z-10 items-center justify-between px-0.5">
-          <div className="px-4 flex items-center gap-2">
+          <div className="px-4 flex items-center gap-x-2">
             <IconButton
               icon={user ? "siderbar-bold-duotone" : "lock"}
               className={cn("bg-transparent")}

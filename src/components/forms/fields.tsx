@@ -1,28 +1,11 @@
 import { Icon } from "@/lib/icons";
+import { TextFieldConfig } from "./schema";
 
-type FieldName =
-  | "name"
-  | "tel"
-  | "email"
-  | "sid"
-  | "location"
-  | "area"
-  | "phone"
-  | "active"
-  | "tags"
-  | "group";
-
-export interface IField<T extends string> extends HTMLInputElement {
-  name: T;
-  id: string;
-  label: string;
-}
-
-export const InputField = <T extends FieldName>(item: IField<T>) => (
+export const InputField = (item: TextFieldConfig) => (
   <div className="relative font-dm">
     <div className="flex items-center absolute gap-x-0 justify-start">
       <div className={labelClassName}>
-        <label htmlFor={item.name}>{item.label}</label>
+        <label htmlFor={item.name.toString()}>{item.label}</label>
       </div>
 
       {item.required && (
@@ -40,11 +23,10 @@ export const InputField = <T extends FieldName>(item: IField<T>) => (
       )}
     </div>
     <input
-      id={item.name}
-      name={item.name}
+      name={item.name.toString()}
       type={item.type}
       required={item.required}
-      autoComplete={item.autocomplete}
+      autoComplete={item.autoComplete}
       className={inputClassName}
     />
   </div>

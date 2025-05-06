@@ -1,12 +1,35 @@
 import { copyFn } from "@/utils/helpers";
 import html2canvas from "html2canvas-pro";
-import { RefObject, useCallback, useState } from "react";
+import { RefObject, useCallback, useState, useMemo } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
+import { addLog, Log } from "@/lib/firebase/add-log";
+import { gsec } from "@/app/_lib/utils";
 
 export const useQrcode = (
   ref: RefObject<HTMLDivElement | null>,
   ident: string | undefined,
 ) => {
+  const [user] = useAuthState(auth);
+
+  const logPayload = useMemo(
+    () =>
+      ({
+        uid: user?.uid,
+        name: user?.displayName?.split(" ").shift(),
+        ref: ident,
+        note: "qr-code",
+      }) as Log,
+    [ident, user],
+  );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const log = useCallback(
+    async (action: string) => {
+      await addLog(gsec(), { ...logPayload, action });
+    },
+    [logPayload],
+  );
 
   const generateImage = useCallback(async () => {
     if (imageUrl) {
@@ -28,7 +51,7 @@ export const useQrcode = (
     return dataUrl;
   }, [imageUrl, ref]);
 
-  const download = async () => {
+  const download = useCallback(async () => {
     if (!ref?.current) return;
     const image = await generateImage();
     if (image) {
@@ -36,10 +59,11 @@ export const useQrcode = (
       link.href = image;
       link.download = `${ident ?? "qr-code"}.png`;
       link.click();
+      log("download");
     }
-  };
+  }, [ident, log, generateImage, ref]);
 
-  const share = async () => {
+  const share = useCallback(async () => {
     const image = await generateImage();
     if (image) {
       // Convert data URL to Blob
@@ -74,16 +98,18 @@ export const useQrcode = (
           "Web Share API not supported in your browser. isProcessing instead.",
         );
         await download();
+        log("share");
       }
     }
-  };
+  }, [log, download, generateImage, ident]);
 
   const copy = useCallback(
     (url: string | null) => async () => {
       if (!url) return;
       await copyFn({ name: "QR Code link", text: url });
+      log("copy");
     },
-    [],
+    [log],
   );
 
   // const print = useCallback(() => {}, []);
@@ -146,7 +172,9 @@ export const useQrcode = (
     // Write the HTML content and trigger print
     printWindow.document.writeln(html);
     printWindow.document.close();
-  }, [generateImage]);
+
+    log("print");
+  }, [generateImage, log]);
 
   return { download, share, copy, print };
 };
