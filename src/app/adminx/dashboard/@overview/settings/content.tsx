@@ -43,8 +43,8 @@ export const Content = () => {
         {(field) => (
           <div className="grid grid-cols-6 gap-2">
             <div className="col-span-2 flex flex-col font-quick justify-between py-1">
-              <div className="text-sm capitalize tracking-tighter items-center gap-2.5 flex">
-                <span className="font-bold">{label}</span>
+              <div className="text-sm capitalize tracking-tighter items-center lg:gap-2.5 gap-2 flex">
+                <span className="font-bold">{label?.split(" ").shift()}</span>
                 <button className="cursor-pointer">
                   <Icon
                     name="pen-square"
@@ -53,7 +53,7 @@ export const Content = () => {
                   />
                 </button>
               </div>
-              <div className="text-xs font-dm gap-6 w-fit flex px-2 py-1 bg-ultra-fade border-[0.33px] border-neutral-300 dark:border-zinc-600 dark:bg-zinc-900 items-center rounded-lg">
+              <div className="text-xs font-dm gap-8 w-fit flex px-2 py-1 bg-ultra-fade border-[0.33px] border-neutral-300 dark:border-zinc-600 dark:bg-zinc-900 items-center rounded-lg">
                 <span className="opacity-70 tracking-tighter select-none">
                   Enabled
                 </span>
@@ -80,8 +80,8 @@ export const Content = () => {
         App Settings
       </div>
       <div className="flex items-start justify-start">
-        <div className="px-4 font-sans w-[32rem] font-medium">
-          <div className="p-4 space-y-4 rounded-2xl border border-slate-400 dark:border-zark size-full bg-slate-200 dark:bg-zinc-900">
+        <div className="px-2 font-sans w-full font-medium">
+          <div className="py-4 px-1 space-y-4 rounded-2xl border border-slate-400 dark:border-zark size-full bg-slate-200 dark:bg-zinc-900">
             <div className="font-sans font-medium tracking-tight">
               Open Communications
             </div>
@@ -90,7 +90,7 @@ export const Content = () => {
               data={comms[0].fields as TextFieldConfig[]}
               component={FieldItem}
               container="space-y-8 py-4"
-              itemStyle="rounded-xl px-3 py-7 dark:bg-neutral-700 border bg-white border-neutral-400 dark:border-zinc-400/80"
+              itemStyle="rounded-xl px-2 py-7 dark:bg-neutral-700 border bg-white border-neutral-400 dark:border-zinc-400/80"
             />
           </div>
         </div>
