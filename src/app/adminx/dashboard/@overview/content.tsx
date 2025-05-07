@@ -46,7 +46,7 @@ export const Content = () => {
               <div
                 className={cn(
                   "col-span-12 lg:col-span-4 bg-gradient-to-b from-ultra-fade/50 to-super-fade",
-                  "dark:border-panel lg:rounded-[3px] lg:rounded-tr-xl rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
+                  "dark:border-panel lg:rounded-[3px] lg:rounded-tr-xl rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0 lg:border-e-[0.33px]",
                   "dark:from-neutral-800/40 dark:via-neutral-800/80 dark:to-neutral-800/80",
                   "overflow-hidden relative",
                 )}

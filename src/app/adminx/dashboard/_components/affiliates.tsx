@@ -48,7 +48,7 @@ export function Affiliates() {
     <Card
       className={cn(
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
-        "dark:border-panel lg:rounded-lg lg:rounded-br-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
+        "dark:border-panel lg:rounded-lg lg:rounded-br-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0 lg:border-e-[0.33px]",
         "dark:from-neutral-400/40 dark:via-neutral-300/80 dark:to-neutral-200/40",
         "overflow-hidden relative flex flex-col justify-between",
       )}
