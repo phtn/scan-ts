@@ -42,6 +42,8 @@ type InquiryInfo = {
   description: string;
 };
 
+export type CommsFieldName = "phone" | "messenger";
+
 // Complete form values type
 export type FormValues = {
   personalInfo: PersonalInfo;
@@ -61,7 +63,7 @@ type FieldValidator = (value: string | number) => true | string;
 
 // Define base field properties
 export interface BaseFieldConfig {
-  name: keyof InquiryFormType | keyof AffiliateFieldName;
+  name: keyof InquiryFormType | keyof AffiliateFieldName | keyof CommsFieldName;
   label?: string;
   required?: boolean;
   autoComplete?: string;

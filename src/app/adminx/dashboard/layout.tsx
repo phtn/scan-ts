@@ -24,12 +24,15 @@ const DashboardLayout = ({ signin, overview }: Props) => {
           <div className="px-4 flex items-center gap-x-2">
             <IconButton
               icon={user ? "siderbar-bold-duotone" : "lock"}
-              className={cn("bg-transparent")}
+              className={cn("bg-transparent size-4 dark:bg-transparent")}
               iconStyle={cn("text-neutral-400", { "": user })}
             />
           </div>
           <div className="flex px-1 items-center gap-4">
-            <IconButton icon="question-circle-duotone" />
+            <IconButton
+              icon="question-circle-duotone"
+              className="bg-transparent"
+            />
           </div>
         </header>
         <div className="absolute w-full z-[100] -top-4 md:right-40 pointer-events-none">

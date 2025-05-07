@@ -2,8 +2,43 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Icon } from "@/lib/icons";
 import { SubsTable } from "./subs-table";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { opts } from "@/utils/helpers";
 
 export const Subs = () => {
+  const pathname = usePathname();
+  const path = pathname.split("/")[3];
+  const router = useRouter();
+  const pageRoute = useCallback(() => {
+    router.push(`/adminx/dashboard/scans`);
+  }, [router]);
+  const goBack = useCallback(() => {
+    router.back();
+  }, [router]);
+
+  const WindowOptions = useCallback(() => {
+    const options = opts(
+      <button
+        onClick={goBack}
+        className="hover:opacity-100 opacity-60 cursor-pointer"
+      >
+        <Icon name="minimize-square-bold" solid size={24} />
+      </button>,
+      <button
+        onClick={pageRoute}
+        className="hover:opacity-100 opacity-60 cursor-pointer"
+      >
+        <Icon name="maximize-square" size={24} />
+      </button>,
+    );
+    return (
+      <div className="flex items-start justify-center h-full">
+        {options.get(path === "scans")}
+      </div>
+    );
+  }, [pageRoute, goBack, path]);
+
   return (
     <Card
       className={cn(
@@ -25,11 +60,7 @@ export const Subs = () => {
           </CardTitle>
         </div>
 
-        <div className="flex items-start justify-center h-full">
-          <button className="hover:opacity-100 opacity-60 cursor-pointer">
-            <Icon name="maximize-square" size={24} />
-          </button>
-        </div>
+        <WindowOptions />
       </CardHeader>
       <CardContent className="flex flex-11/12 p-0 justify-center items-start">
         <div className="relative size-full">

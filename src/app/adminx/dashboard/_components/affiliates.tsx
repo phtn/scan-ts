@@ -6,9 +6,43 @@ import { Icon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { useToggle } from "@/app/hooks/use-toggle";
 import { AffiliatesTable } from "./affiliates-table";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { opts } from "@/utils/helpers";
 
 export function Affiliates() {
   const { open, toggle } = useToggle();
+  const pathname = usePathname();
+  const path = pathname.split("/")[3];
+  const router = useRouter();
+  const pageRoute = useCallback(() => {
+    router.push(`/adminx/dashboard/affiliates`);
+  }, [router]);
+  const goBack = useCallback(() => {
+    router.back();
+  }, [router]);
+
+  const WindowOptions = useCallback(() => {
+    const options = opts(
+      <button
+        onClick={goBack}
+        className="hover:opacity-100 opacity-60 cursor-pointer"
+      >
+        <Icon name="minimize-square-bold" solid size={24} />
+      </button>,
+      <button
+        onClick={pageRoute}
+        className="hover:opacity-100 opacity-60 cursor-pointer"
+      >
+        <Icon name="maximize-square" size={24} />
+      </button>,
+    );
+    return (
+      <div className="flex items-start justify-center h-full">
+        {options.get(path === "affiliates")}
+      </div>
+    );
+  }, [pageRoute, goBack, path]);
 
   return (
     <Card
@@ -45,21 +79,17 @@ export function Affiliates() {
               </span>
             </button>
           </div>
-          <div className="lg:flex hidden tracking-tight items-center gap-1">
+          {/* <div className="lg:flex hidden tracking-tight items-center gap-1">
             <div className="size-2 rounded-full bg-blue-400"></div>
             <span className="text-sm">Active</span>
           </div>
           <div className="lg:flex hidden tracking-tight items-center gap-1">
             <div className="size-2 rounded-full dark:bg-orange-300 bg-orange-400"></div>
             <span className="text-sm">Inactive</span>
-          </div>
+          </div> */}
         </div>
 
-        <div className="flex items-start justify-center h-full">
-          <button className="hover:opacity-100 opacity-60 cursor-pointer">
-            <Icon name="maximize-square" size={24} />
-          </button>
-        </div>
+        <WindowOptions />
       </CardHeader>
       <CardContent className="flex flex-11/12 p-0 justify-center items-start">
         <div className="relative size-full">

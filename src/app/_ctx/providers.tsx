@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { type ReactNode } from "react";
+import { SettingsCtxProvider } from "./settings";
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
@@ -11,7 +12,7 @@ export const Providers = ({ children }: { children: ReactNode }) => {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <SettingsCtxProvider>{children}</SettingsCtxProvider>
     </ThemeProvider>
   );
 };
