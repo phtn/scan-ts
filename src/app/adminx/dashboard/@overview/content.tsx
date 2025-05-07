@@ -15,7 +15,12 @@ export const Content = () => {
     () => (
       <main className="space-y-2.5 lg:h-screen overflow-scroll">
         <div className="lg:h-[54vh]">
-          <div className={cn("mx-1.5 grid h-full grid-cols-12 gap-x-2.5", ``)}>
+          <div
+            className={cn(
+              "lg:m-1.5 grid h-full grid-cols-12 gap-y-2.5 lg:gap-2.5",
+              ``,
+            )}
+          >
             <div className="col-span-12 lg:col-span-8">
               <Affiliates />
             </div>
@@ -26,7 +31,12 @@ export const Content = () => {
         </div>
 
         <div className="lg:h-[38vh]">
-          <div className={cn("mx-1.5 mt-0 grid grid-cols-12 gap-x-2.5", ``)}>
+          <div
+            className={cn(
+              "lg:mx-1.5 mt-0 grid grid-cols-12 gap-y-2.5 lg:gap-x-2.5",
+              ``,
+            )}
+          >
             <SubsCtxProvider>
               <div className="col-span-12 lg:col-span-8">
                 <Subs />
@@ -36,7 +46,7 @@ export const Content = () => {
               <div
                 className={cn(
                   "col-span-12 lg:col-span-4 bg-gradient-to-b from-ultra-fade/50 to-super-fade",
-                  "dark:border-panel rounded-[3px] rounded-tr-xl border-[0.33px] border-gray-500",
+                  "dark:border-panel lg:rounded-[3px] lg:rounded-tr-xl rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
                   "dark:from-neutral-800/40 dark:via-neutral-800/80 dark:to-neutral-800/80",
                   "overflow-hidden relative",
                 )}

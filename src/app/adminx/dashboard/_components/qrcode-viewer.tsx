@@ -46,7 +46,7 @@ export const QRCodeViewer = () => {
     <Card
       className={cn(
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
-        "dark:border-panel rounded-lg rounded-bl-[3px] border-[0.33px] border-gray-500",
+        "dark:border-panel lg:rounded-lg lg:rounded-bl-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
         "dark:from-neutral-500/60 dark:via-neutral-300/80 dark:to-90% dark:to-neutral-300/50",
         "overflow-hidden relative flex flex-col justify-between",
       )}
@@ -58,7 +58,7 @@ export const QRCodeViewer = () => {
 
       <CardHeader className="flex font-sans relative flex-row dark:border-hot-dark items-start h-12 justify-between">
         <div className="flex h-full items-center font-sans gap-3 lg:gap-6">
-          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:font-medium leading-none portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
+          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
             QR Codes
           </CardTitle>
           <div className="font-sans relative flex items-center justify-center">

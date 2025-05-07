@@ -105,8 +105,8 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
 
   return (
     <div className="bg-super-fade size-full">
-      <form action={action} className="flex lg:h-full flex-col justify-between">
-        <div className="overflow-hidden h-full pt-5 relative bg-white border-t-[0.33px] dark:bg-zinc-800 border-gray-400/60 dark:border-hot-dark/40 px-4">
+      <form action={action} className="flex h-full flex-col justify-between">
+        <div className="overflow-hidden py-3 h-full relative bg-white border-t-[0.33px] dark:bg-zinc-800 border-gray-400/60 dark:border-hot-dark/40 px-4">
           <h2 className="ps-2 font-semibold h-8 lg:h-12 font-sans tracking-tight opacity-60">
             Create New Affiliate
           </h2>
@@ -119,7 +119,7 @@ export const AffiliateForm = ({ children }: AffiliateFormProps) => {
             {children}
           </div>
         </div>
-        <div className="flex flex-1 border-t-[0.33px] border-gray-400/60 dark:bg-zark dark:border-zinc-600 items-center justify-between">
+        <div className="flex border-t-[0.33px] border-gray-400/60 dark:bg-zark dark:border-zinc-600 items-center justify-between">
           <CheckboxPanel data={affiliateConfigs} />
           <Submit />
         </div>
@@ -151,7 +151,7 @@ const ConfigItem = ({
   onCheckedChange,
 }: AffiliateConfig) => {
   return (
-    <div className="relative border-r-[0.33px] border-gray-400 dark:border-zinc-600 tracking-tight flex w-full items-start lg:gap-7 bg-gray-300/30 font-sans dark:bg-zark lg:py-4 py-2 gap-2 lg:px-5 px-2 outline-none">
+    <div className="relative border-r-[0.33px] min-h-12 border-gray-400 dark:border-zinc-600 tracking-tight flex w-full items-start lg:gap-7 bg-gray-300/30 font-sans dark:bg-zark lg:py-4 py-2 gap-2 lg:px-5 px-2 outline-none">
       <Checkbox
         id={`${id}-c`}
         checked={value}
@@ -164,7 +164,7 @@ const ConfigItem = ({
         <div className="grid lg:gap-2">
           <Label
             htmlFor={id}
-            className="max-w-[8ch] lg:max-w-full text-xs lg:text-[16px]"
+            className="max-w-20 line-clamp-2 px-2 lg:px-0 lg:max-w-full text-xs lg:text-[16px]"
           >
             {label}
           </Label>

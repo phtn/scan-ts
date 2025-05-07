@@ -244,8 +244,8 @@ export default function AffiliatesDataTable({
   }, [rowSelection, table, getQRCodes]);
 
   return (
-    <div className="flex flex-col justify-between h-full font-sans">
-      <div className="dark:bg-zinc-800 bg-background overflow-hidden h-11/12 flex border-y-[0.33px] border-panel/40">
+    <div className="flex flex-col h-full justify-between font-sans">
+      <div className="dark:bg-zinc-800 bg-background h-[inherit] flex-col justify-between overflow-hidden flex border-y-[0.33px] border-panel/40">
         <Table className="table-fixed">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -331,7 +331,7 @@ export default function AffiliatesDataTable({
               ))
             ) : (
               <TableRow className="w-full">
-                <TableCell className="h-80 whitespace-nowrap w-full p-4 font-sans flex">
+                <TableCell className="h-72 whitespace-nowrap w-full tracking-widest font-quick opacity-60 p-4 flex">
                   No results.
                 </TableCell>
               </TableRow>
@@ -341,7 +341,7 @@ export default function AffiliatesDataTable({
       </div>
 
       {/* Pagination */}
-      <div className="flex px-4 my-2 h-10 flex-1 grow-0 items-center justify-between gap-8">
+      <div className="flex px-4 py-2 h-16 -mb-6 lg:mb-0 flex-1 relative items-center z-[50] justify-between gap-8">
         {/* Results per page */}
         {/* <div className="flex items-center gap-3">
           <p className="text-foreground font-dm text-xs whitespace-nowrap">

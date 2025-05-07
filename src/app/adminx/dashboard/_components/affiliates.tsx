@@ -48,7 +48,7 @@ export function Affiliates() {
     <Card
       className={cn(
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
-        "dark:border-panel rounded-lg rounded-br-[3px] border-[0.33px] border-gray-500",
+        "dark:border-panel lg:rounded-lg lg:rounded-br-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
         "dark:from-neutral-400/40 dark:via-neutral-300/80 dark:to-neutral-200/40",
         "overflow-hidden relative flex flex-col justify-between",
       )}
@@ -56,11 +56,11 @@ export function Affiliates() {
       {/* Add subtle orange glow effect */}
       <div className="absolute -top-20 -left-20 size-56 lg:bg-amber-50/30 rounded-full blur-[8px] opacity-20"></div>
       <div className="absolute -top-20 right-48 w-96 h-44 lg:dark:bg-neutral-100 rounded-full blur-[80px] opacity-40"></div>
-      <div className="absolute bottom-0 -right-4 w-44 h-11 bg-neutral-600/80 rounded-full blur-[24px] opacity-80"></div>
+      {/* <div className="absolute bottom-0 -right-4 w-44 h-11 bg-neutral-600/80 rounded-full blur-[24px] opacity-80"></div> */}
 
-      <CardHeader className="flex relative flex-1 flex-row dark:border-hot-dark items-start h-12 justify-between">
+      <CardHeader className="flex relative flex-1/12 flex-row dark:border-hot-dark items-start h-12 justify-between">
         <div className="flex h-full items-center font-sans gap-3 lg:gap-6">
-          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:font-medium leading-none portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
+          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
             Affiliates
           </CardTitle>
           <div className="flex items-center text-sm font-medium gap-1 w-28 tracking-tighter">
@@ -91,7 +91,7 @@ export function Affiliates() {
 
         <WindowOptions />
       </CardHeader>
-      <CardContent className="flex flex-11/12 p-0 justify-center items-start">
+      <CardContent className="flex h-full p-0">
         <div className="relative size-full">
           {open ? <AffiliateForm /> : <AffiliatesTable />}
         </div>

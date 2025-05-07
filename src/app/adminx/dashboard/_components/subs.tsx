@@ -43,7 +43,7 @@ export const Subs = () => {
     <Card
       className={cn(
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
-        "dark:border-panel rounded-lg border-[0.33px] rounded-tr-[3px] border-gray-500",
+        "dark:border-panel lg:rounded-lg lg:rounded-tr-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0",
         "dark:from-neutral-400/40 dark:via-neutral-300/80 dark:to-neutral-200/40",
         "overflow-hidden relative flex flex-col justify-between",
       )}
@@ -55,7 +55,7 @@ export const Subs = () => {
 
       <CardHeader className="flex relative flex-1 flex-row dark:border-hot-dark items-start h-12 justify-between">
         <div className="flex h-full items-center font-sans gap-3 lg:gap-6">
-          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:ps-2 lg:font-medium leading-none portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
+          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:ps-2 lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
             Subs
           </CardTitle>
         </div>
