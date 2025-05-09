@@ -80,7 +80,7 @@ export const Content = () => {
         App Settings
       </div>
       <div className="flex items-start justify-start">
-        <div className="px-2 font-sans w-full font-medium">
+        <div className="px-2 font-sans max-w-96 font-medium">
           <div className="py-4 px-1 space-y-4 rounded-2xl border border-slate-400 dark:border-zark size-full bg-slate-200 dark:bg-zinc-900">
             <div className="font-sans font-medium tracking-tight">
               Open Communications
