@@ -24,7 +24,7 @@ import { Icon, IconName } from "@/lib/icons";
 import { HyperList } from "@/ui/hyper-list";
 import { Sub } from "@/lib/firebase/add-sub";
 import { SubsCtx } from "@/app/_ctx/subs";
-import { AffiliateId, Device } from "@/app/types";
+import { AffiliateId } from "@/app/types";
 
 export const SubsTable = () => {
   const { subs } = use(SubsCtx)!;
