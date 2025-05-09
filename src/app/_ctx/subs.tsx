@@ -48,6 +48,7 @@ export const SubsCtxProvider = ({ children }: { children: ReactNode }) => {
     if (data) {
       const d = data.docs.map((doc) => doc.data());
       setSubs(d as Sub[]);
+      console.log(d);
     }
   }, [data]);
 

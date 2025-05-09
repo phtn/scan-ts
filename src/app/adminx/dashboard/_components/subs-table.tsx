@@ -24,18 +24,20 @@ import { Icon, IconName } from "@/lib/icons";
 import { HyperList } from "@/ui/hyper-list";
 import { Sub } from "@/lib/firebase/add-sub";
 import { SubsCtx } from "@/app/_ctx/subs";
+import { AffiliateId, Device } from "@/app/types";
 
 export const SubsTable = () => {
   const { subs } = use(SubsCtx)!;
   useEffect(() => {
+    console.log(subs);
     if (subs.length === 0) {
-      console.log("Fetching affiliates data...");
+      console.log("Fetching subs data...", subs.length);
       // Fetch affiliates data from API or other source
     }
   }, [subs]);
   return (
     // <div className="bg-gradient-to-b lg:size-full w-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
-    <SubsDataTable data={subs} />
+    <SubsDataTable data={subs ?? []} />
     // </div>
   );
 };
@@ -61,64 +63,84 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
 
   const columns: ColumnDef<Sub>[] = [
     {
+      accessorFn: (row) => row.user.name, // Use accessorFn instead
+      id: "name", // Unique identifier
       header: "Name",
-      accessorKey: "user.name",
-      cell: ({ row }) => (
-        <button
-          onClick={() => row.toggleSelected()}
-          className="font-medium hover:underline underline-offset-4 decoration-dotted decoration-neutral-400 tracking-tight cursor-pointer"
-        >
-          {row.getValue("name")}
-        </button>
-      ),
-      size: 60,
+      cell: ({ row }) => {
+        const name = row.getValue("name") as string;
+        return (
+          <button
+            onClick={() => row.toggleSelected()}
+            className="font-medium hover:underline underline-offset-4 decoration-dotted decoration-neutral-400 tracking-tight cursor-pointer"
+          >
+            {name}
+          </button>
+        );
+      },
+      size: 70,
     },
     {
+      accessorFn: (row) => row.user.email,
+      id: "email",
       header: "Email",
-      accessorKey: "user.email",
       cell: ({ row }) => {
-        const action = row.getValue("action") as string;
+        const email = row.getValue("email") as string;
         return (
-          <div className="flex justify-start uppercase text-[10px] font-sans">
-            {action}
-          </div>
+          <div className="flex justify-start text-xs font-sans">{email}</div>
         );
       },
-      size: 60,
+      size: 70,
     },
     {
+      accessorFn: (row) => row.user.tel,
+      id: "phone",
       header: "Phone",
-      accessorKey: "user.phone",
       cell: ({ row }) => {
-        const ref = row.getValue("ref") as string;
+        const phone = row.getValue("phone") as string;
         return (
-          <div className="flex justify-start text-[10px] font-quick">
-            {ref.toString().split("-").shift()}
-          </div>
+          <div className="flex justify-start text-xs font-quick">{phone}</div>
         );
       },
       size: 60,
     },
     {
+      accessorFn: (row) => row.user.inquiry,
+      id: "inquiry",
       header: "Inquiry",
-      accessorKey: "user.inquiry",
       cell: ({ row }) => {
-        const ref = row.getValue("ref") as string;
+        const inquiry = row.getValue("inquiry") as string;
         return (
-          <div className="flex justify-start text-[10px] font-quick">
-            {ref && ref.split("-").shift()}
+          <div className="flex justify-start text-[10px] uppercase font-quick">
+            {inquiry}
           </div>
         );
       },
-      size: 60,
+      size: 40,
     },
     {
-      header: "Affiliate",
-      accessorKey: "affiliateId.user",
+      header: "Affiliate ID",
+      accessorKey: "affiliateId",
+      id: "affiliateId",
       cell: ({ row }) => {
+        const affiliate = row.getValue("affiliateId") as AffiliateId;
         return (
-          <div className="flex justify-end text-xs font-sans opacity-40">
-            {row.id}
+          <div className="flex justify-start uppercase text-xs font-sans opacity-40">
+            {affiliate?.["grp"].substring(0, 8)}
+          </div>
+        );
+      },
+      size: 40,
+      enableHiding: true,
+    },
+    {
+      header: "Device",
+      accessorFn: (row) => row.device?.fingerprintId,
+      id: "device",
+      cell: ({ row }) => {
+        const device = row.getValue("device") as string;
+        return (
+          <div className="flex justify-start uppercase text-xs font-sans opacity-40">
+            {device.substring(0, 6)}
           </div>
         );
       },
@@ -194,7 +216,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
     const selectedRows = table.getSelectedRowModel().rows;
     if (selectedRows.length > 0) {
       const selectedRowData = selectedRows[0].original;
-      console.log("Selected affiliate:", selectedRowData);
+      console.log("Selected sub:", selectedRowData);
     }
   }, [rowSelection, table]);
 

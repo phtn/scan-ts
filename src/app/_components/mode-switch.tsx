@@ -79,7 +79,7 @@ export function ToggleSwitch() {
           <span className="text-[10px] uppercase">Off</span>
         </span>
         <span className="pointer-events-none relative flex items-center justify-center px-1 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=checked]:-translate-x-full peer-data-[state=unchecked]:invisible peer-data-[state=checked]:rtl:translate-x-full">
-          <span className="text-[10px] text-orange-300 uppercase">On</span>
+          <span className="text-[10px] text-deep uppercase">On</span>
         </span>
       </div>
       <Label htmlFor={id} className="sr-only">
