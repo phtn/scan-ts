@@ -106,7 +106,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
         const ref = row.getValue("ref") as string;
         return (
           <div className="flex justify-start text-[10px] font-quick">
-            {ref.toString().split("-").shift()}
+            {ref && ref.split("-").shift()}
           </div>
         );
       },

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useId } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { LilSwitch } from "../adminx/dashboard/_components/ui/switch";
 
 export const ModeSwitch = () => {
   const { setTheme, theme } = useTheme();
@@ -68,7 +69,7 @@ export function ToggleSwitch() {
         className="lg:hidden scale-80"
       />
       <div className="relative hidden lg:inline-grid h-6 grid-cols-[1fr_1fr] items-center border-[0.33px] border-neutral-400/80 dark:border-zinc-600/80 rounded-sm font-medium">
-        <Switch
+        <LilSwitch
           id={id}
           checked={checked}
           onCheckedChange={setChecked}

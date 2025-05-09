@@ -6,7 +6,7 @@ import { useCallback, useMemo } from "react";
 import { HyperList } from "@/ui/hyper-list";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LilSwitch } from "./ui/switch";
+import { ToggleSwitch } from "@/app/_components/mode-switch";
 
 interface INav {
   id: string;
@@ -105,7 +105,7 @@ export default function Sidebar({ user }: SidebarProps) {
       <div className="flex lg:p-4 w-12 lg:w-full items-center justify-center lg:justify-start pb-4 lg:h-44">
         <div className="lg:space-y-6 flex flex-col items-start space-y-6">
           <div className="flex items-center w-12 lg:w-full justify-center lg:space-x-5">
-            <LilSwitch />
+            <ToggleSwitch />
             <div className="text-xs lg:flex hidden font-quick">light</div>
           </div>
           <Link
