@@ -187,7 +187,7 @@ export default function LogsDataTable({ data }: DataTableProps<Log>) {
 
   return (
     <div className="flex flex-col justify-between h-full font-sans">
-      <div className="bg-background/40 overflow-hidden h-full flex border-y-[0.0px] border-panel/40">
+      <div className="bg-background/40 overflow-hidden h-full flex">
         <Table className="table-fixed">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -259,7 +259,7 @@ export default function LogsDataTable({ data }: DataTableProps<Log>) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="h-10"
+                  className="h-8 border-b-[0.33px] dark:border-zark border-zark/20 dark:hover:bg-zark/60"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -283,39 +283,7 @@ export default function LogsDataTable({ data }: DataTableProps<Log>) {
       </div>
 
       {/* Pagination */}
-      <div className="flex px-4 my-2 flex-1 grow-0 items-center justify-between gap-8">
-        {/* Results per page */}
-        {/* <div className="flex items-center gap-3">
-          <p className="text-foreground font-dm text-xs whitespace-nowrap">
-            Rows per page
-          </p>
-
-          <Select
-            value={table.getState().pagination.pageSize.toString()}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value));
-            }}
-          >
-            <SelectTrigger
-              id={id}
-              className="w-fit whitespace-nowrap h-6 my-2 text-xs px-1.5 py-0 bg-panel border-0"
-            >
-              <SelectValue placeholder="Select number of results" />
-            </SelectTrigger>
-            <SelectContent className="dark:bg-neutral-300 [&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-2">
-              {[5, 10, 25, 50].map((pageSize) => (
-                <SelectItem
-                  caretStyle="size-4 dark:focus:text-panel"
-                  key={pageSize}
-                  value={pageSize.toString()}
-                  className="dark:text-panel"
-                >
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div> */}
+      <div className="flex px-4 py-2 border-t-[0.33px] border-gray-400/80 dark:border-zark flex-1 grow-0 items-center justify-between gap-8">
         {/* Page number information */}
         <div className="text-foreground font-sans tracking-tight flex whitespace-nowrap">
           <p
@@ -349,7 +317,7 @@ export default function LogsDataTable({ data }: DataTableProps<Log>) {
                 data={paginations}
                 component={PaginationButton}
                 container="flex space-x-2 p-0 overflow-clip"
-                itemStyle="h-6"
+                itemStyle="h-8"
                 delay={0.6}
                 direction="left"
               />

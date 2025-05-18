@@ -25,21 +25,16 @@ import { HyperList } from "@/ui/hyper-list";
 import { Sub } from "@/lib/firebase/add-sub";
 import { SubsCtx } from "@/app/_ctx/subs";
 import { AffiliateId } from "@/app/types";
+import { usePathname } from "next/navigation";
 
 export const SubsTable = () => {
   const { subs } = use(SubsCtx)!;
   useEffect(() => {
-    console.log(subs);
     if (subs.length === 0) {
       console.log("Fetching subs data...", subs.length);
-      // Fetch affiliates data from API or other source
     }
   }, [subs]);
-  return (
-    // <div className="bg-gradient-to-b lg:size-full w-full dark:from-hot-dark/20 from-super-fade dark:via-hot-dark/40 dark:to-neutral-400/40 via-ultra-fade to-super-fade">
-    <SubsDataTable data={subs ?? []} />
-    // </div>
-  );
+  return <SubsDataTable data={subs ?? []} />;
 };
 
 interface DataTableProps<T> {
@@ -47,9 +42,12 @@ interface DataTableProps<T> {
 }
 
 export default function SubsDataTable({ data }: DataTableProps<Sub>) {
+  const pathname = usePathname();
+  const route = pathname.split("/").pop();
+
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: route === "scans" ? 20 : 4,
   });
 
   const [sorting, setSorting] = useState<SortingState>([
@@ -71,7 +69,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
         return (
           <button
             onClick={() => row.toggleSelected()}
-            className="font-medium hover:underline underline-offset-4 decoration-dotted decoration-neutral-400 tracking-tight cursor-pointer"
+            className="font-semibold hover:underline underline-offset-4 decoration-dotted decoration-neutral-400 tracking-tight cursor-pointer"
           >
             {name}
           </button>
@@ -86,7 +84,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
       cell: ({ row }) => {
         const email = row.getValue("email") as string;
         return (
-          <div className="flex justify-start text-xs font-sans">{email}</div>
+          <div className="flex justify-start text-sm font-sans">{email}</div>
         );
       },
       size: 70,
@@ -98,7 +96,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
       cell: ({ row }) => {
         const phone = row.getValue("phone") as string;
         return (
-          <div className="flex justify-start text-xs font-quick">{phone}</div>
+          <div className="flex justify-start text-sm font-quick">{phone}</div>
         );
       },
       size: 60,
@@ -208,21 +206,14 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
     [canNext, canPrevious, table],
   );
 
-  useEffect(() => {
-    console.log(rowSelection);
-  }, [rowSelection]);
-
-  useEffect(() => {
-    const selectedRows = table.getSelectedRowModel().rows;
-    if (selectedRows.length > 0) {
-      const selectedRowData = selectedRows[0].original;
-      console.log("Selected sub:", selectedRowData);
-    }
-  }, [rowSelection, table]);
-
   return (
     <div className="flex flex-col justify-between h-full font-sans">
-      <div className="dark:bg-zinc-800 bg-background overflow-hidden h-full flex border-y-[0.0px] border-panel/40">
+      <div
+        className={cn(
+          "dark:bg-zinc-800 bg-background/40 overflow-hidden h-[27.5vh] flex",
+          { "h-full": route === "scans" },
+        )}
+      >
         <Table className="table-fixed">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -232,7 +223,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
                     <TableHead
                       key={header.id}
                       style={{ width: `${header.getSize()}px` }}
-                      className="h-8 dark:bg-zinc-900 bg-super-fade border-y-[0.33px] border-gray-400/80"
+                      className="h-8 dark:bg-zinc-900 bg-super-fade border-y-[0.33px] border-gray-400/80 dark:border-zark"
                     >
                       {header.isPlaceholder ? null : header.column.getCanSort() ? (
                         <div
@@ -294,7 +285,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="h-10"
+                  className="h-14 border-b-[0.33px] dark:border-zark border-zark/20"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -318,40 +309,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
       </div>
 
       {/* Pagination */}
-      <div className="flex px-4 my-2 flex-1 grow-0 items-center justify-between gap-8">
-        {/* Results per page */}
-        {/* <div className="flex items-center gap-3">
-          <p className="text-foreground font-dm text-xs whitespace-nowrap">
-            Rows per page
-          </p>
-
-          <Select
-            value={table.getState().pagination.pageSize.toString()}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value));
-            }}
-          >
-            <SelectTrigger
-              id={id}
-              className="w-fit whitespace-nowrap h-6 my-2 text-xs px-1.5 py-0 bg-panel border-0"
-            >
-              <SelectValue placeholder="Select number of results" />
-            </SelectTrigger>
-            <SelectContent className="dark:bg-neutral-300 [&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-2">
-              {[5, 10, 25, 50].map((pageSize) => (
-                <SelectItem
-                  caretStyle="size-4 dark:focus:text-panel"
-                  key={pageSize}
-                  value={pageSize.toString()}
-                  className="dark:text-panel"
-                >
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div> */}
-        {/* Page number information */}
+      <div className="flex px-4 border-t-[0.33px] py-2 border-gray-400/80 dark:border-zark flex-1 grow-0 items-center justify-between gap-8">
         <div className="text-foreground font-sans tracking-tight flex whitespace-nowrap">
           <p
             className="text-foreground space-x-2 font-dm text-xs whitespace-nowrap"
@@ -384,7 +342,7 @@ export default function SubsDataTable({ data }: DataTableProps<Sub>) {
                 data={paginations}
                 component={PaginationButton}
                 container="flex space-x-2 p-0 overflow-clip"
-                itemStyle="h-6"
+                itemStyle="h-8"
                 delay={0.6}
                 direction="left"
               />

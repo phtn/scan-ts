@@ -68,14 +68,14 @@ export function ToggleSwitch() {
         onCheckedChange={setChecked}
         className="lg:hidden scale-80"
       />
-      <div className="relative hidden lg:inline-grid h-6 grid-cols-[1fr_1fr] items-center border-[0.33px] border-neutral-400/80 dark:border-zinc-600/80 rounded-sm font-medium">
+      <div className="relative hidden lg:inline-grid h-6 grid-cols-[1fr_1fr] items-center border-[0.0px] border-neutral-400/80 dark:border-zinc-600/80 rounded-sm font-medium">
         <LilSwitch
           id={id}
           checked={checked}
           onCheckedChange={setChecked}
           className="peer data-[state=unchecked]:bg-input cursor-pointer absolute inset-0 h-[inherit] w-[60px] rounded-sm [&_span]:z-10 [&_span]:h-full [&_span]:w-1/2 [&_span]:rounded-sm [&_span]:transition-transform [&_span]:duration-300 [&_span]:ease-[cubic-bezier(0.16,1,0.3,1)] [&_span]:data-[state=checked]:translate-x-full [&_span]:data-[state=checked]:rtl:-translate-x-full"
         />
-        <span className="pointer-events-none font-quick relative flex items-center justify-center ps-1.5 pe-1 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=checked]:invisible peer-data-[state=unchecked]:translate-x-full peer-data-[state=unchecked]:rtl:-translate-x-full">
+        <span className="pointer-events-none font-quick relative flex items-center justify-center ps-2 pe-1.5 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=checked]:invisible peer-data-[state=unchecked]:translate-x-full peer-data-[state=unchecked]:rtl:-translate-x-full">
           <span className="text-[10px] uppercase">Off</span>
         </span>
         <span className="pointer-events-none relative flex items-center justify-center px-1 text-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] peer-data-[state=checked]:-translate-x-full peer-data-[state=unchecked]:invisible peer-data-[state=checked]:rtl:translate-x-full">

@@ -48,7 +48,7 @@ export const QRCodeViewer = () => {
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
         "dark:border-panel lg:rounded-lg lg:rounded-bl-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0 lg:border-e-[0.33px]",
         "dark:from-neutral-500/60 dark:via-neutral-300/80 dark:to-90% dark:to-neutral-300/50",
-        "overflow-hidden relative flex flex-col justify-between",
+        "overflow-hidden relative flex flex-col justify-between shadow-none",
       )}
     >
       <div className="absolute top-16 left-12 size-80 bg-neutral-50/80 rounded-full blur-[40px] opacity-80"></div>

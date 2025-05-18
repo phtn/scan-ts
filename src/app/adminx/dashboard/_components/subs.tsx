@@ -43,9 +43,10 @@ export const Subs = () => {
     <Card
       className={cn(
         "bg-gradient-to-b h-full from-ultra-fade/50 to-super-fade",
-        "dark:border-panel lg:rounded-lg lg:rounded-tr-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0 lg:border-e-[0.33px]",
-        "dark:from-neutral-400/40 dark:via-neutral-300/80 dark:to-neutral-200/40",
-        "overflow-hidden relative flex flex-col justify-between",
+        "dark:border-panel lg:rounded-xl lg:rounded-tr-[3px] rounded-none rounded-s-xl border-[0.33px] border-gray-500 border-e-0 lg:border-e-[0.33px]",
+        "dark:from-neutral-800/40 dark:via-neutral-800/80 dark:to-neutral-800/40",
+        "overflow-hidden relative flex flex-col justify-between shadow-none",
+        { " mb-1.5 mx-1.5": path === "scans" },
       )}
     >
       {/* Add subtle orange glow effect */}
@@ -55,8 +56,8 @@ export const Subs = () => {
 
       <CardHeader className="flex relative flex-1 flex-row dark:border-hot-dark items-start h-12 justify-between">
         <div className="flex h-full items-center font-sans gap-3 lg:gap-6">
-          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:ps-2 lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
-            Subs
+          <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:ps-2 lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tighter px-3">
+            {path === "scans" ? "Scans / Submitted Inquiries" : "Latest Scans"}
           </CardTitle>
         </div>
 

@@ -15,7 +15,7 @@ export const Content = () => {
       </div>
       <div className="px-6">
         <button
-          className="text-xs cursor-pointer select-none font-semibold rounded-lg bg-slate-300 dark:bg-slate-800 py-1.5 px-2 font-quick tracking-tighter"
+          className="text-xs cursor-pointer select-none font-semibold rounded-lg bg-orange-300 dark:bg-panel-dark dark:hover:text-orange-200 dark:text-orange-300 py-2.5 px-4 font-quick tracking-tighter"
           onClick={handleSignOut}
         >
           Sign out
