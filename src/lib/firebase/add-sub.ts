@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from ".";
 import type { AffiliateId, Device } from "@/app/types";
 import type { InquiryFormType } from "@/components/forms/schema";
