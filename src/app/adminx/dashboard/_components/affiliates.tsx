@@ -63,7 +63,7 @@ export function Affiliates() {
           <CardTitle className="lg:text-xl ps-2 font-semibold text-[16px] lg:font-medium leading-none dark:portrait:text-blue-400 h-12 flex items-center font-sans tracking-tight px-3">
             Affiliates
           </CardTitle>
-          <div className="flex items-center text-sm font-medium gap-1 w-28 tracking-tighter">
+          <div className="flex items-center text-base font-medium gap-1 w-28 tracking-tighter">
             <button
               onClick={toggle}
               className="hover:opacity-100 transition-colors duration-300 hover:text-teal-500 dark:hover:text-teal-300 cursor-pointer flex items-center gap-1.5 group"
@@ -71,11 +71,11 @@ export function Affiliates() {
               <Icon
                 name={open ? "close-square" : "add-square"}
                 solid
-                size={24}
+                size={20}
                 className="text-panel dark:text-ultra-fade group-hover:text-teal-500 dark:group-hover:text-teal-300"
               />
               <span className="drop-shadow-xs group">
-                {open ? "Close Form" : "Create New"}
+                {open ? "Close Form" : "New"}
               </span>
             </button>
           </div>

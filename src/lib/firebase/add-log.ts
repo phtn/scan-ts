@@ -16,7 +16,7 @@ export async function addLog(id: string, payload: Log) {
     const ref = collection(db, "logs");
     const docRef = doc(ref, id);
 
-    console.log(JSON.stringify(payload, null, 2));
+    // console.log(JSON.stringify(payload, null, 2));
 
     await setDoc(docRef, {
       ...payload,
@@ -25,7 +25,7 @@ export async function addLog(id: string, payload: Log) {
       updatedAt: Date.now(),
     });
 
-    console.log("Document added successfully!");
+    // console.log("Document added successfully!");
     return "success";
   } catch (e) {
     console.error("Error adding document: ", e);

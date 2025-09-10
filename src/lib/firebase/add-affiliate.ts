@@ -41,8 +41,6 @@ export async function addNewAffiliate(docId: string, payload: IAffiliate) {
     const docRef = doc(collectionRef, docId);
     const docSnap = await getDoc(docRef);
 
-    console.log(payload);
-
     if (docSnap.exists()) {
       console.log("Document already exists!");
       return "exists";

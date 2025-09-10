@@ -229,7 +229,7 @@ export const generateQR = async (id: string, grp?: string, seed?: string) => {
 
   const host =
     process.env.NODE_ENV === "development"
-      ? "https://192.168.1.30:3000"
+      ? "https://localhost:3000"
       : "https://scan-ts.vercel.app";
   const qrUrl = `${host}/?id=${encodeURIComponent(id)}&grp=${encodeURIComponent(grp ?? "no-group")}&seed=${encodeURIComponent(seed ?? "")}&iztp1nk=${encodeURIComponent(ident)}`;
 

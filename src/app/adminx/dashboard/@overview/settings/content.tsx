@@ -80,9 +80,9 @@ export const Content = () => {
         App Settings
       </div>
       <div className="flex items-start justify-start">
-        <div className="px-2 font-sans max-w-96 font-medium">
-          <div className="py-4 px-1 space-y-4 rounded-2xl border border-slate-400 dark:border-zark size-full bg-slate-200 dark:bg-zinc-900">
-            <div className="font-sans font-medium tracking-tight">
+        <div className="px-4 font-sans font-medium">
+          <div className="p-4 space-y-4 rounded-xl border-none border-slate-400/0 size-full bg-slate-200 dark:bg-zinc-900">
+            <div className="font-sans font-medium text-xl tracking-tight">
               Open Communications
             </div>
             {/* <div className="h-px px-4 my-4 bg-slate-400 dark:bg-zark"></div> */}
@@ -90,7 +90,7 @@ export const Content = () => {
               data={comms[0].fields as TextFieldConfig[]}
               component={FieldItem}
               container="space-y-8 py-4"
-              itemStyle="rounded-xl px-2 py-7 dark:bg-neutral-700 border bg-white border-neutral-400 dark:border-zinc-400/80"
+              itemStyle="rounded-lg p-6 dark:bg-neutral-700 border-none bg-white border-neutral-400 dark:border-zinc-400/80"
             />
           </div>
         </div>

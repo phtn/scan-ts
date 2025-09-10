@@ -124,7 +124,7 @@ export default function AffiliatesDataTable({
         return (
           <Badge
             className={cn(
-              "tracking-tight hover:text-white text-xs font-sans select-none text-panel/60 dark:text-neutral-300 dark:bg-transparent bg-transparent border border-blue-400 flex items-center w-fit justify-center gap-1",
+              "tracking-tight hover:text-white text-xs py-1 font-sans select-none text-panel/60 dark:text-neutral-300 dark:bg-transparent bg-transparent border border-blue-400/20 flex items-center w-fit justify-center gap-1",
               {
                 "dark:bg-transparent dark:text-neutral-300 text-panel/60 border-orange-300":
                   !isActive,
@@ -135,7 +135,7 @@ export default function AffiliatesDataTable({
               className={cn("size-2 rounded-full bg-blue-400", {
                 "bg-orange-300": !isActive,
               })}
-            ></div>
+            />
             <div>{isActive ? "Active" : "Inactive"}</div>
           </Badge>
         );
